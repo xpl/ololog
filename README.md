@@ -54,7 +54,7 @@ log.configure ({ concat: { separator: ', ' }})
 
 Backed by the [ansicolor](https://github.com/xpl/ansicolor) library. Colored output is supported for the terminal environment and for the Chrome DevTools console. On other platforms, ANSI codes are safely stripped from the output, so they don't mess up anything.
 
-By using `ansicolor` directly:
+Apply styling by calling the `ansicolor` directly:
 
 ```javascript
 require ('ansicolor').nice // Importing
@@ -62,7 +62,7 @@ require ('ansicolor').nice // Importing
 log (('foo'.dim.red + 'bar'.bgBrightCyan).underline)
 ```
 
-By using built-in shorthand methods (no need to import `ansicolor`, but we lose the ability to colorize only part of the string):
+...or by using the built-in shorthand methods (no need to import `ansicolor`, but we lose the ability to colorize only part of the string):
 
 ```javascript
 log.red ('red text')
