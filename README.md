@@ -57,7 +57,7 @@ log.configure ({ concat: { separator: ', ' }})
                                                                           // bar, baz
 ```
 
-You can [read more about `configure` here](https://github.com/xpl/pipez#a-case-study-toy-logging). Configuration mechanism is implemented as a separate external library, for everyone's use.
+You can [read more about `configure` here](https://github.com/xpl/pipez). Configuration engine is implemented as a separate external library, for everyone's use. Contributions are welcome.
 
 ## ANSI styling
 
