@@ -3,8 +3,8 @@
 - [x] Platform-agnostic logging
 - [x] Colors / styles for terminals and Chrome DevTools (try [online demo](https://xpl.github.io/ololog/))
 - [x] Displays call locations
-- [x] Powerful object printer
-- [x] Pluggable architecture
+- [x] [Powerful object printer](https://github.com/xpl/string.ify)
+- [x] [Pluggable architecture](https://github.com/xpl/pipez)
 
 ## Powered by
 
