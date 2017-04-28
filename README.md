@@ -52,7 +52,7 @@ log.configure ({ concat: { separator: ', ' }})
 
 ## ANSI styling
 
-Backed by the [ansicolor](https://github.com/xpl/ansicolor) library. Colored output is supported for the terminal environment and for the Chrome DevTools console. On other platforms, ANSI codes are safely stripped from the output, so they don't mess up anything.
+Backed by the [ansicolor](https://github.com/xpl/ansicolor) library, colored output is supported for the terminal environment and for the Chrome DevTools console. On other platforms, ANSI codes are safely stripped from the output, so they don't mess up anything.
 
 Apply styling by calling the `ansicolor` directly:
 
