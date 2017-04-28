@@ -2,6 +2,13 @@
 
 Platform-agnostic logging / colors / styles / call locations / pretty prints / pluggable architecture.
 
+## Powered by
+
+- [String.ify](https://github.com/xpl/string.ify)
+- [ansicolor](https://github.com/xpl/ansicolor)
+- [StackTracey](https://github.com/xpl/stacktracey)
+- [Pipez](https://github.com/xpl/pipez)
+
 ## Importing
 
 ```javascript
@@ -170,6 +177,12 @@ Backdating:
 log.configure ({ time: { when: new Date ('2017-02-27T12:45:19.951Z') }}) (...)
 ```
 
+## Limiting max argument length
+
+```javascript
+log.configure ({ trim: { max: 5 } }) ('1234567890', 'abcdefgh') // 1234… abcd…
+```
+
 ## Custom methods / aspect-oriented code injection
 
 You can add your own shorthand methods, and you can also bind new code to the existing methods, executing it _before_, _after_ or _instead_. See the [pipez](https://github.com/xpl/pipez) library, which provides all the fun.
@@ -186,10 +199,4 @@ log.methods ({
 
 ```javascript
 log.indent (2).configure ({ time: true }).red.bright ('this is bold red message, indented by 2 and supplied with timestamp')
-```
-
-## Limiting max argument length
-
-```javascript
-log.configure ({ trim: { max: 5 } }) ('1234567890', 'abcdefgh') // 1234… abcd…
 ```
