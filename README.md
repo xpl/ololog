@@ -66,7 +66,7 @@ log (('foo'.dim.red + 'bar'.bgBrightCyan).underline)
 
 ```javascript
 log.red ('red text')
-log.bright.red.underline ('multiple styles combined')'
+log.bright.red.underline ('multiple styles combined')
 ```
 
 ## Smart object printing
