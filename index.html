@@ -1,0 +1,46 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="google" content="notranslate">
+		<meta http-equiv="Content-Language" content="en">
+		<title>Ololog Web Testpage</title>
+		<script>window.module = {}</script>
+		<script src="https://rawgit.com/xpl/ansicolor/master/ololog.js"></script>
+		<script>log = module.exports.nice</script>
+		<style>
+			* { box-sizing: border-box; font-family: monospace; font-size: 20px; }
+			input.err { background: rgb(255,200,200); }
+			body { display: block; width: 100%; padding: 1em; margin: 0; white-space: nowrap; }
+			a { position: fixed; bottom: 1em; right: 1em; opacity: 0.5; font-style: italic; }
+		</style>
+	</head>
+	
+	<body>
+		<span style="opacity:0.5;">// Open the browser's JavaScript console!</span>
+		
+		<br><br>
+		
+		log = require ('ololog')
+
+		<br><br>
+
+		<input oninput="foo()" id="foo" style="width: 340px;" placeholder="type expressions here, e.g. log.red ('foo')" />);
+
+		<script>
+			input = document.getElementById ('foo')
+			function foo () {
+				try {
+					eval (input.value)
+					input.className = ''
+				} catch (e) {
+					input.className = 'err'
+				}
+			}
+		</script>
+		
+		<br><br>
+		
+		<a href="https://github.com/xpl/ololog">github.com/xpl/ololog</a>
+	</body>
+	
+</html>
