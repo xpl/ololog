@@ -1,6 +1,6 @@
 # Ololog! <sup>BETA</sup>
 
-Platform-agnostic logging / colors & styles / call locations / pretty prints / pluggable architecture.
+Platform-agnostic logging / colors / styles / call locations / pretty prints / pluggable architecture.
 
 ## Importing
 
