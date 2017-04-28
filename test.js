@@ -3,12 +3,12 @@
 /*  ------------------------------------------------------------------------ */
                     
 require ('chai').should ()
-require ('ansicolor').nice
 
 /*  ------------------------------------------------------------------------ */
 
 describe ('Ololog', () => {
 
+    const ansicolor = require ('ansicolor').nice
     const log = require ('./ololog').configure ({ locate: false, time: { when: new Date ('2017-02-27T12:45:19.951Z') } })
 
     const assert = (call, shouldBe = []) => {
