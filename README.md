@@ -62,7 +62,7 @@ require ('ansicolor').nice // Importing
 log (('foo'.dim.red + 'bar'.bgBrightCyan).underline)
 ```
 
-...or by using the built-in shorthand methods (no need to import `ansicolor`, but we lose the ability to colorize only part of the string):
+...or by using the built-in shorthand methods (no need to import `ansicolor`, but we lose the ability to colorize a part of the string):
 
 ```javascript
 log.red ('red text')
