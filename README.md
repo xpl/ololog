@@ -24,7 +24,7 @@ Although, comparing to Chrome...
 
 ```javascript
 log ('foo\n', 'bar', 'baz') // foo
-							// bar baz
+                            // bar baz
 ```
 
 ## `.configure (...)`
@@ -47,7 +47,7 @@ You can stack up multiple `configure` calls (although this example is rather far
 ```javascript
 log.configure ({ concat: { separator: ', ' }})
    .configure ({ lines: { linebreak: '<br>' }}) ('foo<br>', 'bar', 'baz') // foo
-   																		  // bar, baz
+                                                                          // bar, baz
 ```
 
 ## ANSI styling
@@ -128,9 +128,9 @@ log.configure ({ locate: { where: new StackTracey ().at (2) } }) (...)
 ## Indentation
 
 ```javascript
-log.configure ({ indent: { level: 3 } }) ('foo\n', 'bar\n', 'baz')	//			foo
-																	//			bar
-																	//			baz
+log.configure ({ indent: { level: 3 } }) ('foo\n', 'bar\n', 'baz')  //          foo
+                                                                    //          bar
+                                                                    //          baz
 ```
 
 Shorthand method:
@@ -176,10 +176,10 @@ You can add your own shorthand methods, and you can also bind new code to the ex
 ```javascript
 log.methods ({
 
-	indent (level) { return this.configure ({ indent: { level: level }}) }
+    indent (level) { return this.configure ({ indent: { level: level }}) }
 
-	get red ()    { return this.configure ({ 'concat+': lines => lines.map (ansicolor.red) }) } // executes it after the 'concat'
-	get bright () { return this.configure ({ 'concat+': lines => lines.map (ansicolor.bright) }) }	
+    get red ()    { return this.configure ({ 'concat+': lines => lines.map (ansicolor.red) }) } // executes it after the 'concat'
+    get bright () { return this.configure ({ 'concat+': lines => lines.map (ansicolor.bright) }) }  
 })
 ```
 
@@ -192,9 +192,3 @@ log.indent (2).configure ({ time: true }).red.bright ('this is bold red message,
 ```javascript
 log.configure ({ trim: { max: 5 } }) ('1234567890', 'abcdefgh') // 1234… abcd…
 ```
-
-
-
-
-
-
