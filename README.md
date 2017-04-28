@@ -1,6 +1,10 @@
 # Ololog! <sup>BETA</sup>
 
-Platform-agnostic logging / colors / styles / call locations / pretty prints / pluggable architecture.
+- [x] Platform-agnostic logging
+- [x] Colors / styles for terminals and Chrome DevTools
+- [x] Displays call locations
+- [x] Powerful object printer
+- [x] Pluggable architecture
 
 ## Powered by
 
