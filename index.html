@@ -6,7 +6,7 @@
 		<title>Ololog Web Testpage</title>
 		<script>window.module = {}</script>
 		<script src="https://rawgit.com/xpl/ansicolor/master/ololog.js"></script>
-		<script>log = module.exports.nice</script>
+		<script>log = module.exports</script>
 		<style>
 			* { box-sizing: border-box; font-family: monospace; font-size: 20px; }
 			input.err { background: rgb(255,200,200); }
@@ -24,7 +24,7 @@
 
 		<br><br>
 
-		<input oninput="foo()" id="foo" style="width: 600px;" placeholder="type expressions here, e.g. log.red ('foo')" />);
+		<input oninput="foo()" id="foo" style="width: 600px;" placeholder="type expressions here, e.g. log.red ('foo')" />;
 
 		<script>
 			input = document.getElementById ('foo')
