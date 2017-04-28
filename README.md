@@ -19,6 +19,16 @@
 log = require ('ololog')
 ```
 
+Ready browser bundle (exposes global `ololog` and `ansicolor` objects), not compressed:
+
+```html
+<script src="https://rawgit.com/xpl/ololog/master/build/ololog.browser.js"></script>
+<script>
+    log = ololog
+    log ('something'.red)
+</script>
+```
+
 ## Basic usage
 
 At first, it's similar to `console.log`:
