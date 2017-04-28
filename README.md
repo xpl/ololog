@@ -77,6 +77,8 @@ You can [read more about `configure` here](https://github.com/xpl/pipez). Config
 
 ## ANSI styling
 
+![pic](https://cdn.jpg.wtf/futurico/85/38/1493373489-85382f79849e1f183af105af00ab96b2.png)
+
 Backed by the [ansicolor](https://github.com/xpl/ansicolor) library, colored output is supported for the terminal environment and for the Chrome DevTools console. On other platforms, ANSI codes are safely stripped from the output, so they don't mess up anything.
 
 Apply styling by calling the `ansicolor` directly:
