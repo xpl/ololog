@@ -67,9 +67,9 @@ const log = module.exports = pipez ({
 
         engine = ((typeof window !== 'undefined') && (window.window === window) && window.navigator)
 
-                            ? (navigator.userAgent.indexOf ('AppleWebKit') >= 0)
+                            ? (navigator.userAgent.indexOf ('Chrome') >= 0)
 
-                                ? 'webkit'
+                                ? 'chrome'
                                 : 'generic'
 
                             : 'ansi',
@@ -79,7 +79,7 @@ const log = module.exports = pipez ({
         defaults = {
 
             ansi:    s => console.log (s),
-            webkit:  s => console.log (...ansi.parse (s).asWebInspectorConsoleLogArguments),
+            chrome:  s => console.log (...ansi.parse (s).asChromeConsoleLogArguments),
             generic: s => console.log (ansi.strip (s))
         },
 
