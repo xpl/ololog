@@ -188,7 +188,7 @@ log.methods ({
 log.indent (2).configure ({ time: true }).red.bright ('this is bold red message, indented by 2 and supplied with timestamp')
 ```
 
-### Limiting max argument length
+## Limiting max argument length
 
 ```javascript
 log.configure ({ trim: { max: 5 } }) ('1234567890', 'abcdefgh') // 1234… abcd…
