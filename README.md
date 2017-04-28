@@ -1,7 +1,7 @@
 # Ololog! <sup>BETA</sup>
 
 - [x] Platform-agnostic logging
-- [x] Colors / styles for terminals and Chrome DevTools
+- [x] Colors / styles for terminals and Chrome DevTools (try [online demo](https://xpl.github.io/ololog/))
 - [x] Displays call locations
 - [x] Powerful object printer
 - [x] Pluggable architecture
