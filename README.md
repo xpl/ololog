@@ -119,7 +119,7 @@ Custom printer:
 log.configure ({ locate: { print: ({ calleeShort, fileName, line }) => ... } }) (...)
 ```
 
-Manually setting call location (see [StackTracey](https://github.com/xpl/stacktracey) library, which serves the purpose):
+Manually setting call location (see the [StackTracey](https://github.com/xpl/stacktracey) library, which serves the purpose):
 
 ```javascript
 log.configure ({ locate: { where: new StackTracey ().at (2) } }) (...)
