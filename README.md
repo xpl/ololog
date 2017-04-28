@@ -19,7 +19,9 @@
 log = require ('ololog')
 ```
 
-Ready browser bundle (exposes global `ololog` and `ansicolor` objects), not compressed:
+# Browser bundle
+
+Exposes global `ololog` and `ansicolor` objects. Not compressed.
 
 ```html
 <script src="https://rawgit.com/xpl/ololog/master/build/ololog.browser.js"></script>
