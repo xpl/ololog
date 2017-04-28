@@ -6,7 +6,10 @@
 		<title>Ololog Web Testpage</title>
 		<script>window.module = {}</script>
 		<script src="https://rawgit.com/xpl/ololog/master/build/ololog.browser.js"></script>
-		<script>log = require ('ololog')</script>
+		<script>
+			log = ololog
+			ansicolor = ansicolor.nice
+		</script>
 		<style>
 			* { box-sizing: border-box; font-family: monospace; font-size: 20px; }
 			input.err { background: rgb(255,200,200); }
@@ -24,18 +27,29 @@
 
 		<br><br>
 
-		<input oninput="foo()" id="foo" style="width: 600px;" placeholder="type expressions here, e.g. log.red ('foo')" />;
+		<input id="foo" style="width: 600px;" value="log.red.italic ('foo')" />;
 
 		<script>
 			input = document.getElementById ('foo')
+
+			input.onkeydown = function (e) {
+				if (e.keyCode === 13) {
+					foo ()
+				}
+			}
+			input.oninput = foo
+
 			function foo () {
 				try {
 					eval (input.value)
 					input.className = ''
 				} catch (e) {
+					console.log (e)
 					input.className = 'err'
 				}
 			}
+
+			foo ()
 		</script>
 		
 		<br><br>
