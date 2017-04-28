@@ -150,6 +150,7 @@ log = log.configure ({ time: true })
 With indentation:
 
 ```javascript
+log            ('Lorem ipsum dolor sit amet\nconsectetur adipiscing elit..\n')
 log.indent (2) ('Lorem ipsum dolor sit amet\nconsectetur adipiscing elit..\n')
 ```
 
