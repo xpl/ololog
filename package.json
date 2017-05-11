@@ -12,7 +12,18 @@
     "url": "https://github.com/xpl/ololog.git"
   },
   "keywords": [
-    "log"
+    "logging",
+    "log",
+    "ansi",
+    "pretty-print",
+    "stacktrace",
+    "aspect-oriented-programming",
+    "chrome-devtools",
+    "debug",
+    "debugging-tool",
+    "console-log",
+    "terminal-colors",
+    "tty"
   ],
   "author": "Vitaly Gordon <rocket.mind@gmail.com>",
   "license": "MIT",
