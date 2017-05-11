@@ -4379,7 +4379,7 @@ const changeLastNonemptyLine = (lines, fn) => {
 
 /*  ------------------------------------------------------------------------ */
 
-const log = module.exports = pipez ({
+const log = pipez ({
 
 /*  ------------------------------------------------------------------------ */
 
@@ -4430,11 +4430,13 @@ const log = module.exports = pipez ({
 
         engines = { /* configurable */ },
 
+        consoleMethod = 'log',
+
         defaults = {
 
-            ansi:    s => console.log (s),
-            chrome:  s => console.log (...ansi.parse (s).asChromeConsoleLogArguments),
-            generic: s => console.log (ansi.strip (s))
+            ansi:    s => console[consoleMethod] (s),
+            chrome:  s => console[consoleMethod] (...ansi.parse (s).asChromeConsoleLogArguments),
+            generic: s => console[consoleMethod] (ansi.strip (s))
         },
 
         linebreak = '\n'
@@ -4451,7 +4453,11 @@ const log = module.exports = pipez ({
 
 }).methods ({
 
-    indent (level) { return this.configure ({ indent: { level: level }}) }
+    indent (level) { return this.configure ({ indent: { level: level }}) },
+
+    get error () { return this.configure ({ render: { consoleMethod: 'error' } }) },
+    get warn ()  { return this.configure ({ render: { consoleMethod: 'warn' } }) },
+    get info ()  { return this.configure ({ render: { consoleMethod: 'info' } }) }
 })
 
 /*  ------------------------------------------------------------------------ */
@@ -4465,6 +4471,40 @@ ansi.names.forEach (color => {
 })
 
 /*  ------------------------------------------------------------------------ */
+
+let impl = log
+
+module.exports = new Proxy (log, {
+
+    apply (target, this_, args) {
+
+        console.log (impl)
+
+        return impl.apply (this_, args) // @hide
+    },
+
+    get (target, prop) {
+
+        return Reflect.get (impl, prop)
+    }
+
+}).methods ({
+
+    substitute (newImpl) {
+
+        let prevImpl = impl
+
+        impl = newImpl
+
+        return {
+            release () { if (impl === newImpl) { impl = prevImpl } }
+        }
+    }
+})
+
+/*  ------------------------------------------------------------------------ */
+
+
 
 },{"ansicolor":1,"pipez":22,"stacktracey":25,"string.bullet":26,"string.ify":27}],22:[function(require,module,exports){
 const O = Object
@@ -4482,16 +4522,20 @@ const merge = (to, from) => {
 
 const pipez = module.exports = functions => O.assign (
 
+/*  Function of functions (call chain)  */
+
     (...initial) =>
-        O.values (functions)
-         .reduce ((memo, f, k) => f (memo, {}), initial),
+        Reflect.ownKeys (functions) // guaranteed to be in property creation order (as defined by the standard)
+               .reduce ((memo, k) => functions[k] (memo, {}), initial),
+
+/*  Additional methods     */
 
     {
         configure (overrides = {}) {
 
             const modifiedFunctions = {}
 
-            for (const k of Reflect.ownKeys (functions)) { // guaranteed to be in property creation order (as defined by the standard)
+            for (const k of Reflect.ownKeys (functions)) {
 
                 const override = overrides[k],
                       before   = overrides['+' + k] || (x => x),
@@ -4512,9 +4556,11 @@ const pipez = module.exports = functions => O.assign (
             return pipez (modifiedFunctions).methods (this.methods_)
         },
 
-        methods_: O.assign ({}, functions),
+        methods_: {},
 
-        methods (methods) { return merge (this, merge (this.methods_, methods)) }
+        methods (methods) { return merge (this, merge (this.methods_, methods)) },
+
+        get impl () { return functions }
     }
 )
 

@@ -1,10 +1,10 @@
 # Ololog! <sup>BETA</sup>
 
 - [x] Platform-agnostic logging
-- [x] Colors / styles for terminals and Chrome DevTools
+- [x] Colors / styles for terminals and Chrome DevTools (try [online demo](https://xpl.github.io/ololog/))
 - [x] Displays call locations
-- [x] Powerful object printer
-- [x] Pluggable architecture
+- [x] [Powerful object printer](https://github.com/xpl/string.ify)
+- [x] [Pluggable architecture](https://github.com/xpl/pipez)
 
 ## Powered by
 
@@ -17,6 +17,18 @@
 
 ```javascript
 log = require ('ololog')
+```
+
+## Browser bundle
+
+Exposes global `ololog` and `ansicolor` objects. Installs unsafe String extensions for ANSI styles. Not compressed.
+
+```html
+<script src="https://rawgit.com/xpl/ololog/master/build/ololog.browser.js"></script>
+<script>
+    log = ololog
+    log ('something'.red)
+</script>
 ```
 
 ## Basic usage
@@ -64,6 +76,8 @@ log.configure ({ concat: { separator: ', ' }})
 You can [read more about `configure` here](https://github.com/xpl/pipez). Configuration engine is implemented as a separate external library, for everyone's use. Contributions are welcome.
 
 ## ANSI styling
+
+![pic](https://cdn.jpg.wtf/futurico/85/38/1493373489-85382f79849e1f183af105af00ab96b2.png)
 
 Backed by the [ansicolor](https://github.com/xpl/ansicolor) library, colored output is supported for the terminal environment and for the Chrome DevTools console. On other platforms, ANSI codes are safely stripped from the output, so they don't mess up anything.
 
@@ -232,3 +246,7 @@ log.methods ({
 ```javascript
 log.indent (2).configure ({ time: true }).red.bright ('this is bold red message, indented by 2 and supplied with timestamp')
 ```
+
+## See also
+
+- [Online demo](https://xpl.github.io/ololog/)
