@@ -125,6 +125,15 @@ log.configure ({ stringify: { pretty: false } }) (obj)
 { abc: 42, defgh: true, qwertyiop: 333, zap: "123457", long: ["foo", "bar", "baz", "qux", "lol", "yup"] }
 ```
 
+Turning off max depth / max array length limiting:
+
+```javascript
+log.unlimited (obj)
+```
+```javascript
+log.red.unlimited.bright (obj) // chainable
+```
+
 All magic is provided by the external [String.ify](https://github.com/xpl/string.ify) library. Read the docs to see all the available configuration options. There are plenty of them! Contributions are welcome.
 
 ## Pretty printing `Error` instances
