@@ -143,12 +143,14 @@ This feature is implemented in the [StackTracey](https://github.com/xpl/stacktra
 ```javascript
 const e = new Error ('dummy error') // issued somewhere in a Mocha test callback...
 
-log (e)
+...
+
+log.bright.red (e)
 ```
 ```
 [EXCEPTION] dummy error
     
-        at it                              test.js:109                             log.indent (2) (new Error ('dummy error'))
+        at it                              test.js:109                             log.bright.red (e)
         at callFn                          node_modules/mocha/lib/runnable.js:326  var result = fn.call(ctx);                
         at run                             node_modules/mocha/lib/runnable.js:319  callFn(this.fn);                          
         at runTest                         node_modules/mocha/lib/runner.js:422    test.run(fn);                             
