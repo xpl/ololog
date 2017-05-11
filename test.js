@@ -1,6 +1,20 @@
 "use strict";
 
 /*  ------------------------------------------------------------------------ */
+
+const assert = (call, shouldBe = [], method='log') => {
+
+    let impl = console[method], args 
+
+    console[method] = function (...args_) { args = args_ }; call () // @hide
+    console[method] = impl
+
+    if (!args) { throw new Error (`console.${method} hasn't been called!`) }
+
+    args.should.deep.equal (shouldBe)
+}
+
+/*  ------------------------------------------------------------------------ */
                     
 require ('chai').should ()
 
@@ -11,18 +25,6 @@ describe ('Ololog', () => {
     const ansicolor = require ('ansicolor').nice
     const log = require ('./ololog').configure ({ locate: false, time: { when: new Date ('2017-02-27T12:45:19.951Z') } })
 
-    const assert = (call, shouldBe = [], method='log') => {
-
-        let impl = console[method], args 
-
-        console[method] = function (...args_) { args = args_; /*return impl.apply (this, args_)*/ }; call () // @hide
-        console[method] = impl
-
-        if (!args) { throw new Error (`console.${method} hasn't been called!`) }
-
-        args.should.deep.equal (shouldBe)
-    }
-
     it ('separator work', () => {
 
         assert (() => log ('hello\n', 'world', 'line1\nline2\nline3\n'), ['hello\nworld line1\nline2\nline3\n'])
@@ -30,9 +32,9 @@ describe ('Ololog', () => {
 
     it ('location work', () => {
 
-        assert (() => log.configure ({ locate: true }) ('with location\n\n'), ['with location \u001b[22m\u001b[2m(assert @ test.js:33)\u001b[22m\n\n'])
+        assert (() => log.configure ({ locate: true }) ('with location\n\n'), ['with location \u001b[22m\u001b[2m(assert @ test.js:35)\u001b[22m\n\n'])
 
-        assert (() => require ('./ololog') ('with location'), ['with location \u001b[22m\u001b[2m(assert @ test.js:35)\u001b[22m'])
+        assert (() => require ('./ololog') ('with location'), ['with location \u001b[22m\u001b[2m(assert @ test.js:37)\u001b[22m'])
     })
 
     it ('indent work', () => {
@@ -90,18 +92,6 @@ describe ('Ololog', () => {
         assert (() => log.configure ({ trim: { max: 5 } }) ('1234567890', 'abcdefgh'), ["1234… abcd…"])
     })
 
-    it ('substitute works', () => {
-
-        const handle = log.substitute (log.configure ({ '+render': lines => {
-
-            console.log ('lines:', lines)
-            return lines
-
-        }}))
-
-        log.red ('red text\nline 2')
-    })
-
     it ('.error / .warn / .info works', () => {
 
         assert (() => log.error.red ('this goes to stderr'),
@@ -112,6 +102,11 @@ describe ('Ololog', () => {
 
         assert (() => log.info.red ('this goes to console.info'),
                      ['\u001b[31m' + 'this goes to console.info' + '\u001b[39m'], 'info')
+    })
+
+    it ('formatting Error works', () => {
+
+        log.indent (2) (new Error ('dummy error'))
     })
 })
 

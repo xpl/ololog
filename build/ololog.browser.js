@@ -4457,7 +4457,9 @@ const log = pipez ({
 
     get error () { return this.configure ({ render: { consoleMethod: 'error' } }) },
     get warn ()  { return this.configure ({ render: { consoleMethod: 'warn' } }) },
-    get info ()  { return this.configure ({ render: { consoleMethod: 'info' } }) }
+    get info ()  { return this.configure ({ render: { consoleMethod: 'info' } }) },
+
+    get unlimited () { return this.configure ({ stringify: { maxArrayLength: Number.MAX_VALUE, maxDepth: Number.MAX_VALUE } }) }
 })
 
 /*  ------------------------------------------------------------------------ */

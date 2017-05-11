@@ -3,6 +3,7 @@
 - [x] Platform-agnostic logging
 - [x] Colors / styles for terminals and Chrome DevTools (try [online demo](https://xpl.github.io/ololog/))
 - [x] Displays call locations
+- [x] Formats `Error` instances as pretty stacktraces with source lines
 - [x] [Powerful object printer](https://github.com/xpl/string.ify)
 - [x] [Pluggable architecture](https://github.com/xpl/pipez)
 
@@ -125,6 +126,30 @@ log.configure ({ stringify: { pretty: false } }) (obj)
 ```
 
 All magic is provided by the external [String.ify](https://github.com/xpl/string.ify) library. Read the docs to see all the available configuration options. There are plenty of them! Contributions are welcome.
+
+## Pretty printing `Error` instances
+
+```javascript
+const e = new Error ('dummy error') // issued somewhere in a Mocha test callback...
+
+log (e)
+```
+```
+[EXCEPTION] dummy error
+    
+        at it                              test.js:109                             log.indent (2) (new Error ('dummy error'))
+        at callFn                          node_modules/mocha/lib/runnable.js:326  var result = fn.call(ctx);                
+        at run                             node_modules/mocha/lib/runnable.js:319  callFn(this.fn);                          
+        at runTest                         node_modules/mocha/lib/runner.js:422    test.run(fn);                             
+        at                                 node_modules/mocha/lib/runner.js:528    self.runTest(function(err) {              
+        at next                            node_modules/mocha/lib/runner.js:342    return fn();                              
+        at                                 node_modules/mocha/lib/runner.js:352    next(suites.pop());                       
+        at next                            node_modules/mocha/lib/runner.js:284    return fn();                              
+        at <anonymous>                     node_modules/mocha/lib/runner.js:320    next(0);                                  
+        at runCallback                     timers.js:651                                                                     
+        at tryOnImmediate                  timers.js:624                                                                     
+        at processImmediate [as _immediat  timers.js:596   
+```       
 
 ## Displaying call location
 
