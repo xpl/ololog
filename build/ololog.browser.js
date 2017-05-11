@@ -4490,35 +4490,37 @@ ansi.names.forEach (color => {
 
 /*  ------------------------------------------------------------------------ */
 
-let impl = log
+// let impl = log
 
-module.exports = new Proxy (log, {
+// module.exports = new Proxy (log, {
 
-    apply (target, this_, args) {
+//     apply (target, this_, args) {
 
-        console.log (impl)
+//         console.log (impl)
 
-        return impl.apply (this_, args) // @hide
-    },
+//         return impl.apply (this_, args) // @hide
+//     },
 
-    get (target, prop) {
+//     get (target, prop) {
 
-        return Reflect.get (impl, prop)
-    }
+//         return Reflect.get (impl, prop)
+//     }
 
-}).methods ({
+// }).methods ({
 
-    substitute (newImpl) {
+//     substitute (newImpl) {
 
-        let prevImpl = impl
+//         let prevImpl = impl
 
-        impl = newImpl
+//         impl = newImpl
 
-        return {
-            release () { if (impl === newImpl) { impl = prevImpl } }
-        }
-    }
-})
+//         return {
+//             release () { if (impl === newImpl) { impl = prevImpl } }
+//         }
+//     }
+// })
+
+module.exports = log
 
 /*  ------------------------------------------------------------------------ */
 
