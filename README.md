@@ -3,7 +3,7 @@
 - [x] Platform-agnostic logging
 - [x] Colors / styles for terminals and Chrome DevTools (try [online demo](https://xpl.github.io/ololog/))
 - [x] Displays call locations
-- [x] Formats `Error` instances as pretty stacktraces with source lines
+- [x] Formats `Error` instances as [pretty stacktraces with source lines](https://github.com/xpl/ololog#pretty-printing-error-instances)
 - [x] [Powerful object printer](https://github.com/xpl/string.ify)
 - [x] [Pluggable architecture](https://github.com/xpl/pipez)
 
@@ -138,15 +138,19 @@ All magic is provided by the external [String.ify](https://github.com/xpl/string
 
 ## Pretty printing `Error` instances
 
+This feature is implemented in the [StackTracey](https://github.com/xpl/stacktracey#pretty-printing) library. See it's docs for more (you can configure the path shortening / library calls skipping).
+
 ```javascript
 const e = new Error ('dummy error') // issued somewhere in a Mocha test callback...
 
-log (e)
+...
+
+log.bright.red (e)
 ```
 ```
 [EXCEPTION] dummy error
     
-        at it                              test.js:109                             log.indent (2) (new Error ('dummy error'))
+        at it                              test.js:109                             log.bright.red (e)
         at callFn                          node_modules/mocha/lib/runnable.js:326  var result = fn.call(ctx);                
         at run                             node_modules/mocha/lib/runnable.js:319  callFn(this.fn);                          
         at runTest                         node_modules/mocha/lib/runner.js:422    test.run(fn);                             
