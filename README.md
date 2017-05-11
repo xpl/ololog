@@ -183,6 +183,32 @@ Backdating:
 log.configure ({ time: { when: new Date ('2017-02-27T12:45:19.951Z') }}) (...)
 ```
 
+## Specifying additional semantics (errors, warnings, info messages)
+
+You can add `.error` call modifier, which tells Ololog to render with `console.error` instead of `console.log`: 
+
+```javascript
+log.error ('this goes to stderr')
+```
+```javascript
+log.bright.red.error ('bright red error!')
+```
+
+Under the hood it does the following:
+
+```javascript
+log.configure ({ render: { consoleMethod: 'error' } }) ('this goes to stderr')
+```
+
+Other `console` methods are supported as well:
+
+```javascript
+log.info ('calls console.info')
+```
+```javascript
+log.warn ('calls console.warn')
+```
+
 ## Limiting max argument length
 
 ```javascript

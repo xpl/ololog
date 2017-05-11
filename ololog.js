@@ -25,7 +25,7 @@ const changeLastNonemptyLine = (lines, fn) => {
 
 /*  ------------------------------------------------------------------------ */
 
-const log = module.exports = pipez ({
+const log = pipez ({
 
 /*  ------------------------------------------------------------------------ */
 
@@ -76,11 +76,13 @@ const log = module.exports = pipez ({
 
         engines = { /* configurable */ },
 
+        consoleMethod = 'log',
+
         defaults = {
 
-            ansi:    s => console.log (s),
-            chrome:  s => console.log (...ansi.parse (s).asChromeConsoleLogArguments),
-            generic: s => console.log (ansi.strip (s))
+            ansi:    s => console[consoleMethod] (s),
+            chrome:  s => console[consoleMethod] (...ansi.parse (s).asChromeConsoleLogArguments),
+            generic: s => console[consoleMethod] (ansi.strip (s))
         },
 
         linebreak = '\n'
@@ -97,7 +99,11 @@ const log = module.exports = pipez ({
 
 }).methods ({
 
-    indent (level) { return this.configure ({ indent: { level: level }}) }
+    indent (level) { return this.configure ({ indent: { level: level }}) },
+
+    get error () { return this.configure ({ render: { consoleMethod: 'error' } }) },
+    get warn ()  { return this.configure ({ render: { consoleMethod: 'warn' } }) },
+    get info ()  { return this.configure ({ render: { consoleMethod: 'info' } }) }
 })
 
 /*  ------------------------------------------------------------------------ */
@@ -111,3 +117,37 @@ ansi.names.forEach (color => {
 })
 
 /*  ------------------------------------------------------------------------ */
+
+let impl = log
+
+module.exports = new Proxy (log, {
+
+    apply (target, this_, args) {
+
+        console.log (impl)
+
+        return impl.apply (this_, args) // @hide
+    },
+
+    get (target, prop) {
+
+        return Reflect.get (impl, prop)
+    }
+
+}).methods ({
+
+    substitute (newImpl) {
+
+        let prevImpl = impl
+
+        impl = newImpl
+
+        return {
+            release () { if (impl === newImpl) { impl = prevImpl } }
+        }
+    }
+})
+
+/*  ------------------------------------------------------------------------ */
+
+

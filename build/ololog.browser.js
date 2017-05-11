@@ -4349,7 +4349,7 @@ process.umask = function() { return 0; };
 
 },{}],20:[function(require,module,exports){
 window.ololog 	   = require ('./ololog')
-window.ansicolor   = require ('ansicolor')
+window.ansicolor   = require ('ansicolor').nice
 window.StackTracey = require ('stacktracey')
 },{"./ololog":21,"ansicolor":1,"stacktracey":25}],21:[function(require,module,exports){
 "use strict";
