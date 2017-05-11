@@ -3,7 +3,7 @@
 - [x] Platform-agnostic logging
 - [x] Colors / styles for terminals and Chrome DevTools (try [online demo](https://xpl.github.io/ololog/))
 - [x] Displays call locations
-- [x] Formats `Error` instances as pretty stacktraces with source lines
+- [x] Formats `Error` instances as [pretty stacktraces with source lines](https://github.com/xpl/ololog#pretty-printing-error-instances)
 - [x] [Powerful object printer](https://github.com/xpl/string.ify)
 - [x] [Pluggable architecture](https://github.com/xpl/pipez)
 
@@ -137,6 +137,8 @@ log.red.unlimited.bright (obj) // chainable
 All magic is provided by the external [String.ify](https://github.com/xpl/string.ify) library. Read the docs to see all the available configuration options. There are plenty of them! Contributions are welcome.
 
 ## Pretty printing `Error` instances
+
+This feature is implemented in the [StackTracey](https://github.com/xpl/stacktracey#pretty-printing) library. See it's docs for more (you can configure the path shortening / library calls skipping).
 
 ```javascript
 const e = new Error ('dummy error') // issued somewhere in a Mocha test callback...
