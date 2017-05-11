@@ -4360,8 +4360,24 @@ const O           = Object,
       StackTracey = require ('stacktracey'),
       ansi        = require ('ansicolor'),
       bullet      = require ('string.bullet'),
-      stringify   = require ('string.ify'),
       pipez       = require ('pipez')
+
+/*  ------------------------------------------------------------------------ */
+
+const stringify = require ('string.ify').configure ({
+
+    formatter (x) {
+
+        if (x instanceof Error) {
+
+            const why           = stringify.limit ((x.message || '').replace (/\r|\n/g, '').trim (), 120),
+                  stack         = new StackTracey (x).pretty,
+                  stackIndented = stack.split ('\n').map (x => '    ' + x).join ('\n')
+
+            return `[EXCEPTION] ${why}\n\n${stackIndented}\n`
+        }
+    }
+})
 
 /*  ------------------------------------------------------------------------ */
 
