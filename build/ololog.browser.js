@@ -95,6 +95,8 @@ class Code {
         return (this.value === Code.noBrightness) || (this.value === Code.bright) || (this.value === Code.dim) }
 }
 
+/*  ------------------------------------------------------------------------ */
+
 O.assign (Code, {
 
     bright:       1,
@@ -121,6 +123,45 @@ const replaceAll = (str, a, b) => str.split (a).join (b)
 
 const denormalizeBrightness = s => s.replace (/(\u001b\[(1|2)m)/g, '\u001b[22m$1')
 const normalizeBrightness = s => s.replace (/\u001b\[22m(\u001b\[(1|2)m)/g, '$1')
+
+const wrap = (str, openCode, closeCode) => {
+
+    const open  = Code.str (openCode),
+          close = Code.str (closeCode)
+
+    return denormalizeBrightness (open + replaceAll (normalizeBrightness (str), close, open) + close)
+}
+
+/*  ------------------------------------------------------------------------ */
+
+const stringWrappingMethods = (() => [
+
+        ...colorCodes.map ((k, i) => !k ? [] : [ // color methods
+
+            [k,                     30 + i,  Code.noColor],
+            [camel ('bg', k),       40 + i,  Code.noBgColor],
+            [camel ('bgBright', k), 100 + i, Code.noBgColor]
+        ]),
+
+        ...styleCodes.map ((k, i) => !k ? [] : [ // style methods
+
+            [k, i, ((k === 'bright') || (k === 'dim')) ? Code.noBrightness : (20 + i)]
+        ])
+    ]
+    .reduce ((a, b) => a.concat (b))
+    
+) ();
+
+/*  ------------------------------------------------------------------------ */
+
+const assignStringWrappingAPI = (target, wrapBefore = target) =>
+
+    stringWrappingMethods.reduce ((memo, [k, open, close]) =>
+                                        O.defineProperty (memo, k, {
+                                            get: () => assignStringWrappingAPI (str => wrapBefore (wrap (str, open, close)))
+                                        }),
+
+                                  target)
 
 /*  ------------------------------------------------------------------------ */
 
@@ -249,19 +290,15 @@ class Colors {
     [Symbol.iterator] () {
         return this.spans[Symbol.iterator] ()
     }
-
-/*  String wrapping API    */
-
-    static define (method, open, close) {
-
-        open  = Code.str (open)
-        close = Code.str (close)
-
-        this[method] = s => denormalizeBrightness (open + replaceAll (normalizeBrightness (s), close, open) + close);
-        
-        (this.names = this.names || []).push (method)
-    }
 }
+
+/*  ------------------------------------------------------------------------ */
+
+assignStringWrappingAPI (Colors, str => str)
+
+/*  ------------------------------------------------------------------------ */
+
+Colors.names = stringWrappingMethods.map (([k]) => k)
 
 /*  ------------------------------------------------------------------------ */
 
@@ -288,22 +325,6 @@ Colors.rgbBright = {
     cyan:    [0,   204, 255],
     white:   [255, 255, 255]
 }
-
-/*  ------------------------------------------------------------------------ */
-
-colorCodes.forEach ((k, i) => {
-    if (k) {
-        Colors.define (k,                      30 + i, Code.noColor)
-        Colors.define (camel ('bg', k),        40 + i, Code.noBgColor)
-        Colors.define (camel ('bgBright', k), 100 + i, Code.noBgColor)
-    }
-})
-
-styleCodes.forEach ((k, i) => {
-    if (k) {
-        Colors.define (k, i, ((k === 'bright') || (k === 'dim')) ? Code.noBrightness : (20 + i))
-    }
-})
 
 /*  ------------------------------------------------------------------------ */
 
