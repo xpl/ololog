@@ -106,7 +106,9 @@ describe ('Ololog', () => {
 
     it ('formatting Error works', () => {
 
-        log.indent (2) (new Error ('dummy error'))
+        const e = new Error ('dummy error')
+
+        log.indent (2) (e)
     })
 })
 

@@ -150,6 +150,7 @@ log.bright.red (e)
 ```
 [EXCEPTION] dummy error
     
+        at it                              test.js:104                             const e = new Error ('dummy error')
         at it                              test.js:109                             log.bright.red (e)
         at callFn                          node_modules/mocha/lib/runnable.js:326  var result = fn.call(ctx);                
         at run                             node_modules/mocha/lib/runnable.js:319  callFn(this.fn);                          
