@@ -4,8 +4,8 @@
   "description": "Platform-agnostic logging / ANSI styles / shows code locations / pretty prints objects",
   "main": "ololog",
   "scripts": {
-    "test": "./node_modules/.bin/mocha --reporter spec --watch",
-    "prepublish": "./node_modules/.bin/browserify ./ololog.browser.js > ./build/ololog.browser.js"
+    "test": "mocha --reporter spec --watch",
+    "prepublish": "browserify ./ololog.browser.js > ./build/ololog.browser.js"
   },
   "repository": {
     "type": "git",
