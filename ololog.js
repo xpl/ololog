@@ -79,7 +79,9 @@ const log = pipez ({
 
                 }) => changeLastNonemptyLine (lines, line => join (line, ' ', print (where))),
 
-    render: (lines, {
+    join: (lines, { linebreak = '\n' }) => lines.join (linebreak),
+
+    render: (text, {
 
         engine = ((typeof window !== 'undefined') && (window.window === window) && window.navigator)
 
@@ -99,11 +101,9 @@ const log = pipez ({
             ansi:    s => console[consoleMethod] (s),
             chrome:  s => console[consoleMethod] (...ansi.parse (s).asChromeConsoleLogArguments),
             generic: s => console[consoleMethod] (ansi.strip (s))
-        },
+        }
 
-        linebreak = '\n'
-
-    }) => O.assign (defaults, engines)[engine] (lines.join (linebreak))
+    }) => (text && O.assign (defaults, engines)[engine] (text)) || undefined
 
 /*  ------------------------------------------------------------------------ */
 
@@ -121,7 +121,10 @@ const log = pipez ({
     get warn ()  { return this.configure ({ render: { consoleMethod: 'warn' } }) },
     get info ()  { return this.configure ({ render: { consoleMethod: 'info' } }) },
 
-    get unlimited () { return this.configure ({ stringify: { maxArrayLength: Number.MAX_VALUE, maxDepth: Number.MAX_VALUE } }) }
+    get unlimited () { return this.configure ({ stringify: { maxArrayLength: Number.MAX_VALUE, maxDepth: Number.MAX_VALUE } }) },
+
+    get serialize () { return this.before ('render') },
+    get deserialize () { return this.from ('render') }
 })
 
 /*  ------------------------------------------------------------------------ */
@@ -135,36 +138,6 @@ ansi.names.forEach (color => {
 })
 
 /*  ------------------------------------------------------------------------ */
-
-// let impl = log
-
-// module.exports = new Proxy (log, {
-
-//     apply (target, this_, args) {
-
-//         console.log (impl)
-
-//         return impl.apply (this_, args) // @hide
-//     },
-
-//     get (target, prop) {
-
-//         return Reflect.get (impl, prop)
-//     }
-
-// }).methods ({
-
-//     substitute (newImpl) {
-
-//         let prevImpl = impl
-
-//         impl = newImpl
-
-//         return {
-//             release () { if (impl === newImpl) { impl = prevImpl } }
-//         }
-//     }
-// })
 
 module.exports = log
 
