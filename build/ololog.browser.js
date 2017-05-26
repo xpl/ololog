@@ -4454,7 +4454,9 @@ const log = pipez ({
 
                 }) => changeLastNonemptyLine (lines, line => join (line, ' ', print (where))),
 
-    render: (lines, {
+    join: (lines, { linebreak = '\n' }) => lines.join (linebreak),
+
+    render: (text, {
 
         engine = ((typeof window !== 'undefined') && (window.window === window) && window.navigator)
 
@@ -4474,11 +4476,9 @@ const log = pipez ({
             ansi:    s => console[consoleMethod] (s),
             chrome:  s => console[consoleMethod] (...ansi.parse (s).asChromeConsoleLogArguments),
             generic: s => console[consoleMethod] (ansi.strip (s))
-        },
+        }
 
-        linebreak = '\n'
-
-    }) => O.assign (defaults, engines)[engine] (lines.join (linebreak))
+    }) => (text && O.assign (defaults, engines)[engine] (text)) || undefined
 
 /*  ------------------------------------------------------------------------ */
 
@@ -4496,7 +4496,10 @@ const log = pipez ({
     get warn ()  { return this.configure ({ render: { consoleMethod: 'warn' } }) },
     get info ()  { return this.configure ({ render: { consoleMethod: 'info' } }) },
 
-    get unlimited () { return this.configure ({ stringify: { maxArrayLength: Number.MAX_VALUE, maxDepth: Number.MAX_VALUE } }) }
+    get unlimited () { return this.configure ({ stringify: { maxArrayLength: Number.MAX_VALUE, maxDepth: Number.MAX_VALUE } }) },
+
+    get serialize () { return this.before ('render') },
+    get deserialize () { return this.from ('render') }
 })
 
 /*  ------------------------------------------------------------------------ */
@@ -4510,36 +4513,6 @@ ansi.names.forEach (color => {
 })
 
 /*  ------------------------------------------------------------------------ */
-
-// let impl = log
-
-// module.exports = new Proxy (log, {
-
-//     apply (target, this_, args) {
-
-//         console.log (impl)
-
-//         return impl.apply (this_, args) // @hide
-//     },
-
-//     get (target, prop) {
-
-//         return Reflect.get (impl, prop)
-//     }
-
-// }).methods ({
-
-//     substitute (newImpl) {
-
-//         let prevImpl = impl
-
-//         impl = newImpl
-
-//         return {
-//             release () { if (impl === newImpl) { impl = prevImpl } }
-//         }
-//     }
-// })
 
 module.exports = log
 
@@ -4561,49 +4534,84 @@ const merge = (to, from) => {
 
 /*  ------------------------------------------------------------------------ */
 
-const pipez = module.exports = functions => O.assign (
+const pipez = module.exports = (functions_, prev) => {
 
-/*  Function of functions (call chain)  */
+    let functions = {} // bound to self
 
-    (...initial) =>
-        Reflect.ownKeys (functions) // guaranteed to be in property creation order (as defined by the standard)
-               .reduce ((memo, k) => functions[k] (memo, {}), initial),
+    const functionNames = Reflect.ownKeys (functions_) // guaranteed to be in property creation order (as defined by the standard)
+    const self = O.assign (
 
-/*  Additional methods     */
+    /*  Function of functions (call chain)  */
 
-    {
-        configure (overrides = {}) {
+        (...initial) => functionNames.reduce ((memo, k) => functions[k].call (self, memo, {}), initial),
 
-            const modifiedFunctions = {}
+    /*  Additional methods     */
 
-            for (const k of Reflect.ownKeys (functions)) {
+        {
+            configure (overrides = {}) {
 
-                const override = overrides[k],
-                      before   = overrides['+' + k] || (x => x),
-                      after    = overrides[k + '+'] || (x => x),
-                      fn       = (typeof override === 'function') ? override : functions[k]
+                const modifiedFunctions = {}
 
-                const boundArgs = (typeof override === 'boolean') ? { yes: override } : (override || {})
+                for (const k of functionNames) {
 
-                modifiedFunctions[k] = (x, args) => {
+                    const override = overrides[k],
+                          before   = overrides['+' + k] || (x => x),
+                          after    = overrides[k + '+'] || (x => x),
+                          fn       = (typeof override === 'function') ? override : functions[k]
 
-                    const newArgs = O.assign ({}, boundArgs, args),
-                          maybeFn = (newArgs.yes === false) ? (x => x) : fn
+                    const boundArgs = (typeof override === 'boolean') ? { yes: override } : (override || {})
 
-                    return after (maybeFn (before (x, newArgs), newArgs), newArgs)
+                    modifiedFunctions[k] = function (x, args) {
+
+                        const newArgs = O.assign ({}, boundArgs, args),
+                              maybeFn = (newArgs.yes === false) ? (x => x) : fn
+
+                        return after.call (this,
+                                    maybeFn.call (this,
+                                        before.call (this, x, newArgs), newArgs), newArgs)
+                    }
                 }
-            }
 
-            return pipez (modifiedFunctions).methods (this.methods_)
-        },
+                return pipez (modifiedFunctions, self).methods (this.methods_)
+            },
 
-        methods_: {},
+            from (name) {
 
-        methods (methods) { return merge (this, merge (this.methods_, methods)) },
+                let subset = null
 
-        get impl () { return functions }
-    }
-)
+                for (const k of functionNames) {
+                    if (k === name) { subset = { takeFirstArgument: (args, cfg) => args[0] } }
+                    if (subset) { subset[k] = functions[k] }
+                }
+
+                return pipez (subset, self)
+            },
+
+            before (name) {
+
+                let subset = {}
+
+                for (const k of functionNames) {
+                    if (k === name) break;
+                    subset[k] = functions[k]
+                }
+
+                return pipez (subset, self)
+            },
+
+            methods_: {},
+
+            methods (methods) { return merge (this, merge (this.methods_, methods)) },
+
+            get impl () { return functions },
+            get prev () { return prev }
+        }
+    )
+
+    for (let [k, f] of O.entries (functions_)) { functions[k] = f.bind (self) }
+
+    return self
+}
 
 /*  ------------------------------------------------------------------------ */
 
@@ -4957,11 +4965,11 @@ module.exports = function (bullet, arg) {
 (function (global){
 "use strict";
 
-const O          = require ('es7-object-polyfill'),
-      bullet     = require ('string.bullet'),
-      isBrowser  = (typeof window !== 'undefined') && (window.window === window) && window.navigator,
-      maxOf      = (arr, pick) => arr.reduce ((max, s) => Math.max (max, pick ? pick (s) : s), 0),
-      isInteger  = Number.isInteger || (value => (typeof value === 'number') && isFinite (value) && (Math.floor (value) === value)),
+const O            = require ('es7-object-polyfill'),
+      bullet       = require ('string.bullet'),
+      isBrowser    = (typeof window !== 'undefined') && (window.window === window) && window.navigator,
+      maxOf        = (arr, pick) => arr.reduce ((max, s) => Math.max (max, pick ? pick (s) : s), 0),
+      isInteger    = Number.isInteger || (value => (typeof value === 'number') && isFinite (value) && (Math.floor (value) === value)),
       isTypedArray = x => (x instanceof Float32Array) ||
                           (x instanceof Float64Array) ||
                           (x instanceof Int8Array) ||
@@ -4971,154 +4979,180 @@ const O          = require ('es7-object-polyfill'),
                           (x instanceof Int32Array) ||
                           (x instanceof Uint32Array)
 
+const assignProps = (to, from) => { for (const prop in from) { O.defineProperty (to, prop, O.getOwnPropertyDescriptor (from, prop)) }; return to }
+
 const configure = cfg => {
-const stringify = O.assign (x => {
 
-        const state = O.assign ({ parents: new Set (), siblings: new Map () }, cfg)
+    const stringify = x => {
 
-        if (cfg.pretty === 'auto') {
-            const   oneLine =                         stringify.configure ({ pretty: false, siblings: new Map () }) (x)
-            return (oneLine.length <= 80) ? oneLine : stringify.configure ({ pretty: true,  siblings: new Map () }) (x) }
+            const state = O.assign ({ parents: new Set (), siblings: new Map () }, cfg)
 
-        var customFormat = cfg.formatter && cfg.formatter (x, stringify)
+            if (cfg.pretty === 'auto') {
+                const   oneLine =                         stringify.configure ({ pretty: false, siblings: new Map () }) (x)
+                return (oneLine.length <= 80) ? oneLine : stringify.configure ({ pretty: true,  siblings: new Map () }) (x) }
 
-        if (typeof customFormat === 'string') {
-            return customFormat }
+            var customFormat = cfg.formatter && cfg.formatter (x, stringify)
 
-        if ((typeof jQuery !== 'undefined') && (x instanceof jQuery)) {
-            x = x.toArray () }
+            if (typeof customFormat === 'string') {
+                return customFormat }
 
-        else if (isTypedArray (x)) {
-            x = Array.from (x) }
+            if ((typeof jQuery !== 'undefined') && (x instanceof jQuery)) {
+                x = x.toArray () }
 
-        if (isBrowser && (x === window)) {
-            return 'window' }
+            else if (isTypedArray (x)) {
+                x = Array.from (x) }
 
-        else if (!isBrowser && (typeof global !== 'undefined') && (x === global)) {
-            return 'global' }
+            if (isBrowser && (x === window)) {
+                return 'window' }
 
-        else if (x === null) {
-            return 'null' }
+            else if (!isBrowser && (typeof global !== 'undefined') && (x === global)) {
+                return 'global' }
 
-        else if (x instanceof Date) {
-            return state.pure ? x.getTime () : "📅  " + x.toString () }
+            else if (x === null) {
+                return 'null' }
 
-        else if (state.parents.has (x)) {
-            return state.pure ? undefined : '<cyclic>' }
+            else if (x instanceof Date) {
+                return state.pure ? x.getTime () : "📅  " + x.toString () }
 
-        else if (state.siblings.has (x)) {
-            return state.pure ? undefined : '<ref:' + state.siblings.get (x) + '>' }
+            else if (state.parents.has (x)) {
+                return state.pure ? undefined : '<cyclic>' }
 
-        else if (x && (typeof Symbol !== 'undefined')
-                   && (customFormat = x[Symbol.for ('String.ify')])
-                   && (typeof (customFormat = customFormat.call (x, stringify.configure (state))) === 'string')) {
-            return customFormat }
+            else if (state.siblings.has (x)) {
+                return state.pure ? undefined : '<ref:' + state.siblings.get (x) + '>' }
 
-        else if (x instanceof Function) {
-            return (cfg.pure ? x.toString () : (x.name ? ('<function:' + x.name + '>') : '<function>')) }
+            else if (x && (typeof Symbol !== 'undefined')
+                       && (customFormat = x[Symbol.for ('String.ify')])
+                       && (typeof (customFormat = customFormat.call (x, stringify.configure (state))) === 'string')) {
 
-        else if (typeof x === 'string') {
-            return '"' + stringify.limit (x, cfg.pure ? Number.MAX_SAFE_INTEGER : cfg.maxStringLength) + '"' }
+                return customFormat }
 
-        else if (typeof x === 'object') {
+            else if (x instanceof Function) {
+                return (cfg.pure ? x.toString () : (x.name ? ('<function:' + x.name + '>') : '<function>')) }
 
-            state.parents.add (x)
-            state.siblings.set (x, state.siblings.size)
+            else if (typeof x === 'string') {
+                return '"' + stringify.limit (x, cfg.pure ? Number.MAX_SAFE_INTEGER : cfg.maxStringLength) + '"' }
 
-            const result = stringify.configure (O.assign ({}, state, { depth: state.depth + 1 })).object (x)
+            else if (typeof x === 'object') {
 
-            state.parents.delete (x)
+                state.parents.add (x)
+                state.siblings.set (x, state.siblings.size)
 
-            return result }
+                const result = stringify.configure (O.assign ({}, state, { depth: state.depth + 1 })).object (x)
 
-        else if (!isInteger (x) && (cfg.precision > 0)) {
-            return x.toFixed (cfg.precision) }
+                state.parents.delete (x)
 
-        else {
-            return String (x) }
+                return result }
 
-    }, cfg, {
-
-        configure: newConfig => configure (O.assign ({}, cfg, newConfig)),
-
-        limit: (s, n) => s && ((s.length <= n) ? s : (s.substr (0, n - 1) + '…')),
-
-        rightAlign: strings => {
-                        var max = maxOf (strings, s => s.length)
-                        return strings.map (s => ' '.repeat (max - s.length) + s) },
-
-        object: x => {
-
-            if (x instanceof Set) {
-                x = Array.from (x.values ()) }
-
-            else if (x instanceof Map) {
-                x = Array.from (x.entries ()) }
-
-            const isArray = Array.isArray (x)
-
-            if (isBrowser) {
-                
-                if (x instanceof Element) {
-                    return '<' + (x.tagName.toLowerCase () +
-                                ((x.id && ('#' + x.id)) || '') +
-                                ((x.className && ('.' + x.className)) || '')) + '>' }
-                
-                else if (x instanceof Text) {
-                    return '@' + stringify.limit (x.wholeText, 20) } }
-
-            if (!cfg.pure && ((cfg.depth > cfg.maxDepth) || (isArray && (x.length > cfg.maxArrayLength)))) {
-                return isArray ? '<array[' + x.length + ']>' : '<object>' }
-
-            const pretty   = cfg.pretty ? true : false,
-                  entries  = O.entries (x),
-                  oneLine  = !pretty || (entries.length < 2),
-                  quoteKey = cfg.json ? (k => '"' + k + '"') : (k => k)
-
-            if (pretty) {
-
-                const values        = O.values (x),
-                      printedKeys   = stringify.rightAlign (O.keys (x).map (k => quoteKey (k) + ': ')),
-                      printedValues = values.map (stringify),
-                      leftPaddings  = printedValues.map ((x, i) => (((x[0] === '[') ||
-                                                                     (x[0] === '{'))
-                                                                        ? 3
-                                                                        : ((typeof values[i] === 'string') ? 1 : 0))),
-                      maxLeftPadding = maxOf (leftPaddings),
-
-                      items = leftPaddings.map ((padding, i) => {
-                                        const value = ' '.repeat (maxLeftPadding - padding) + printedValues[i]
-                                        return isArray ? value : bullet (printedKeys[i], value) }),
-
-                      printed = bullet (isArray ? '[ ' :
-                                                  '{ ', items.join (',\n')),
-
-                      lines    = printed.split ('\n'),
-                      lastLine = lines[lines.length - 1]
-
-                return printed +  (' '.repeat (maxOf (lines, l => l.length) - lastLine.length) + (isArray ? ' ]' : ' }')) }
+            else if (!isInteger (x) && (cfg.precision > 0)) {
+                return x.toFixed (cfg.precision) }
 
             else {
-
-                const items   = entries.map (kv => (isArray ? '' : (quoteKey (kv[0]) + ': ')) + stringify (kv[1])),
-                      content = items.join (', ')
-
-                return isArray
-                        ? ('['  + content +  ']')
-                        : ('{ ' + content + ' }')
-            }
+                return String (x) }
         }
-    })
 
-    return stringify
-}
+    /*  API  */
+
+        assignProps (stringify, {
+
+            state: cfg,
+
+            configure: newConfig => configure (O.assign ({}, cfg, newConfig)),
+
+        /*  TODO: generalize generation of these chain-style .configure helpers (maybe in a separate library, as it looks like a common pattern)    */
+
+            get pretty   () { return stringify.configure ({ pretty: true }) },
+            get noPretty () { return stringify.configure ({ pretty: false }) },
+
+            get json () { return stringify.configure ({ json: true }) },
+            get pure () { return stringify.configure ({ pure: true }) },
+
+            maxStringLength (n = Number.MAX_SAFE_INTEGER) { return stringify.configure ({ maxStringLength: n }) },
+            maxArrayLength  (n = Number.MAX_SAFE_INTEGER) { return stringify.configure ({ maxArrayLength: n }) },
+            maxDepth        (n = Number.MAX_SAFE_INTEGER) { return stringify.configure ({ maxDepth: n }) },
+
+            precision (p) { return stringify.configure ({ precision: p }) },
+            formatter (f) { return stringify.configure ({ formatter: f }) },
+
+        /*  Some undocumented internals    */
+
+            limit: (s, n) => s && ((s.length <= n) ? s : (s.substr (0, n - 1) + '…')),
+
+            rightAlign: strings => {
+                            var max = maxOf (strings, s => s.length)
+                            return strings.map (s => ' '.repeat (max - s.length) + s) },
+
+            object: x => {
+
+                if (x instanceof Set) {
+                    x = Array.from (x.values ()) }
+
+                else if (x instanceof Map) {
+                    x = Array.from (x.entries ()) }
+
+                const isArray = Array.isArray (x)
+
+                if (isBrowser) {
+                    
+                    if (x instanceof Element) {
+                        return '<' + (x.tagName.toLowerCase () +
+                                    ((x.id && ('#' + x.id)) || '') +
+                                    ((x.className && ('.' + x.className)) || '')) + '>' }
+                    
+                    else if (x instanceof Text) {
+                        return '@' + stringify.limit (x.wholeText, 20) } }
+
+                if (!cfg.pure && ((cfg.depth > cfg.maxDepth) || (isArray && (x.length > cfg.maxArrayLength)))) {
+                    return isArray ? '<array[' + x.length + ']>' : '<object>' }
+
+                const pretty   = cfg.pretty ? true : false,
+                      entries  = O.entries (x),
+                      oneLine  = !pretty || (entries.length < 2),
+                      quoteKey = cfg.json ? (k => '"' + k + '"') : (k => k)
+
+                if (pretty) {
+
+                    const values        = O.values (x),
+                          printedKeys   = stringify.rightAlign (O.keys (x).map (k => quoteKey (k) + ': ')),
+                          printedValues = values.map (stringify),
+                          leftPaddings  = printedValues.map ((x, i) => (((x[0] === '[') ||
+                                                                         (x[0] === '{'))
+                                                                            ? 3
+                                                                            : ((typeof values[i] === 'string') ? 1 : 0))),
+                          maxLeftPadding = maxOf (leftPaddings),
+
+                          items = leftPaddings.map ((padding, i) => {
+                                            const value = ' '.repeat (maxLeftPadding - padding) + printedValues[i]
+                                            return isArray ? value : bullet (printedKeys[i], value) }),
+
+                          printed = bullet (isArray ? '[ ' :
+                                                      '{ ', items.join (',\n')),
+
+                          lines    = printed.split ('\n'),
+                          lastLine = lines[lines.length - 1]
+
+                    return printed +  (' '.repeat (maxOf (lines, l => l.length) - lastLine.length) + (isArray ? ' ]' : ' }')) }
+
+                else {
+
+                    const items   = entries.map (kv => (isArray ? '' : (quoteKey (kv[0]) + ': ')) + stringify (kv[1])),
+                          content = items.join (', ')
+
+                    return isArray
+                            ? ('['  + content +  ']')
+                            : ('{ ' + content + ' }')
+                }
+            }
+        })
+
+        return stringify
+    }
 
 module.exports = configure ({
 
                     depth:           0,
                     pure:            false,
                     json:            false,
-                    color:           false, // not supported yet
+                //  color:           false, // not supported yet
                     maxDepth:        5,
                     maxArrayLength:  60,
                     maxStringLength: 60,
