@@ -5017,8 +5017,8 @@ const configure = cfg => {
             else if (state.parents.has (x)) {
                 return state.pure ? undefined : '<cyclic>' }
 
-            else if (state.siblings.has (x)) {
-                return state.pure ? undefined : '<ref:' + state.siblings.get (x) + '>' }
+            else if (!state.pure && state.siblings.has (x)) {
+                return '<ref:' + state.siblings.get (x) + '>' }
 
             else if (x && (typeof Symbol !== 'undefined')
                        && (customFormat = x[Symbol.for ('String.ify')])

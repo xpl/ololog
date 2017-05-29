@@ -108,7 +108,23 @@ describe ('Ololog', () => {
 
         const e = new Error ('dummy error')
 
-        log.indent (2) (e)
+        log.configure ({ '+render': text => {
+
+            text.indexOf ('[EXCEPTION] dummy error\n').should.equal (0)
+            text.indexOf ('const e = new Error (\'dummy error\')').should.be.gt (0)
+
+        }}) (e)
+    })
+
+    it ('getting rendered text', () => {
+
+        log.before ('render') ({ foo: 42 }).should.be.equal ('{ foo: 42 }')
+    })
+
+    it ('returns its first argument', () => {
+
+        assert (() => log (42)              .should.equal (42), ['42'])
+        assert (() => log (42, 'foo', 'bar').should.equal (42), ['42 foo bar'])
     })
 })
 

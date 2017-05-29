@@ -3,6 +3,7 @@
 - [x] Platform-agnostic logging
 - [x] Colors / styles for terminals and Chrome DevTools (try [online demo](https://xpl.github.io/ololog/))
 - [x] Displays call locations
+- [x] Returns its argument (for easy debugging of functional expressions)
 - [x] Formats `Error` instances as [pretty stacktraces with source lines](https://github.com/xpl/ololog#pretty-printing-error-instances)
 - [x] [Powerful object printer](https://github.com/xpl/string.ify)
 - [x] [Pluggable architecture](https://github.com/xpl/pipez)
@@ -75,6 +76,20 @@ log.configure ({ concat: { separator: ', ' }})
 ```
 
 You can [read more about `configure` here](https://github.com/xpl/pipez). Configuration engine is implemented as a separate external library, for everyone's use. Contributions are welcome.
+
+## Debugging of functional expressions
+
+Ololog returns its first argument (a feature that `console.log` doesn't have), and it greatly simplifies debugging of functional expressions, as you can simply wrap part of an expression to `log`:
+
+```javascript
+array.map (x => log (x + 1))
+```
+
+It is far less ugly than with `console.log`:
+
+```javascript
+array.map (x => { console.log (x); return x + 1 })
+```
 
 ## ANSI styling
 
@@ -266,6 +281,14 @@ log.warn ('calls console.warn')
 
 ```javascript
 log.configure ({ trim: { max: 5 } }) ('1234567890', 'abcdefgh') // 1234… abcd…
+```
+
+## Getting rendered text
+
+The following will execute all stages before the 'render' (screen output) stage, returning its argument:
+
+```javascript
+log.before ('render') ({ foo: 42 }) // '{ foo: 42 }'
 ```
 
 ## Custom methods / aspect-oriented code injection
