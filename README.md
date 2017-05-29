@@ -17,6 +17,9 @@
 
 ## Importing
 
+```bash
+npm install ololog
+```
 ```javascript
 log = require ('ololog')
 ```
