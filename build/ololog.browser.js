@@ -4476,9 +4476,11 @@ const log = pipez ({
             ansi:    s => console[consoleMethod] (s),
             chrome:  s => console[consoleMethod] (...ansi.parse (s).asChromeConsoleLogArguments),
             generic: s => console[consoleMethod] (ansi.strip (s))
-        }
+        },
 
-    }) => (text && O.assign (defaults, engines)[engine] (text)) || undefined
+        initialArguments: [firstArgument]
+
+    }) => ((text && O.assign (defaults, engines)[engine] (text)), firstArgument)
 
 /*  ------------------------------------------------------------------------ */
 
@@ -4543,7 +4545,7 @@ const pipez = module.exports = (functions_, prev) => {
 
     /*  Function of functions (call chain)  */
 
-        (...initial) => functionNames.reduce ((memo, k) => functions[k].call (self, memo, {}), initial),
+        (...initial) => functionNames.reduce ((memo, k) => functions[k].call (self, memo, { initialArguments: initial }), initial),
 
     /*  Additional methods     */
 
