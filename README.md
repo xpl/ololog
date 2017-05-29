@@ -85,7 +85,7 @@ You can [read more about `configure` here](https://github.com/xpl/pipez). Config
 Ololog returns its first argument (a feature that `console.log` doesn't have), and it greatly simplifies debugging of functional expressions, as you can simply wrap part of an expression to `log`:
 
 ```javascript
-array.map (x => log (x + 1))
+array.map (x => log (x) + 1)
 ```
 
 It is far less ugly than with `console.log`:
