@@ -26,7 +26,7 @@ log = require ('ololog')
 
 ## Browser bundle
 
-Exposes global `ololog` and `ansicolor` objects. Installs unsafe [String extensions for ANSI styles](https://github.com/xpl/ansicolor#nice-mode-by-request). Not compressed.
+Exposes global `ololog` and [`ansicolor`](https://github.com/xpl/ansicolor) objects. Installs unsafe [String extensions for ANSI styles](https://github.com/xpl/ansicolor#nice-mode-by-request). Not compressed.
 
 ```html
 <script src="https://rawgit.com/xpl/ololog/master/build/ololog.browser.js"></script>
