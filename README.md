@@ -115,6 +115,8 @@ log.red ('red text')
 log.bright.red.underline ('multiple styles combined')
 ```
 
+[See all the supported style options here](https://github.com/xpl/ansicolor#supported-styles).
+
 ## Smart object printing
 
 ```javascript
