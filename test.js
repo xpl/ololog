@@ -31,10 +31,8 @@ describe ('Ololog', () => {
     })
 
     it.only ('location work', () => {
-
-        log.configure ({ locate: true }).bgBrightCyan ('with location\n\n')
-
-        //assert (() => log.configure ({ locate: true }).red ('with location\n\n'), ['with location \u001b[22m\u001b[2m(assert @ test.js:35)\u001b[22m\n\n'])
+    
+        assert (() => log.configure ({ locate: true }).bgBrightCyan ('with location\n\n'), ['\u001b[106m' + 'with location' + '\u001b[49m \u001b[22m\u001b[2m' + '(assert @ test.js:35)' + '\u001b[22m\n\u001b[106m\u001b[49m\n\u001b[106m\u001b[49m'])
 
         assert (() => require ('./ololog') ('with location'), ['with location \u001b[22m\u001b[2m(assert @ test.js:37)\u001b[22m'])
     })
