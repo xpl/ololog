@@ -30,7 +30,7 @@ describe ('Ololog', () => {
         assert (() => log ('hello\n', 'world', 'line1\nline2\nline3\n'), ['hello\nworld line1\nline2\nline3\n'])
     })
 
-    it.only ('location work', () => {
+    it ('location work', () => {
     
         assert (() => log.configure ({ locate: true }).bgBrightCyan ('with location\n\n'), ['\u001b[106m' + 'with location' + '\u001b[49m \u001b[22m\u001b[2m' + '(assert @ test.js:35)' + '\u001b[22m\n\u001b[106m\u001b[49m\n\u001b[106m\u001b[49m'])
 
