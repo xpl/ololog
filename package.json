@@ -5,7 +5,8 @@
   "main": "ololog",
   "scripts": {
     "test": "mocha --reporter spec --watch",
-    "prepublish": "browserify ./ololog.browser.js > ./build/ololog.browser.js"
+    "build": "browserify ./ololog.browser.js > ./build/ololog.browser.js",
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",
