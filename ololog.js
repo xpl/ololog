@@ -7,7 +7,7 @@ const O                 = Object,
       ansi              = require ('ansicolor'),
       bullet            = require ('string.bullet'),
       pipez             = require ('pipez'),
-      { printableText } = require ('stringpector')
+      { printableText } = require ('printable-characters')
 
 /*  ------------------------------------------------------------------------ */
 

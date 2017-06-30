@@ -41,7 +41,7 @@
     "stacktracey": "*",
     "string.bullet": "*",
     "string.ify": "*",
-    "stringpector": "*",
+    "printable-characters": "*",
     "pipez": "*"
   }
 }
