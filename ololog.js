@@ -2,11 +2,12 @@
 
 /*  ------------------------------------------------------------------------ */
 
-const O           = Object,
-      StackTracey = require ('stacktracey'),
-      ansi        = require ('ansicolor'),
-      bullet      = require ('string.bullet'),
-      pipez       = require ('pipez')
+const O                 = Object,
+      StackTracey       = require ('stacktracey'),
+      ansi              = require ('ansicolor'),
+      bullet            = require ('string.bullet'),
+      pipez             = require ('pipez'),
+      { printableText } = require ('stringpector')
 
 /*  ------------------------------------------------------------------------ */
 
@@ -30,7 +31,8 @@ const stringify = require ('string.ify').configure ({
 const changeLastNonemptyLine = (lines, fn) => {
 
     for (let i = lines.length - 1; i >= 0; i--) {
-        if ((i === 0) || !lines[i].match (/^\s*$/)) {
+
+        if ((i === 0) || (printableText (lines[i]).length > 0)) {
             lines[i] = fn (lines[i])
             break;
         }

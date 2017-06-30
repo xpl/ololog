@@ -41,6 +41,7 @@
     "stacktracey": "*",
     "string.bullet": "*",
     "string.ify": "*",
+    "stringpector": "*",
     "pipez": "*"
   }
 }
