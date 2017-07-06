@@ -142,7 +142,11 @@ const log = pipez ({
     get warn ()  { return this.configure ({ render: { consoleMethod: 'warn' } }) },
     get info ()  { return this.configure ({ render: { consoleMethod: 'info' } }) },
 
+    maxArrayLength (n) { return this.configure ({ stringify: { maxArrayLength: n } }) },
+    maxDepth (n) { return this.configure ({ stringify: { maxDepth: n } }) },
+
     get unlimited () { return this.configure ({ stringify: { maxArrayLength: Number.MAX_VALUE, maxDepth: Number.MAX_VALUE } }) },
+    get noPretty () { return this.configure ({ stringify: { pretty: false } }) },
 
     get serialize () { return this.before ('render') },
     get deserialize () { return this.from ('render') }

@@ -145,19 +145,19 @@ log (obj)
 Disabling fancy formatting:
 
 ```javascript
-log.configure ({ stringify: { pretty: false } }) (obj)
+log.noPretty (obj) // or log.configure ({ stringify: { pretty: false } }) (obj)
 ```
 ```
 { abc: 42, defgh: true, qwertyiop: 333, zap: "123457", long: ["foo", "bar", "baz", "qux", "lol", "yup"] }
 ```
 
-Turning off max depth / max array length limiting:
+Changing max print depth / max array length:
 
 ```javascript
-log.unlimited (obj)
+log.maxDepth (1).maxArrayLength (100) (...) // or log.configure ({ stringify: { maxDepth: 1, maxArrayLength: 100 } })
 ```
 ```javascript
-log.red.unlimited.bright (obj) // chainable
+log.unlimited (...) // disables limiting
 ```
 
 All magic is provided by the external [String.ify](https://github.com/xpl/string.ify) library. Read the docs to see all the available configuration options. There are plenty of them! Contributions are welcome.
