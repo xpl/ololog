@@ -50,7 +50,7 @@ log ('foo', 'bar', 'baz') // foo bar baz
 It exposes a method called `.configure`, which produces a new `log` instance with the new settings applied (not mutating the original one), which can be saved and re-used subsequently:
 
 ```javascript
-log = require ('ololog').configure ({ concat: { separator: '' }})
+const log = require ('ololog').configure ({ concat: { separator: '' }})
 ```
 ```javascript
 log ('foo', 'bar', 'baz') // foobarbaz
