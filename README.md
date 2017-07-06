@@ -45,27 +45,21 @@ At first, it's similar to `console.log`:
 log ('foo', 'bar', 'baz') // foo bar baz
 ```
 
-# `.configure (...)`
+# Configuration
 
-It's a pure function that produces a new `log` instance, with new settings applied (not mutating the original one). You can save it for the later use:
+It exposes a method called `.configure`, which produces a new `log` instance with the new settings applied (not mutating the original one), which can be saved and re-used subsequently:
 
 ```javascript
 log = require ('ololog').configure ({ concat: { separator: '' }})
+```
+```javascript
 log ('foo', 'bar', 'baz') // foobarbaz
 ```
 
-...or apply it ad-hoc:
+...or you can apply the configuration method _ad-hoc_:
 
 ```javascript
 log.configure ({ concat: { separator: '' }}) ('foo', 'bar', 'baz') // foobarbaz
-```
-
-You can stack up multiple `configure` calls (although this example is rather far-fetched):
-
-```javascript
-log.configure ({ concat: { separator: ', ' }})
-   .configure ({ lines: { linebreak: '<br>' }}) ('foo<br>', 'bar', 'baz') // foo
-                                                                          // bar, baz
 ```
 
 You can [read more about `configure` here](https://github.com/xpl/pipez). Configuration engine is implemented as a separate external library, for everyone's use. Contributions are welcome.
