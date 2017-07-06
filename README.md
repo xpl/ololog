@@ -6,7 +6,7 @@
 - [x] [Returns its argument](https://github.com/xpl/ololog#debugging-of-functional-expressions) (for easy debugging of functional expressions)
 - [x] [Smart newline / indentation handling](https://github.com/xpl/ololog#smart-newline-handling)
 - [x] Formats `Error` instances as [pretty stacktraces with source lines](https://github.com/xpl/ololog#pretty-printing-error-instances)
-- [x] [Powerful object printer](https://github.com/xpl/string.ify)
+- [x] [Powerful object printer](https://github.com/xpl/ololog#smart-object-printing)
 - [x] [Pluggable architecture](https://github.com/xpl/pipez)
 
 # Powered by
@@ -125,6 +125,10 @@ log.bright (
 
 # Smart object printing
 
+All magic is provided by the external [String.ify](https://github.com/xpl/string.ify) library. Read the docs to see all the available configuration options. There are plenty of them! Contributions are welcome.
+
+![GIF animation](http://cdn.jpg.wtf/futurico/13/34/1470446586-13341a275886bd6be2af39e3c24f2f31.gif)
+
 ```javascript
 let  obj = { abc: 42, defgh: true, qwertyiop: 333, zap: '123457', long: ['foo', 'bar', 'baz', 'qux', 'lol', 'yup'] }
 log (obj)
@@ -159,8 +163,6 @@ log.maxDepth (1).maxArrayLength (100) (...) // or log.configure ({ stringify: { 
 ```javascript
 log.unlimited (...) // disables limiting
 ```
-
-All magic is provided by the external [String.ify](https://github.com/xpl/string.ify) library. Read the docs to see all the available configuration options. There are plenty of them! Contributions are welcome.
 
 # Pretty printing `Error` instances
 
