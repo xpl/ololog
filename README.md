@@ -9,14 +9,14 @@
 - [x] [Powerful object printer](https://github.com/xpl/string.ify)
 - [x] [Pluggable architecture](https://github.com/xpl/pipez)
 
-## Powered by
+# Powered by
 
 - [String.ify](https://github.com/xpl/string.ify)
 - [ansicolor](https://github.com/xpl/ansicolor)
 - [StackTracey](https://github.com/xpl/stacktracey)
 - [Pipez](https://github.com/xpl/pipez)
 
-## Importing
+# Importing
 
 ```bash
 npm install ololog
@@ -25,7 +25,7 @@ npm install ololog
 log = require ('ololog')
 ```
 
-## Browser bundle
+# Browser bundle
 
 Exposes global `ololog` and [`ansicolor`](https://github.com/xpl/ansicolor) objects. Installs unsafe [String extensions for ANSI styles](https://github.com/xpl/ansicolor#nice-mode-by-request). Not compressed.
 
@@ -37,7 +37,7 @@ Exposes global `ololog` and [`ansicolor`](https://github.com/xpl/ansicolor) obje
 </script>
 ```
 
-## Basic usage
+# Basic usage
 
 At first, it's similar to `console.log`:
 
@@ -45,7 +45,7 @@ At first, it's similar to `console.log`:
 log ('foo', 'bar', 'baz') // foo bar baz
 ```
 
-## `.configure (...)`
+# `.configure (...)`
 
 It's a pure function that produces a new `log` instance, with new settings applied (not mutating the original one). You can save it for the later use:
 
@@ -70,7 +70,7 @@ log.configure ({ concat: { separator: ', ' }})
 
 You can [read more about `configure` here](https://github.com/xpl/pipez). Configuration engine is implemented as a separate external library, for everyone's use. Contributions are welcome.
 
-## Debugging of functional expressions
+# Debugging of functional expressions
 
 Ololog returns its first argument (a feature that `console.log` doesn't have), and it greatly simplifies debugging of functional expressions, as you can simply wrap part of an expression to `log`:
 
@@ -84,7 +84,7 @@ It is far less ugly than with `console.log`:
 array.map (x => { console.log (x); return x + 1 })
 ```
 
-## ANSI styling
+# ANSI styling
 
 ![pic](https://cdn.jpg.wtf/futurico/e1/3e/1497133274-e13e9cb97baa90cebbbad55534926fc5.png)
 
@@ -107,7 +107,7 @@ log.bright.red.underline ('multiple styles combined')
 
 [See all the supported styling options here](https://github.com/xpl/ansicolor#supported-styles).
 
-## Smart newline handling
+# Smart newline handling
 
 ```javascript
 log.bright.magenta ('this is something:'.yellow, [ "595da547d9b22f23d8228643", "595da547d9b22f23d822863f", "595da547d9b22f23d8228641" ])
@@ -129,7 +129,7 @@ log.bright (
 
 ![pic](https://cdn.jpg.wtf/futurico/b1/dc/1499313094-b1dc706d06a584059e54106b8376d672.png)
 
-## Smart object printing
+# Smart object printing
 
 ```javascript
 let  obj = { abc: 42, defgh: true, qwertyiop: 333, zap: '123457', long: ['foo', 'bar', 'baz', 'qux', 'lol', 'yup'] }
@@ -168,7 +168,7 @@ log.red.unlimited.bright (obj) // chainable
 
 All magic is provided by the external [String.ify](https://github.com/xpl/string.ify) library. Read the docs to see all the available configuration options. There are plenty of them! Contributions are welcome.
 
-## Pretty printing `Error` instances
+# Pretty printing `Error` instances
 
 This feature is implemented in the [StackTracey](https://github.com/xpl/stacktracey#pretty-printing) library. See it's docs for more (you can configure the path shortening / library calls skipping).
 
@@ -197,7 +197,7 @@ log.bright.red (e)
         at processImmediate [as _immediat  timers.js:596   
 ```       
 
-## Displaying call location
+# Displaying call location
 
 Have you ever encountered a situation where you need to quickly find in the code the place where the logging is called, but it's not so easy to do? With call location tags it's really easy. And it's enabled by default.
 
@@ -223,7 +223,7 @@ Manually setting call location (see the [StackTracey](https://github.com/xpl/sta
 log.configure ({ locate: { where: new StackTracey ().at (2) } }) (...)
 ```
 
-## Indentation
+# Indentation
 
 ```javascript
 log.configure ({ indent: { level: 3 } }) ('foo\n', 'bar\n', 'baz')  //          foo
@@ -237,7 +237,7 @@ Shorthand method:
 log.indent (2) ('foo\n', 'bar\n', 'baz')
 ```
 
-## Timestamping
+# Timestamping
 
 Disabled by default. To enable:
 
@@ -268,7 +268,7 @@ Backdating:
 log.configure ({ time: { when: new Date ('2017-02-27T12:45:19.951Z') }}) (...)
 ```
 
-## Specifying additional semantics (errors, warnings, info messages)
+# Specifying additional semantics (errors, warnings, info messages)
 
 You can add `.error` call modifier, which tells Ololog to render with `console.error` instead of `console.log`: 
 
@@ -294,13 +294,13 @@ log.info ('calls console.info')
 log.warn ('calls console.warn')
 ```
 
-## Limiting max argument length
+# Limiting max argument length
 
 ```javascript
 log.configure ({ trim: { max: 5 } }) ('1234567890', 'abcdefgh') // 1234… abcd…
 ```
 
-## Getting rendered text
+# Getting rendered text
 
 The following will execute all stages before the 'render' (screen output) stage, returning its argument:
 
@@ -308,7 +308,7 @@ The following will execute all stages before the 'render' (screen output) stage,
 log.before ('render') ({ foo: 42 }) // '{ foo: 42 }'
 ```
 
-## Custom methods / aspect-oriented code injection
+# Custom methods / aspect-oriented code injection
 
 You can add your own shorthand methods, and you can also bind new code to the existing methods, executing it _before_, _after_ or _instead_. See the [pipez](https://github.com/xpl/pipez) library, which provides all the fun.
 
@@ -326,6 +326,6 @@ log.methods ({
 log.indent (2).configure ({ time: true }).red.bright ('this is bold red message, indented by 2 and supplied with timestamp')
 ```
 
-## See also
+# See also
 
 - [Online demo](https://xpl.github.io/ololog/)
