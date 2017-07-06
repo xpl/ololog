@@ -1,10 +1,10 @@
 # Ololog! <sup>BETA</sup>
 
 - [x] Platform-agnostic logging
-- [x] Colors / styles for terminals and Chrome DevTools (try [online demo](https://xpl.github.io/ololog/))
-- [x] Displays call locations
-- [x] Returns its argument (for easy debugging of functional expressions)
-- [x] Smart newline/indentation handling
+- [x] [Colors / styles](https://github.com/xpl/ololog#ansi-styling) for terminals and Chrome DevTools (try [online demo](https://xpl.github.io/ololog/))
+- [x] [Displays call locations](https://github.com/xpl/ololog#displaying-call-location)
+- [x] [Returns its argument](https://github.com/xpl/ololog#debugging-of-functional-expressions) (for easy debugging of functional expressions)
+- [x] [Smart newline / indentation handling](https://github.com/xpl/ololog#smart-newline-handling)
 - [x] Formats `Error` instances as [pretty stacktraces with source lines](https://github.com/xpl/ololog#pretty-printing-error-instances)
 - [x] [Powerful object printer](https://github.com/xpl/string.ify)
 - [x] [Pluggable architecture](https://github.com/xpl/pipez)
