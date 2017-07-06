@@ -4,6 +4,7 @@
 - [x] Colors / styles for terminals and Chrome DevTools (try [online demo](https://xpl.github.io/ololog/))
 - [x] Displays call locations
 - [x] Returns its argument (for easy debugging of functional expressions)
+- [x] Smart newline/indentation handling
 - [x] Formats `Error` instances as [pretty stacktraces with source lines](https://github.com/xpl/ololog#pretty-printing-error-instances)
 - [x] [Powerful object printer](https://github.com/xpl/string.ify)
 - [x] [Pluggable architecture](https://github.com/xpl/pipez)
@@ -42,17 +43,6 @@ At first, it's similar to `console.log`:
 
 ```javascript
 log ('foo', 'bar', 'baz') // foo bar baz
-```
-
-Although, comparing to Chrome...
-
-![pic](https://cdn.jpg.wtf/futurico/d9/7a/1493353824-d97aedd3837a0c462dd0cf08b6c4b46c.png)
-
-...our tokenizer implementation is more robust, producing no unneeded word separators:
-
-```javascript
-log ('foo\n', 'bar', 'baz') // foo
-                            // bar baz
 ```
 
 ## `.configure (...)`
@@ -116,6 +106,28 @@ log.bright.red.underline ('multiple styles combined')
 ```
 
 [See all the supported styling options here](https://github.com/xpl/ansicolor#supported-styles).
+
+## Smart newline handling
+
+```javascript
+log.bright.magenta ('this is something:'.yellow, [ "595da547d9b22f23d8228643", "595da547d9b22f23d822863f", "595da547d9b22f23d8228641" ])
+```
+
+![pic](https://cdn.jpg.wtf/futurico/a3/cf/1499313101-a3cf62db303adad169816ce670f43a3b.png)
+
+...and this is how it would look without special caring:
+
+![pic](https://cdn.jpg.wtf/futurico/b1/34/1499313467-b1342c4330146675e9353eddd281006c.png)
+
+Can it handle more arguments?
+
+```javascript
+log.bright (
+    'this is something:'.yellow, '[ "595da547d9b22f23d8228643",\n  "595da547d9b22f23d822863f",\n  "595da547d9b22f23d8228641"  ]'.cyan,
+                                 '[ "595da547d9b22f23d8228643",\n  "595da547d9b22f23d822863f",\n  "595da547d9b22f23d8228641"  ]'.green)
+```
+
+![pic](https://cdn.jpg.wtf/futurico/b1/dc/1499313094-b1dc706d06a584059e54106b8376d672.png)
 
 ## Smart object printing
 

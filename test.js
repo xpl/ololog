@@ -23,11 +23,11 @@ require ('chai').should ()
 describe ('Ololog', () => {
 
     const ansicolor = require ('ansicolor').nice
-    const log = require ('./ololog').configure ({ locate: false, time: { when: new Date ('2017-02-27T12:45:19.951Z') } })
+    const log       = require ('./ololog').configure ({ locate: false, time: { when: new Date ('2017-02-27T12:45:19.951Z') } })
 
-    it ('separator work', () => {
+    it ('tokenization / line splitting / left-pad work', () => {
 
-        assert (() => log ('hello\n', 'world', 'line1\nline2\nline3\n'), ['hello\nworld line1\nline2\nline3\n'])
+        assert (() => log ('hello\n', 'world', 'line1\nline2\nline3\n'), ['hello\nworld line1\n      line2\n      line3\n'])
     })
 
     it ('location work', () => {
@@ -125,6 +125,18 @@ describe ('Ololog', () => {
 
         assert (() => log (42)              .should.equal (42), ['42'])
         assert (() => log (42, 'foo', 'bar').should.equal (42), ['42 foo bar'])
+    })
+
+    it ('smart newline handling', () => {
+
+        assert (() =>
+            log.bright.magenta (
+                'this is something:'.yellow, [ "595da547d9b22f23d8228643", "595da547d9b22f23d822863f", "595da547d9b22f23d8228641" ]), ['\u001b[35m\u001b[22m\u001b[1m\u001b[33mthis is something:\u001b[35m [ \"595da547d9b22f23d8228643\",\u001b[22m\u001b[39m\n\u001b[35m\u001b[22m\u001b[1m                     \"595da547d9b22f23d822863f\",\u001b[22m\u001b[39m\n\u001b[35m\u001b[22m\u001b[1m                     \"595da547d9b22f23d8228641\"  ]\u001b[22m\u001b[39m'])
+
+        assert (() =>
+            log.bright (
+                'this is something:'.yellow, '[ "595da547d9b22f23d8228643",\n  "595da547d9b22f23d822863f",\n  "595da547d9b22f23d8228641"  ]'.cyan,
+                                             '[ "595da547d9b22f23d8228643",\n  "595da547d9b22f23d822863f",\n  "595da547d9b22f23d8228641"  ]'.green), ['\u001b[22m\u001b[1m\u001b[33mthis is something:\u001b[39m \u001b[36m[ \"595da547d9b22f23d8228643\",\u001b[39m\u001b[22m\n\u001b[22m\u001b[1m                   \u001b[36m  \"595da547d9b22f23d822863f\",\u001b[39m\u001b[22m\n\u001b[22m\u001b[1m                   \u001b[36m  \"595da547d9b22f23d8228641\"  ]\u001b[39m \u001b[32m[ \"595da547d9b22f23d8228643\",\u001b[39m\u001b[22m\n\u001b[22m\u001b[1m                                                   \u001b[32m  \"595da547d9b22f23d822863f\",\u001b[39m\u001b[22m\n\u001b[22m\u001b[1m                                                   \u001b[32m  \"595da547d9b22f23d8228641\"  ]\u001b[39m\u001b[22m'])
     })
 })
 

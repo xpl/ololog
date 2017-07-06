@@ -27,7 +27,9 @@ const stringify = require ('string.ify').configure ({
 
 /*  ------------------------------------------------------------------------ */
 
-const { nonPrintableCharacters } = require ('printable-characters')
+const { ansiEscapeCodes,
+        printableCharacters,
+        nonPrintableCharacters } = require ('printable-characters')
 
     , looksEmpty = s => { const visibleLetters = s.replace (nonPrintableCharacters, '')
                           return visibleLetters.length === 0 }
@@ -47,6 +49,9 @@ const { nonPrintableCharacters } = require ('printable-characters')
         return lines
     }
 
+    , whitespaceFill = s => s.replace (ansiEscapeCodes, '')
+                             .replace (printableCharacters, ' ')
+
 /*  ------------------------------------------------------------------------ */
 
 const log = pipez ({
@@ -61,12 +66,18 @@ const log = pipez ({
 
         let lines = [[]]
 
+        let leftPad = []
+
         for (const t of tokens) {
-            
+
             const [first, ...rest] = t.split (linebreak)
 
             lines[lines.length - 1].push (first)
-            lines = lines.concat (rest.map (t => t ? [t] : []))
+            lines = [...lines, ...rest.map (t => t ? [...leftPad, t] : [])]
+
+            const pad = whitespaceFill (!rest.length ? t : rest[rest.length - 1])
+            
+            if (pad) { leftPad.push (pad) }
         }
 
         return lines
