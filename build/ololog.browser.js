@@ -6368,7 +6368,7 @@ const stringify = require ('string.ify').configure ({
 
     formatter (x) {
 
-        if (x instanceof Error) {
+        if ((x instanceof Error) && !x[Symbol.for ('String.ify')]) {
 
             const why           = stringify.limit ((x.message || '').replace (/\r|\n/g, '').trim (), 120),
                   stack         = new StackTracey (x).pretty,
@@ -6446,7 +6446,8 @@ const log = pipez ({
 
     locate: (lines, {
 
-                    where = (new StackTracey ().clean.at (2)),
+                    shift = 0,
+                    where = (new StackTracey ().clean.at (2 + shift)),
                     join  = ((a, sep, b) => (a && b) ? (a + sep + b) : (a || b)),
                     print = ({ calleeShort, fileName = [], line = [] }) => ansi.dim ('(' + join (calleeShort, ' @ ', join (fileName, ':', line)) + ')')
 
@@ -6503,7 +6504,9 @@ const log = pipez ({
     get noPretty () { return this.configure ({ stringify: { pretty: false } }) },
 
     get serialize () { return this.before ('render') },
-    get deserialize () { return this.from ('render') }
+    get deserialize () { return this.from ('render') },
+
+    newline () { return this.from ('join')(['']) }
 })
 
 /*  ------------------------------------------------------------------------ */
