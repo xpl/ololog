@@ -120,11 +120,11 @@ const log = pipez ({
             ansi:    s => console[consoleMethod] (s),
             chrome:  s => console[consoleMethod] (...ansi.parse (s).asChromeConsoleLogArguments),
             generic: s => console[consoleMethod] (ansi.strip (s))
-        },
+        }
 
-        initialArguments: [firstArgument]
+    }) => ((text && O.assign (defaults, engines)[engine] (text), text)),
 
-    }) => ((text && O.assign (defaults, engines)[engine] (text)), firstArgument)
+    returnValue: (__, { initialArguments: [firstArgument] }) => firstArgument
 
 /*  ------------------------------------------------------------------------ */
 

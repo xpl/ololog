@@ -6474,11 +6474,11 @@ const log = pipez ({
             ansi:    s => console[consoleMethod] (s),
             chrome:  s => console[consoleMethod] (...ansi.parse (s).asChromeConsoleLogArguments),
             generic: s => console[consoleMethod] (ansi.strip (s))
-        },
+        }
 
-        initialArguments: [firstArgument]
+    }) => ((text && O.assign (defaults, engines)[engine] (text), text)),
 
-    }) => ((text && O.assign (defaults, engines)[engine] (text)), firstArgument)
+    returnValue: (__, { initialArguments: [firstArgument] }) => firstArgument
 
 /*  ------------------------------------------------------------------------ */
 
@@ -6496,7 +6496,11 @@ const log = pipez ({
     get warn ()  { return this.configure ({ render: { consoleMethod: 'warn' } }) },
     get info ()  { return this.configure ({ render: { consoleMethod: 'info' } }) },
 
+    maxArrayLength (n) { return this.configure ({ stringify: { maxArrayLength: n } }) },
+    maxDepth (n) { return this.configure ({ stringify: { maxDepth: n } }) },
+
     get unlimited () { return this.configure ({ stringify: { maxArrayLength: Number.MAX_VALUE, maxDepth: Number.MAX_VALUE } }) },
+    get noPretty () { return this.configure ({ stringify: { pretty: false } }) },
 
     get serialize () { return this.before ('render') },
     get deserialize () { return this.from ('render') }
@@ -6556,12 +6560,13 @@ const pipez = module.exports = (functions_, prev) => {
 
                     const override = overrides[k],
                           before   = overrides['+' + k] || (x => x),
-                          after    = overrides[k + '+'] || (x => x),
-                          fn       = (typeof override === 'function') ? override : functions[k]
+                          after    = overrides[k + '+'] || (x => x)
 
                     const boundArgs = (typeof override === 'boolean') ? { yes: override } : (override || {})
 
                     modifiedFunctions[k] = function (x, args) {
+
+                        const fn = (typeof override === 'function') ? override : functions[k] // dont cache so people can dynamically change .impl ()
 
                         const newArgs = O.assign ({}, boundArgs, args),
                               maybeFn = (newArgs.yes === false) ? (x => x) : fn
@@ -7047,6 +7052,9 @@ const configure = cfg => {
 
             else if (typeof x === 'string') {
                 return '"' + escapeStr (stringify.limit (x, cfg.pure ? Number.MAX_SAFE_INTEGER : cfg.maxStringLength)) + '"' }
+
+            else if ((x instanceof Promise) && !state.pure) {
+                return '<Promise>' }
 
             else if (typeof x === 'object') {
 
