@@ -14,7 +14,7 @@ const stringify = require ('string.ify').configure ({
 
     formatter (x) {
 
-        if (x instanceof Error) {
+        if ((x instanceof Error) && !x[Symbol.for ('String.ify')]) {
 
             const why           = stringify.limit ((x.message || '').replace (/\r|\n/g, '').trim (), 120),
                   stack         = new StackTracey (x).pretty,
