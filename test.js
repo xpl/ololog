@@ -50,17 +50,17 @@ describe ('Ololog', () => {
 
     it ('timestamps are good with indent', () => {
 
-        const mylog = log.configure ({ time: { yes: true, print: when => when + ' | ' } })
+        const mylog = log.configure ({ time: { yes: true, print: when => when.toUTCString () + ' | ' } })
 
         assert (() => mylog ('foo\nbar\nbaz'), [
-            'Mon Feb 27 2017 15:45:19 GMT+0300 (MSK) | foo\n' +
-            '                                          bar\n' +
-            '                                          baz'])
+            'Mon, 27 Feb 2017 12:45:19 GMT | foo\n' +
+            '                                bar\n' +
+            '                                baz'])
 
         assert (() => mylog.indent (2) ('foo\nbar\nbaz'), [
-            'Mon Feb 27 2017 15:45:19 GMT+0300 (MSK) | \t\tfoo\n' +
-            '                                          \t\tbar\n' +
-            '                                          \t\tbaz'])
+            'Mon, 27 Feb 2017 12:45:19 GMT | \t\tfoo\n' +
+            '                                \t\tbar\n' +
+            '                                \t\tbaz'])
     })
 
     it ('ANSI styles work', () => {
