@@ -77,9 +77,9 @@ describe ('Ololog', () => {
 
     it ('string.ify work', () => {
 
-        assert (() => log.indent (2).green ({ foo: 42, bar: true, qux: 333, zap: '123457', long: [1,2,3,4,5,3,4,5,6,7] }),
+        assert (() => log.indent (2).green ({ foo: 42, bar: true, qux: 333, qux1: 444, qux2: 555, zap: '123457890' }),
 
-           ["\t\t\u001b[32m{  foo:    42,\u001b[39m\n\t\t\u001b[32m   bar:    true,\u001b[39m\n\t\t\u001b[32m   qux:    333,\u001b[39m\n\t\t\u001b[32m   zap:   \"123457\",\u001b[39m\n\t\t\u001b[32m  long: [ 1,\u001b[39m\n\t\t\u001b[32m          2,\u001b[39m\n\t\t\u001b[32m          3,\u001b[39m\n\t\t\u001b[32m          4,\u001b[39m\n\t\t\u001b[32m          5,\u001b[39m\n\t\t\u001b[32m          3,\u001b[39m\n\t\t\u001b[32m          4,\u001b[39m\n\t\t\u001b[32m          5,\u001b[39m\n\t\t\u001b[32m          6,\u001b[39m\n\t\t\u001b[32m          7  ]      }\u001b[39m"])
+           ["\t\t\u001b[32m{  foo:  42,\u001b[39m\n\t\t\u001b[32m   bar:  true,\u001b[39m\n\t\t\u001b[32m   qux:  333,\u001b[39m\n\t\t\u001b[32m  qux1:  444,\u001b[39m\n\t\t\u001b[32m  qux2:  555,\u001b[39m\n\t\t\u001b[32m   zap: \"123457890\" }\u001b[39m"])
 
         assert (() => log.configure ({ stringify: { pretty: false } }) ({ foo: 42, bar: true, qux: 333, zap: '123457', long: [1,2,3,4,5,3,4,5,6,7] }),
 
