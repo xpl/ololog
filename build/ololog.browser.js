@@ -542,11 +542,13 @@ const path = module.exports = {
 		return ((isBrowser && (result[0] === '/')) ? window.location.origin : '') + result
 	},
 
+	isData: x => x.indexOf ('data:') === 0,
+
 	isAbsolute: x => (x[0] === '/') || /^[^\/]*:/.test (x),
 
 	relativeToFile (a, b) {
 		
-	    return path.isAbsolute (b) ?
+	    return (path.isData (a) || path.isAbsolute (b)) ?
 	    			path.normalize (b) :
 	    			path.normalize (path.concat (a.split ('/').slice (0, -1).join ('/'), b))
 	}
@@ -7012,7 +7014,7 @@ const configure = cfg => {
 
             if (cfg.pretty === 'auto') {
                 const   oneLine =                         stringify.configure ({ pretty: false, siblings: new Map () }) (x)
-                return (oneLine.length <= 80) ? oneLine : stringify.configure ({ pretty: true,  siblings: new Map () }) (x) }
+                return (oneLine.length <= 60) ? oneLine : stringify.configure ({ pretty: true,  siblings: new Map () }) (x) }
 
             var customFormat = cfg.formatter && cfg.formatter (x, stringify)
 
@@ -7064,7 +7066,7 @@ const configure = cfg => {
                 state.parents.add (x)
                 state.siblings.set (x, state.siblings.size)
 
-                const result = stringify.configure (O.assign ({}, state, { depth: state.depth + 1 })).object (x)
+                const result = stringify.configure (O.assign ({}, state, { pretty: state.pretty === false ? false : 'auto', depth: state.depth + 1 })).object (x)
 
                 state.parents.delete (x)
 
