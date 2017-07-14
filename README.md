@@ -1,5 +1,7 @@
 # Ololog! <sup>BETA</sup>
 
+[![Build Status](https://travis-ci.org/xpl/ololog.svg?branch=master)](https://travis-ci.org/xpl/ololog) [![NPM](https://img.shields.io/npm/v/ololog.svg)](http://npmjs.com/package/ololog)
+
 - [x] Platform-agnostic logging
 - [x] [Colors / styles](https://github.com/xpl/ololog#ansi-styling) for terminals and Chrome DevTools (try [online demo](https://xpl.github.io/ololog/))
 - [x] [Displays call locations](https://github.com/xpl/ololog#displaying-call-location)
