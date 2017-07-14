@@ -6,7 +6,7 @@
   "scripts": {
     "test": "mocha --reporter spec",
     "autotest": "mocha --reporter spec --watch",
-    "build": "browserify ./ololog.browser.js > ./build/ololog.browser.js",
+    "build": "browserify --debug ./ololog.browser.js > ./build/ololog.browser.js",
     "prepublish": "npm run build"
   },
   "repository": {
