@@ -390,7 +390,10 @@ class SourceMap {
 
     constructor (originalFilePath, sourceMapPath) {
 
-        this.file      = getSource (path.relativeToFile (originalFilePath, sourceMapPath))
+        this.file = sourceMapPath.startsWith ('data:')
+                        ? new SourceFile (originalFilePath, dataURIToBuffer (sourceMapPath).toString ())
+                        : getSource (path.relativeToFile (originalFilePath, sourceMapPath))
+
         this.parsed    = (this.file.text && SourceMapConsumer (JSON.parse (this.file.text))) || null
         this.sourceFor = memoize (this.sourceFor.bind (this))
     }
@@ -423,9 +426,6 @@ class SourceFile {
         if (text) {
             this.text = text }
 
-        else if (path.startsWith ('data:')) {
-            this.text = dataURIToBuffer (path).toString () }
-
         else {
             try {
                 if (isBrowser) {
@@ -455,7 +455,7 @@ class SourceFile {
 
             if (this.sourceMap_ === undefined) {
 
-                const [,url] = this.text.match (/\# sourceMappingURL=(.+)\n?/) || [undefined, undefined]
+                const [,url] = this.text.match (/\u0023 sourceMappingURL=(.+)\n?/) || [undefined, undefined] // escape #, otherwise it will match this exact line.. %)
 
                 if (url) {
 
