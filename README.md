@@ -7,7 +7,7 @@
 - [x] [Smart newline / indentation handling](https://github.com/xpl/ololog#smart-newline-handling)
 - [x] Formats `Error` instances as [pretty stacktraces with source lines](https://github.com/xpl/ololog#pretty-printing-error-instances)
 - [x] [Powerful object printer](https://github.com/xpl/ololog#smart-object-printing)
-- [x] [Pluggable architecture](https://github.com/xpl/pipez)
+- [x] [Pluggable architecture](https://github.com/xpl/pipez#pipezbeta)
 
 # Powered by
 
@@ -62,7 +62,7 @@ log ('foo', 'bar', 'baz') // foobarbaz
 log.configure ({ concat: { separator: '' }}) ('foo', 'bar', 'baz') // foobarbaz
 ```
 
-You can [read more about `configure` here](https://github.com/xpl/pipez). Configuration engine is implemented as a separate external library, for everyone's use. Contributions are welcome.
+You can [read more about `configure` here](https://github.com/xpl/pipez#pipezbeta). Configuration engine is implemented as a separate external library, for everyone's use. Contributions are welcome.
 
 # Debugging of functional expressions
 
