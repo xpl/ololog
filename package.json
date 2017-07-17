@@ -1,6 +1,6 @@
 {
   "name": "ololog",
-  "version": "0.0.40",
+  "version": "1.0.0",
   "description": "Platform-agnostic logging / ANSI styles / shows code locations / pretty prints objects",
   "main": "ololog",
   "scripts": {
