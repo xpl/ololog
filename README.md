@@ -1,4 +1,4 @@
-# Ololog! <sup>BETA</sup>
+# Ololog!
 
 [![Build Status](https://travis-ci.org/xpl/ololog.svg?branch=master)](https://travis-ci.org/xpl/ololog) [![NPM](https://img.shields.io/npm/v/ololog.svg)](http://npmjs.com/package/ololog)
 
