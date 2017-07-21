@@ -27,18 +27,13 @@ const stringify = require ('string.ify').configure ({
 
 /*  ------------------------------------------------------------------------ */
 
-const { ansiEscapeCodes,
-        printableCharacters,
-        nonPrintableCharacters } = require ('printable-characters')
-
-    , looksEmpty = s => { const visibleLetters = s.replace (nonPrintableCharacters, '')
-                          return visibleLetters.length === 0 }
+const { isBlank, blank } = require ('printable-characters')
 
     , changeLastNonemptyLine = (lines, fn) => {
 
         for (let i = lines.length - 1; i >= 0; i--) {
 
-            if ((i === 0) || !looksEmpty (lines[i])) {
+            if ((i === 0) || !isBlank (lines[i])) {
 
                 lines[i] = fn (lines[i])
 
@@ -48,9 +43,6 @@ const { ansiEscapeCodes,
 
         return lines
     }
-
-    , whitespaceFill = s => s.replace (ansiEscapeCodes, '')
-                             .replace (printableCharacters, ' ')
 
 /*  ------------------------------------------------------------------------ */
 
@@ -75,7 +67,7 @@ const log = pipez ({
             lines[lines.length - 1].push (first)
             lines = [...lines, ...rest.map (t => t ? [...leftPad, t] : [])]
 
-            const pad = whitespaceFill (!rest.length ? t : rest[rest.length - 1])
+            const pad = blank (!rest.length ? t : rest[rest.length - 1])
             
             if (pad) { leftPad.push (pad) }
         }
