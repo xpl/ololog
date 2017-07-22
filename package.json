@@ -1,6 +1,6 @@
 {
   "name": "ololog",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Platform-agnostic logging with colors in terminals & browsers / shows call locations / pretty prints objects and stacktraces / smart newline and indentation handling",
   "main": "ololog.es5",
   "scripts": {
