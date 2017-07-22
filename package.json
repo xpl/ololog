@@ -2,7 +2,7 @@
   "name": "ololog",
   "version": "1.0.6",
   "description": "Platform-agnostic logging with colors in terminals & browsers / shows call locations / pretty prints objects and stacktraces / smart newline and indentation handling",
-  "main": "ololog.es5",
+  "main": "build/ololog.es5",
   "scripts": {
     "build": "npm run lint && npm run lint-test && npm run babel && npm run browserify && npm run test && npm run test-es5",
     "lint": "eslint ololog.js",
