@@ -114,7 +114,7 @@
   "license": "Unlicense",
   "bugs": {
     "url": "https://github.com/xpl/ololog/issues"
-  },n
+  },
   "homepage": "https://github.com/xpl/ololog",
   "devDependencies": {
     "browserify": "^14.4.0",
