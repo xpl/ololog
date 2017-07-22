@@ -7,29 +7,33 @@
 - [x] [Displays call locations](https://github.com/xpl/ololog#displaying-call-location)
 - [x] [Returns its argument](https://github.com/xpl/ololog#debugging-of-functional-expressions) (for easy debugging of functional expressions)
 - [x] [Smart newline / indentation handling](https://github.com/xpl/ololog#smart-newline-handling)
-- [x] Formats `Error` instances as [pretty stacktraces with source lines](https://github.com/xpl/ololog#pretty-printing-error-instances)
 - [x] [Powerful object printer](https://github.com/xpl/ololog#smart-object-printing)
-- [x] [Pluggable architecture](https://github.com/xpl/pipez#pipezbeta)
+- [x] Formats `Error` instances as [pretty stacktraces with source lines](https://github.com/xpl/ololog#pretty-printing-error-instances)
+- [x] Full sourcemap support (via [`get-source`](https://github.com/xpl/get-source))
+- [x] [Pluggable pipeline architecture](https://github.com/xpl/pipez#pipezbeta)
 
 # Powered by
 
 - [String.ify](https://github.com/xpl/string.ify)
-- [ansicolor](https://github.com/xpl/ansicolor)
 - [StackTracey](https://github.com/xpl/stacktracey)
 - [Pipez](https://github.com/xpl/pipez)
+- [ansicolor](https://github.com/xpl/ansicolor)
+- [printable-characters](https://github.com/xpl/printable-characters)
 
 # Importing
+
+For use with Node or with module bundlers (Browserify / WebPack / Rollup):
 
 ```bash
 npm install ololog
 ```
 ```javascript
-log = require ('ololog')
+const log = require ('ololog')
 ```
 
 # Browser bundle
 
-Exposes global `ololog` and [`ansicolor`](https://github.com/xpl/ansicolor) objects. Installs [String extensions for ANSI styles](https://github.com/xpl/ansicolor#nice-mode-by-request). Not compressed.
+...for those who still uses `<script>` tag for module importing ;) Exposes global `ololog` and [`ansicolor`](https://github.com/xpl/ansicolor) objects. Installs [String extensions for ANSI styles](https://github.com/xpl/ansicolor#nice-mode-by-request). Not compressed.
 
 ```html
 <script src="https://rawgit.com/xpl/ololog/master/build/ololog.browser.js"></script>

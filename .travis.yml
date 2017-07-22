@@ -1,3 +1,11 @@
 language: node_js
 node_js:
-  - "node"
+- node
+script:
+- npm run build
+after_success: npm run coverage
+deploy:
+  provider: npm
+  email: rocket.mind@gmail.com
+  api_key:
+    secure: rag0oHEqD9mHFoO4UD3NiPE99pPH0Asa0kueE5/U4l0x9MWy0dvqLJCiSdzXrO5hhXDm63l0chyGdplPO6Z0VCEZaWh7om5uB26YaTu9ZKpr+68VYU4pZsRKWAunAo5cWNRaK4UIwr8N5LBJfc0JvpN/pFCG3Gt5mfGGaOYn2CujZr8kCB2Pkg2CkLXlk2sVZcxknaSmOTPejhAI6wV6dqjOxyJ4zGuPs4YyR/Mjw5IPRBgOAzQ0P1qVfw/2SErGh+9wmHwd7cJvYB/OQBaL6jmZI4AUJ4wspK0ugttMNzoCuGOIN2AVWTRXc1aryH0KyMEZLD4Lziw6yOZsiXyLFXQkJZOQgeoJtgT98ni/bRuQxCvO1cWMCPTT52G7mObwH9osblfhhKVKy+S/3WRLzlf6qEjUt3Hvr2aI+RqKQPqaYyHEyoQlPwrE/kKkp8pe94LxJ7uhmJ6kbDhJnfmCBpDLSwBwpwsIpUlij3MbJh5I62yDoD7OkrhQadsas3P21XPiel4sGayym5EwR1PshFGRGDRGgtPxMSUC3eJ22d5rWRG9Dw98GOhi9hlQc8QRM86LEMagw7FpP7/kKMtb7cqVCvyi7iH7pXZBXgabNcW3PZF1Jv1X8/2B8PJEWpG8h9Tr7yxJmfnqw6kOTr5emouEwaiZg34fEHz6trfhQ70=

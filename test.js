@@ -2,13 +2,24 @@
 
 /*  ------------------------------------------------------------------------ */
 
-const assert = (call, shouldBe = [], method='log') => {
+const ansicolor = require ('ansicolor').nice
+const ololog    = require (process.env.OLOLOG_TEST_FILE)
+
+/*  ------------------------------------------------------------------------ */
+
+const assert = (call, shouldBe = [], method = 'log') => {
 
     let impl = console[method], args 
 
-    console[method] = function (...args_) { args = args_ }; call () // @hide
-    console[method] = impl
-
+    try {
+        console[method] = function (...args_) { args = args_ }; call () // @hide
+    } catch (e) {
+        console[method] = impl
+        throw e
+    } finally {
+        console[method] = impl
+    }
+    
     if (!args) { throw new Error (`console.${method} hasn't been called!`) }
 
     args.should.deep.equal (shouldBe)
@@ -22,8 +33,7 @@ require ('chai').should ()
 
 describe ('Ololog', () => {
 
-    const ansicolor = require ('ansicolor').nice
-    const log       = require ('./ololog').configure ({ locate: false, time: { when: new Date ('2017-02-27T12:45:19.951Z') } })
+    const log = ololog.configure ({ locate: false, time: { when: new Date ('2017-02-27T12:45:19.951Z') } })
 
     it ('tokenization / line splitting / left-pad work', () => {
 
@@ -32,9 +42,9 @@ describe ('Ololog', () => {
 
     it ('location work', () => {
     
-        assert (() => log.configure ({ locate: true }).bgBrightCyan ('with location\n\n'), ['\u001b[106m' + 'with location' + '\u001b[49m \u001b[22m\u001b[2m' + '(assert @ test.js:35)' + '\u001b[22m\n\u001b[106m\u001b[49m\n\u001b[106m\u001b[49m'])
+        assert (() => ololog.configure ({ locate: true }).bgBrightCyan ('with location\n\n'), ['\u001b[106m' + 'with location' + '\u001b[49m \u001b[22m\u001b[2m' + '(assert @ test.js:45)' + '\u001b[22m\n\u001b[106m\u001b[49m\n\u001b[106m\u001b[49m'])
 
-        assert (() => require ('./ololog') ('with location'), ['with location \u001b[22m\u001b[2m(assert @ test.js:37)\u001b[22m'])
+        assert (() => require ('./ololog') ('with location'), ['with location \u001b[22m\u001b[2m(assert @ test.js:47)\u001b[22m'])
     })
 
     it ('indent work', () => {
