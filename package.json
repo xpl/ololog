@@ -129,7 +129,7 @@
   },
   "dependencies": {
     "ansicolor": "^1.0.68",
-    "pipez": "0.0.9",
+    "pipez": "^1.0.2",
     "printable-characters": "^1.0.18",
     "stacktracey": "^1.0.44",
     "string.bullet": "^1.0.9",
