@@ -1,6 +1,6 @@
 {
   "name": "ololog",
-  "version": "1.0.4",
+  "version": "1.0.3",
   "description": "Platform-agnostic logging with colors in terminals & browsers / shows call locations / pretty prints objects and stacktraces / smart newline and indentation handling",
   "main": "ololog.es5",
   "scripts": {
@@ -114,24 +114,22 @@
   "license": "Unlicense",
   "bugs": {
     "url": "https://github.com/xpl/ololog/issues"
-  },
+  },n
   "homepage": "https://github.com/xpl/ololog",
   "devDependencies": {
-    "browserify": "^14.3.0",
+    "browserify": "^14.4.0",
     "chai": "^3.5.0",
     "mocha": "^3.4.2",
     "coveralls": "^2.13.1",
     "eslint": "^4.2.0",
     "istanbul": "^0.4.5",
-    "nyc": "^11.0.3",
+    "nyc": "^11.1.0",
     "babel-cli": "^6.24.1",
     "babel-plugin-transform-es2017-object-entries": "0.0.4",
     "babel-preset-es2015": "^6.24.1"
   },
   "dependencies": {
     "ansicolor": "^1.0.68",
-    "browserify": "^14.4.0",
-    "nyc": "^11.1.0",
     "pipez": "0.0.9",
     "printable-characters": "^1.0.18",
     "stacktracey": "^1.0.44",
