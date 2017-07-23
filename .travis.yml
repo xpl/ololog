@@ -4,7 +4,7 @@ node_js:
 script:
 - set -e
 - npm run build
-- npm run test-es5
+- npm run test
 - npm run coveralls
 after_success:
 - git config --global user.email "travis@travis-ci.org"
