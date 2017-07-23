@@ -10,7 +10,7 @@
     "test": "env OLOLOG_TEST_FILE='./ololog' nyc --reporter=html --reporter=text mocha --reporter spec",
     "test-es5": "env OLOLOG_TEST_FILE='./build/ololog.es5' mocha --reporter spec",
     "autotest": "env OLOLOG_TEST_FILE='./ololog' mocha --reporter spec --watch",
-    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "babel": "babel ololog.js --source-maps inline --out-file ./build/ololog.es5.js",
     "browserify": "browserify --debug ./ololog.browser.js > ./build/ololog.browser.js"
   },

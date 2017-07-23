@@ -2,10 +2,22 @@ language: node_js
 node_js:
 - node
 script:
+- set -e
 - npm run build
-after_success: npm run coverage
+- npm run coveralls
+- git config --global user.email "travis@travis-ci.org"
+- git config --global user.name "Travis CI"
+- npm config set git-tag-version=false
+- NPM_VERSION=$(npm version patch)
+- git commit -a -m "${NPM_VERSION:1}" -m "[ci skip]"
+- git remote remove origin
+- git remote add origin https://${GITHUB_TOKEN}@github.com/xpl/ololog.git
+- git push origin HEAD:master
 deploy:
   provider: npm
   email: rocket.mind@gmail.com
   api_key:
-    secure: rag0oHEqD9mHFoO4UD3NiPE99pPH0Asa0kueE5/U4l0x9MWy0dvqLJCiSdzXrO5hhXDm63l0chyGdplPO6Z0VCEZaWh7om5uB26YaTu9ZKpr+68VYU4pZsRKWAunAo5cWNRaK4UIwr8N5LBJfc0JvpN/pFCG3Gt5mfGGaOYn2CujZr8kCB2Pkg2CkLXlk2sVZcxknaSmOTPejhAI6wV6dqjOxyJ4zGuPs4YyR/Mjw5IPRBgOAzQ0P1qVfw/2SErGh+9wmHwd7cJvYB/OQBaL6jmZI4AUJ4wspK0ugttMNzoCuGOIN2AVWTRXc1aryH0KyMEZLD4Lziw6yOZsiXyLFXQkJZOQgeoJtgT98ni/bRuQxCvO1cWMCPTT52G7mObwH9osblfhhKVKy+S/3WRLzlf6qEjUt3Hvr2aI+RqKQPqaYyHEyoQlPwrE/kKkp8pe94LxJ7uhmJ6kbDhJnfmCBpDLSwBwpwsIpUlij3MbJh5I62yDoD7OkrhQadsas3P21XPiel4sGayym5EwR1PshFGRGDRGgtPxMSUC3eJ22d5rWRG9Dw98GOhi9hlQc8QRM86LEMagw7FpP7/kKMtb7cqVCvyi7iH7pXZBXgabNcW3PZF1Jv1X8/2B8PJEWpG8h9Tr7yxJmfnqw6kOTr5emouEwaiZg34fEHz6trfhQ70=
+    secure: FIty7ym8B83udRy8afSdNfNAWQKOej1vCxx7MyxxkHGOSXWTr+Z7rvPmeh0Jn+9JIl9Up83gaiHp9niR1KQor8jWOMHz4O5UuiSet4Ry0bR5jdqw1RRxtUyeW0mjhdVygP6f+btfjLhDuGN7qA954OUgmSIC5ufJhZ1cty73SJ4eGDf1rnkLc431xvqM9e2YkadMHMuwFYO+Axu1bIdlwl94Is3pYQIbqszXGjCABiw1ljLWayOY2qmJLm9y2LUvsXFhvrT4TCTsQlMoUupsIqxyA0OIw3uTAEK3tWmjFeSbNE4z7fAmKzyzzOky5hrQMywh50tTSWTY/CEvTam66ARAmNjPhRmPMgxvW7rmbl1OJJoWOik+G+Qjw5v6WJUoT8MPct3EWQLXp36TVVk2+4HmLibrKZH+pkmiI3vWzPNmiSc7EaHwBTBLkO0LUiHhyvKMQikClgw2DXCUM+905OUdQBkZAVtCGvK2HSIv78X6dnhgmgATKv3pBp3mn+e7s3bZJprr6g6Q1p6AHOFIpBGvzNVNtl22YAsaKfV4vuuiZSzKzioioqWccSCDwzwaF/LMcvcbY/bCN+Assua1I6v6NxXtYjIAsP/LCuNK0pOUoxQvg1lFyZuJZIjcOAj3JvJbGv27UvCtCSTyD4lirap6xrxrrndspHNo8nga+wE=
+env:
+  global:
+    secure: I7N9NWKdybScRsMhOpGEXIo8CvTkXSGXHBkQ79KhP9Z6Al/zhEaDGUmjJbdtu+s+8RQkh2J1elJlfXnMuEJgCUUoiDiAPJQOB1SsIqNt1s+evJbODQER03q8VeuUr3oWhHsZn+hbms9CdwQRm+4h5diaOxPywnsnccZ0iHtW/JLYj3fy/FwVbMjr3tM5lSm/Xr0gwucDP+pU2J2i0kxeFKBcp3Ao4NntPiV/ZwhRxCW67cKwD4OlkaZVt3VGzuixS+HhefRfI8w3PPTuKMv8SZwPK9c9BGSPLJMc7Kb/eU0gTx5MAzk0bI0WeIzCBfq9QZ5gFtoEOgqYVyltTnGeNnV7iDQhUesHo3GMiTplJk7NFJsNww4TSfuKmtiZ7JFAM8XF/+5t1Jche1hPjcUnqFJmYbKsMBwLPOu2SensiDFNm7iehPQzJa9GyWygM7STp+73I+Y26Dh1G+pPb9gir5OkSgsg/o6S2aW6X7tybhggaIOxHA3intjUvYtfgE5T87/xzaBN1yQTFk+BE/QOVExybYi4/b6TADHLQQrgDQMWOSsv7QgDRwqV19gJMmKmDMpKaG2BbjjDN5YJ0n3LsPgEQApywIdUCXmZ+9byl6uq6dr5lbbx/ex5jgqFvaA15gViSSuW5ZgpNFEUTgyu9AcfryeYMydxMwUqCjYVr8I=

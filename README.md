@@ -16,7 +16,7 @@
 
 - [String.ify](https://github.com/xpl/string.ify)
 - [StackTracey](https://github.com/xpl/stacktracey)
-- [Pipez](https://github.com/xpl/pipez)
+- [pipez](https://github.com/xpl/pipez)
 - [ansicolor](https://github.com/xpl/ansicolor)
 - [printable-characters](https://github.com/xpl/printable-characters)
 
