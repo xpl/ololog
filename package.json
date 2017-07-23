@@ -130,9 +130,9 @@
   "dependencies": {
     "ansicolor": "^1.0.68",
     "pipez": "^1.1.7",
-    "printable-characters": "^1.0.18",
+    "printable-characters": "^1.0.26",
     "stacktracey": "^1.0.44",
-    "string.bullet": "^1.0.9",
-    "string.ify": "^1.0.34"
+    "string.bullet": "^1.0.10",
+    "string.ify": "^1.0.35"
   }
 }
