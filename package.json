@@ -4,9 +4,9 @@
   "description": "Platform-agnostic logging with colors in terminals & browsers / shows call locations / pretty prints objects and stacktraces / smart newline and indentation handling",
   "main": "build/ololog.es5",
   "scripts": {
-    "build": "npm run lint && npm run lint-test && npm run babel && npm run browserify && npm run test && npm run test-es5",
     "lint": "eslint ololog.js",
     "lint-test": "eslint test.js",
+    "build": "npm run lint && npm run lint-test && npm run babel && npm run browserify",
     "test": "env OLOLOG_TEST_FILE='./ololog' nyc --reporter=html --reporter=text mocha --reporter spec",
     "test-es5": "env OLOLOG_TEST_FILE='./build/ololog.es5' mocha --reporter spec",
     "autotest": "env OLOLOG_TEST_FILE='./ololog' mocha --reporter spec --watch",
@@ -129,7 +129,7 @@
   },
   "dependencies": {
     "ansicolor": "^1.0.68",
-    "pipez": "^1.1.4",
+    "pipez": "^1.1.7",
     "printable-characters": "^1.0.18",
     "stacktracey": "^1.0.44",
     "string.bullet": "^1.0.9",

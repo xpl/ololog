@@ -1,10 +1,13 @@
 language: node_js
 node_js:
-- node
+- "node"
+- "6"
 script:
 - set -e
 - npm run build
+- npm run test-es5
 - npm run coveralls
+after_success:
 - git config --global user.email "travis@travis-ci.org"
 - git config --global user.name "Travis CI"
 - npm config set git-tag-version=false
