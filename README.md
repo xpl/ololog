@@ -36,7 +36,7 @@ const log = require ('ololog')
 ...for those who still uses `<script>` tag for module importing ;) Exposes global `ololog` and [`ansicolor`](https://github.com/xpl/ansicolor) objects. Installs [String extensions for ANSI styles](https://github.com/xpl/ansicolor#nice-mode-by-request). Not compressed.
 
 ```html
-<script src="https://rawgit.com/xpl/ololog/master/build/ololog.browser.js"></script>
+<script src="https://unpkg.com/ololog"></script> <!-- from unpkg.com CDN -->
 <script>
     log = ololog
     log ('something'.red)
