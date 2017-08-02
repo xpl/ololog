@@ -332,10 +332,10 @@ log.indent (2).configure ({ time: true }).red.bright ('this is bold red message,
 
 Use `.null` to obtain a reduced instance that does nothing apart from returning its first argument:
 
-```
+```javascript
 const devNull = log.null
 ```
-```
+```javascript
 devNull.bright.red ('this never shows') // simply returns 'this never shows'
 ```
 
