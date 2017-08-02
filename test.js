@@ -7,7 +7,7 @@ const ololog    = require (process.env.OLOLOG_TEST_FILE)
 
 /*  ------------------------------------------------------------------------ */
 
-const assert = (call, shouldBe = [], method = 'log') => {
+const assert = (call, shouldBe = undefined, method = 'log') => {
 
     let impl = console[method], args 
 
@@ -19,10 +19,13 @@ const assert = (call, shouldBe = [], method = 'log') => {
     } finally {
         console[method] = impl
     }
-    
-    if (!args) { throw new Error (`console.${method} hasn't been called!`) }
-
-    args.should.deep.equal (shouldBe)
+        
+    if (shouldBe) {
+        if (!args) { throw new Error (`console.${method} hasn't been called!`) }
+        args.should.deep.equal (shouldBe)
+    } else {
+        if (args) { throw new Error (`console.${method} has been called (unexpectedly)!`) }
+    }
 }
 
 /*  ------------------------------------------------------------------------ */
@@ -42,9 +45,9 @@ describe ('Ololog', () => {
 
     it ('location work', () => {
     
-        assert (() => ololog.configure ({ locate: true }).bgBrightCyan ('with location\n\n'), ['\u001b[106m' + 'with location' + '\u001b[49m \u001b[22m\u001b[2m' + '(assert @ test.js:45)' + '\u001b[22m\n\u001b[106m\u001b[49m\n\u001b[106m\u001b[49m'])
+        assert (() => ololog.configure ({ locate: true }).bgBrightCyan ('with location\n\n'), ['\u001b[106m' + 'with location' + '\u001b[49m \u001b[22m\u001b[2m' + '(assert @ test.js:48)' + '\u001b[22m\n\u001b[106m\u001b[49m\n\u001b[106m\u001b[49m'])
 
-        assert (() => require ('./ololog') ('with location'), ['with location \u001b[22m\u001b[2m(assert @ test.js:47)\u001b[22m'])
+        assert (() => require ('./ololog') ('with location'), ['with location \u001b[22m\u001b[2m(assert @ test.js:50)\u001b[22m'])
     })
 
     it ('indent work', () => {
@@ -147,6 +150,13 @@ describe ('Ololog', () => {
             log.bright (
                 'this is something:'.yellow, '[ "595da547d9b22f23d8228643",\n  "595da547d9b22f23d822863f",\n  "595da547d9b22f23d8228641"  ]'.cyan,
                                              '[ "595da547d9b22f23d8228643",\n  "595da547d9b22f23d822863f",\n  "595da547d9b22f23d8228641"  ]'.green), ['\u001b[22m\u001b[1m\u001b[33mthis is something:\u001b[39m \u001b[36m[ \"595da547d9b22f23d8228643\",\u001b[39m\u001b[22m\n\u001b[22m\u001b[1m                   \u001b[36m  \"595da547d9b22f23d822863f\",\u001b[39m\u001b[22m\n\u001b[22m\u001b[1m                   \u001b[36m  \"595da547d9b22f23d8228641\"  ]\u001b[39m \u001b[32m[ \"595da547d9b22f23d8228643\",\u001b[39m\u001b[22m\n\u001b[22m\u001b[1m                                                   \u001b[32m  \"595da547d9b22f23d822863f\",\u001b[39m\u001b[22m\n\u001b[22m\u001b[1m                                                   \u001b[32m  \"595da547d9b22f23d8228641\"  ]\u001b[39m\u001b[22m'])
+    })
+
+    it ('null', () => {
+
+        const nullLog = log.null
+
+        assert (() => nullLog.bright.red ('foo', 'bar').should.equal ('foo'), undefined)
     })
 })
 

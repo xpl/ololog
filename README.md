@@ -328,6 +328,17 @@ log.methods ({
 log.indent (2).configure ({ time: true }).red.bright ('this is bold red message, indented by 2 and supplied with timestamp')
 ```
 
+# Null device
+
+Use `.null` to obtain a reduced instance that does nothing apart from returning its first argument:
+
+```
+const devNull = log.null
+```
+```
+devNull.bright.red ('this never shows') // simply returns 'this never shows'
+```
+
 # See also
 
 - [Online demo](https://xpl.github.io/ololog/)

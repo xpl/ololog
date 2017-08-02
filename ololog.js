@@ -129,6 +129,8 @@ const log = pipez ({
 
 }).methods ({
 
+    get null () { return pipez ({ returnValue: args => args[0] }).methods (this.methods_) },
+
     indent (level) { return this.configure ({ indent: { level: level }}) },
 
     get error () { return this.configure ({ render: { consoleMethod: 'error' } }) },
