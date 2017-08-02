@@ -1,8 +1,9 @@
 {
   "name": "ololog",
-  "version": "1.0.10",
+  "version": "1.0.13",
   "description": "Platform-agnostic logging / colors / terminals & browsers / shows call locations / pretty prints objects and Errors / smart whitespace handling",
   "main": "build/ololog",
+  "browser": "build/ololog.browser",
   "scripts": {
     "lint": "eslint ololog.js",
     "lint-test": "eslint test.js",
