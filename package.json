@@ -128,7 +128,7 @@
     "babel-preset-es2015": "^6.24.1"
   },
   "dependencies": {
-    "ansicolor": "^1.0.68",
+    "ansicolor": "^1.1.68",
     "pipez": "^1.1.7",
     "printable-characters": "^1.0.26",
     "stacktracey": "^1.0.44",

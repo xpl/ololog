@@ -44,10 +44,10 @@ describe ('Ololog', () => {
     })
 
     it ('location work', () => {
-    
-        assert (() => ololog.configure ({ locate: true }).bgBrightCyan ('with location\n\n'), ['\u001b[106m' + 'with location' + '\u001b[49m \u001b[22m\u001b[2m' + '(assert @ test.js:48)' + '\u001b[22m\n\u001b[106m\u001b[49m\n\u001b[106m\u001b[49m'])
+        
+        assert (() => ololog.configure ({ locate: true }).bgBrightCyan ('with location\n\n'), ['\u001b[106mwith location\u001b[49m \u001b[90m(assert @ test.js:48)\u001b[39m\n\u001b[106m\u001b[49m\n\u001b[106m\u001b[49m'])
 
-        assert (() => require ('./ololog') ('with location'), ['with location \u001b[22m\u001b[2m(assert @ test.js:50)\u001b[22m'])
+        assert (() => require ('./ololog') ('with location'), ['with location \u001b[90m(assert @ test.js:50)\u001b[39m'])
     })
 
     it ('indent work', () => {
@@ -58,7 +58,7 @@ describe ('Ololog', () => {
 
     it ('timestamps work', () => {
 
-        assert (() => log.configure ({ time: true }) ('foobar'), ["\u001b[22m\u001b[2m2017-02-27T12:45:19.951Z\u001b[22m\tfoobar"])
+        assert (() => log.configure ({ time: true }) ('foobar'), ["\u001b[90m2017-02-27T12:45:19.951Z\u001b[39m\tfoobar"])
     })
 
     it ('timestamps are good with indent', () => {
@@ -158,6 +158,7 @@ describe ('Ololog', () => {
 
         assert (() => nullLog.bright.red ('foo', 'bar').should.equal ('foo'), undefined)
     })
+
 })
 
 

@@ -80,14 +80,14 @@ const log = pipez ({
     indent: (lines, { level = 0, pattern = '\t' }) => lines.map (line => pattern.repeat (level) + line),
     
     time: (lines, { when  = new Date (),
-                    print = when => ansi.dim (when.toISOString ()) + '\t' }) => bullet (print (when), lines),
+                    print = when => ansi.darkGray (when.toISOString ()) + '\t' }) => bullet (print (when), lines),
 
     locate: (lines, {
 
                     shift = 0,
                     where = (new StackTracey ().clean.at (2 + shift)),
                     join  = ((a, sep, b) => (a && b) ? (a + sep + b) : (a || b)),
-                    print = ({ calleeShort, fileName = [], line = [] }) => ansi.dim ('(' + join (calleeShort, ' @ ', join (fileName, ':', line)) + ')')
+                    print = ({ calleeShort, fileName = [], line = [] }) => ansi.darkGray ('(' + join (calleeShort, ' @ ', join (fileName, ':', line)) + ')')
 
                 }) => changeLastNonemptyLine (lines, line => join (line, ' ', print (where))),
 
