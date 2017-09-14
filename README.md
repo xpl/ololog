@@ -149,7 +149,7 @@ log (obj)
           { price: "100", amount: 10 }  ]   }
 ```
 
-Tuning max printed object length:
+Longer strings:
 
 ```javascript
 log.maxLength (70)
@@ -158,6 +158,8 @@ log.maxLength (70)
 { asks: [{ price: "1000", amount: 10 }, { price: "2000", amount: 10 }],
   bids: [{ price: "500", amount: 10 }, { price: "100", amount: 10 }]    }
 ```
+
+Shorter strings:
 
 ```javascript
 log.maxLength (20)
@@ -173,7 +175,7 @@ log.maxLength (20)
             amount:  10    }  ]   }
 ```
 
-Disabling fancy formatting:
+Disabling fancy formatting / single line mode:
 
 ```javascript
 log.noPretty (obj) // or log.configure ({ stringify: { pretty: false } }) (obj)
