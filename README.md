@@ -199,7 +199,7 @@ log.unlimited (obj) // disables limiting
 
 Passing other configuration options to [`string.ify`](https://github.com/xpl/string.ify): 
 
-```
+```javascript
 log.configure ({ stringify: { precision: 2 } }) (obj) // Read the string.ify docs to see all the available configuration options. There are plenty of them!
 ```
 
