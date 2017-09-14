@@ -139,7 +139,11 @@ An example:
 
 ```javascript
 const obj = { asks: [{ price: "1000", amount: 10 }, { price: "2000", amount: 10 }], bids: [{ price: "500", amount: 10 }, { price: "100", amount: 10 }] }
+```
 
+Default output:
+
+```javascript
 log (obj)
 ```
 ```
@@ -178,19 +182,25 @@ log.maxLength (20)
 Disabling fancy formatting / single line mode:
 
 ```javascript
-log.noPretty (obj) // or log.configure ({ stringify: { pretty: false } }) (obj)
+log.noPretty (obj)
 ```
 ```
-{ abc: 42, defgh: true, qwertyiop: 333, zap: "123457", long: ["foo", "bar", "baz", "qux", "lol", "yup"] }
+{ asks: [{ price: "1000", amount: 10 }, { price: "2000", amount: 10 }], bids: [{ price: "500", amount: 10 }, { price: "100", amount: 10 }] }
 ```
 
 Changing max print depth / max array length:
 
 ```javascript
-log.maxDepth (1).maxArrayLength (100) (...) // or log.configure ({ stringify: { maxDepth: 1, maxArrayLength: 100 } })
+log.maxDepth (1).maxArrayLength (100) (obj) // or log.configure ({ stringify: { maxDepth: 1, maxArrayLength: 100 } })
 ```
 ```javascript
-log.unlimited (...) // disables limiting
+log.unlimited (obj) // disables limiting
+```
+
+Passing other configuration options to [`string.ify`](https://github.com/xpl/string.ify): 
+
+```
+log.configure ({ stringify: { precision: 2 } }) (obj) // Read the string.ify docs to see all the available configuration options. There are plenty of them!
 ```
 
 # Pretty printing `Error` instances
