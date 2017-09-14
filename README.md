@@ -135,7 +135,7 @@ All magic is provided by the external [String.ify](https://github.com/xpl/string
 
 ![GIF animation](http://cdn.jpg.wtf/futurico/13/34/1470446586-13341a275886bd6be2af39e3c24f2f31.gif)
 
-An example:
+Example object:
 
 ```javascript
 const obj = { asks: [{ price: "1000", amount: 10 }, { price: "2000", amount: 10 }], bids: [{ price: "500", amount: 10 }, { price: "100", amount: 10 }] }
