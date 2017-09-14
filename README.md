@@ -135,21 +135,42 @@ All magic is provided by the external [String.ify](https://github.com/xpl/string
 
 ![GIF animation](http://cdn.jpg.wtf/futurico/13/34/1470446586-13341a275886bd6be2af39e3c24f2f31.gif)
 
+An example:
+
 ```javascript
-let  obj = { abc: 42, defgh: true, qwertyiop: 333, zap: '123457', long: ['foo', 'bar', 'baz', 'qux', 'lol', 'yup'] }
+const obj = { asks: [{ price: "1000", amount: 10 }, { price: "2000", amount: 10 }], bids: [{ price: "500", amount: 10 }, { price: "100", amount: 10 }] }
+
 log (obj)
 ```
 ```
-{       abc:    42,
-      defgh:    true,
-  qwertyiop:    333,
-        zap:   "123457",
-       long: [ "foo",
-               "bar",
-               "baz",
-               "qux",
-               "lol",
-               "yup"  ]  }
+{ asks: [ { price: "1000", amount: 10 },
+          { price: "2000", amount: 10 }  ],
+  bids: [ { price: "500", amount: 10 },
+          { price: "100", amount: 10 }  ]   }
+```
+
+Tuning max printed object length:
+
+```javascript
+log.maxLength (70)
+```
+```
+{ asks: [{ price: "1000", amount: 10 }, { price: "2000", amount: 10 }],
+  bids: [{ price: "500", amount: 10 }, { price: "100", amount: 10 }]    }
+```
+
+```javascript
+log.maxLength (20)
+```
+```
+{ asks: [ {  price: "1000",
+            amount:  10     },
+          {  price: "2000",
+            amount:  10     }  ],
+  bids: [ {  price: "500",
+            amount:  10    },
+          {  price: "100",
+            amount:  10    }  ]   }
 ```
 
 Disabling fancy formatting:

@@ -132,7 +132,7 @@
     "pipez": "^1.1.7",
     "printable-characters": "^1.0.28",
     "stacktracey": "^1.0.54",
-    "string.bullet": "^1.0.10",
-    "string.ify": "^1.0.37"
+    "string.bullet": "^1.0.11",
+    "string.ify": "^1.0.39"
   }
 }
