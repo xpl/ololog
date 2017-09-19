@@ -143,7 +143,7 @@ const log = pipez ({
     
     get unlimited () { return this.configure ({ stringify: { maxArrayLength: Number.MAX_VALUE, maxDepth: Number.MAX_VALUE } }) },
     get noPretty () { return this.configure ({ stringify: { pretty: false } }) },
-    get precision (n) { return this.configure ({ stringify: { precision: n } }) },
+    precision (n) { return this.configure ({ stringify: { precision: n } }) },
 
     get serialize () { return this.before ('render') },
     get deserialize () { return this.from ('render') },
