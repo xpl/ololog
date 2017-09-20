@@ -93,7 +93,7 @@ Backed by the [ansicolor](https://github.com/xpl/ansicolor) library, colored out
 Apply styling by calling the `ansicolor` directly:
 
 ```javascript
-require ('ansicolor').nice // Importing
+require ('ansicolor').nice // importing in .nice mode extends the String prototype, but there's a safe functional mode as well (see the docs...)
 
 log (('foo'.dim.red + 'bar'.bgBrightCyan).underline)
 ```
