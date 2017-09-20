@@ -95,7 +95,7 @@ Apply styling by calling the [`ansicolor`](https://github.com/xpl/ansicolor) met
 ```javascript
 require ('ansicolor').nice // importing in .nice mode extends the String prototype, but there's a safe functional mode as well (see the docs...)
 
-log (('foo'.dim.red + 'bar'.bgBrightCyan).underline)
+log (('foo'.dim.red + 'bar'.bgLightCyan).underline)
 ```
 
 ...or by using the built-in shorthand methods (no need to import `ansicolor`, but we lose the ability to colorize just a part of a string):
