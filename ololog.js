@@ -32,15 +32,13 @@ const { isBlank, blank } = require ('printable-characters')
     , changeLastNonemptyLine = (lines, fn) => {
 
         for (let i = lines.length - 1; i >= 0; i--) {
-
+            
             if ((i === 0) || !isBlank (lines[i])) {
-
+                
                 lines[i] = fn (lines[i])
-
                 break;
             }
         }
-
         return lines
     }
 
@@ -57,7 +55,6 @@ const log = pipez ({
     lines: (tokens, { linebreak = '\n' }) => {
 
         let lines = [[]]
-
         let leftPad = []
 
         for (const t of tokens) {
