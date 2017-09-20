@@ -90,7 +90,7 @@ array.map (x => { console.log (x); return x + 1 })
 
 Backed by the [ansicolor](https://github.com/xpl/ansicolor) library, colored output is supported for the terminal environment and for the Chrome DevTools console. On other platforms, ANSI codes are safely stripped from the output, so they don't mess up anything.
 
-Apply styling by calling the `ansicolor` directly:
+Apply styling by calling the [`ansicolor`](https://github.com/xpl/ansicolor) methods on arbitrary strings:
 
 ```javascript
 require ('ansicolor').nice // importing in .nice mode extends the String prototype, but there's a safe functional mode as well (see the docs...)
