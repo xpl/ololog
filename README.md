@@ -105,7 +105,7 @@ log.bright.red.underline ('multiple styles combined')
 
 [See all the supported styling options here](https://github.com/xpl/ansicolor#supported-styles).
 
-# Smart newline handling
+# Smart indentation/newline handling
 
 ```javascript
 log.bright.magenta ('this is something:'.yellow, [ "595da547d9b22f23d8228643", "595da547d9b22f23d822863f", "595da547d9b22f23d8228641" ])
