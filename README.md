@@ -6,19 +6,12 @@
 - [x] [Colors / styles](https://github.com/xpl/ololog#ansi-styling) for terminals and Chrome DevTools (try [online demo](https://xpl.github.io/ololog/))
 - [x] [Displays call locations](https://github.com/xpl/ololog#displaying-call-location)
 - [x] [Returns its argument](https://github.com/xpl/ololog#debugging-of-functional-expressions) (for easy debugging of functional expressions)
-- [x] [Smart newline / indentation handling](https://github.com/xpl/ololog#smart-newline-handling)
+- [x] [Smart newline / indentation handling](https://github.com/xpl/ololog#smart-indentationnewline-handling)
 - [x] [Powerful object printer](https://github.com/xpl/ololog#smart-object-printing)
 - [x] Formats `Error` instances as [pretty stacktraces with source lines](https://github.com/xpl/ololog#pretty-printing-error-instances)
 - [x] Full sourcemap support (via [`get-source`](https://github.com/xpl/get-source))
 - [x] [Pluggable pipeline architecture](https://github.com/xpl/pipez#pipezbeta)
-
-# Powered by
-
-- [String.ify](https://github.com/xpl/string.ify)
-- [StackTracey](https://github.com/xpl/stacktracey)
-- [pipez](https://github.com/xpl/pipez)
-- [ansicolor](https://github.com/xpl/ansicolor)
-- [printable-characters](https://github.com/xpl/printable-characters)
+- [x] [Integrates with Mocha](https://github.com/xpl/ololog#using-with-mocha) (experimental)
 
 # Importing
 
@@ -30,6 +23,21 @@ npm install ololog
 ```javascript
 const log = require ('ololog')
 ```
+
+# Using With [Mocha](https://mochajs.org/)
+
+<img src="https://user-images.githubusercontent.com/1707/30816536-e504a9d6-a21e-11e7-976c-778a95d32219.png">
+
+Replaces the default reporter:
+
+```bash
+mocha --reporter ololog/reporter
+```
+
+- [x] Aligns log messages nicely
+- [x] Supresses log output for nonfailed tests (disable with `.only` or `this.verbose=true` for a suite/test)
+- [x] Automatically manages empty lines / whitespace for better legibility
+- [x] Prints unhandled exceptions and promise rejections as nice stacktraces
 
 # Browser bundle
 
@@ -372,6 +380,14 @@ const devNull = log.null
 ```javascript
 devNull.bright.red ('this never shows') // simply returns 'this never shows'
 ```
+
+# Powered by
+
+- [String.ify](https://github.com/xpl/string.ify)
+- [StackTracey](https://github.com/xpl/stacktracey)
+- [pipez](https://github.com/xpl/pipez)
+- [ansicolor](https://github.com/xpl/ansicolor)
+- [printable-characters](https://github.com/xpl/printable-characters)
 
 # See also
 
