@@ -203,6 +203,19 @@ Passing other configuration options to [`string.ify`](https://github.com/xpl/str
 log.configure ({ stringify: { precision: 2 } }) (obj) // Read the string.ify docs to see all the available configuration options. There are plenty of them!
 ```
 
+# Using with custom stringifier / object printer
+
+Replacing the default printer with [q-i](https://github.com/sapegin/q-i) (as an example):
+
+```javascript
+const log = require ('ololog').configure ({ stringify: { print: require ('q-i').stringify } })
+```
+```javascript
+log ({ foo: true, bar: 42 })
+```
+
+![pic](https://user-images.githubusercontent.com/1707/30799941-222a66a8-a1e7-11e7-89b5-4bed706c7840.png)
+
 # Pretty printing `Error` instances
 
 This feature is implemented in the [StackTracey](https://github.com/xpl/stacktracey#pretty-printing) library. See it's docs for more (you can configure the path shortening / library calls skipping).
@@ -342,20 +355,6 @@ The following will execute all stages before the 'render' (screen output) stage,
 ```javascript
 log.before ('render') ({ foo: 42 }) // '{ foo: 42 }'
 ```
-
-# Using with custom stringifier / object printer
-
-Replacing the default printer with [q-i](https://github.com/sapegin/q-i) (as an example):
-
-```javascript
-const log = require ('ololog').configure ({ stringify: { print: require ('q-i').stringify } })
-```
-```javascript
-log ({ foo: true, bar: 42 })
-```
-
-![pic](https://user-images.githubusercontent.com/1707/30799941-222a66a8-a1e7-11e7-89b5-4bed706c7840.png)
-
 
 # Custom methods / aspect-oriented code injection
 
