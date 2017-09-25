@@ -122,7 +122,7 @@
     "browserify": "^14.4.0",
     "chai": "^3.5.0",
     "coveralls": "^2.13.1",
-    "eslint": "^4.6.1",
+    "eslint": "^4.7.2",
     "istanbul": "^0.4.5",
     "mocha": "^3.5.3",
     "nyc": "^11.2.1"
@@ -131,8 +131,8 @@
     "ansicolor": "^1.1.68",
     "pipez": "^1.1.7",
     "printable-characters": "^1.0.28",
-    "stacktracey": "^1.0.54",
+    "stacktracey": "^1.0.57",
     "string.bullet": "^1.0.11",
-    "string.ify": "^1.0.42"
+    "string.ify": "^1.0.43"
   }
 }
