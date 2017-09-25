@@ -375,4 +375,4 @@ devNull.bright.red ('this never shows') // simply returns 'this never shows'
 
 # See also
 
-- [Online demo](https://xpl.github.io/ololog/)
+- [CCXT](https://github.com/ccxt-dev/ccxt) – a cryptocurrency trading library with 85+ exchanges. It uses Ololog in the tests and in the examples.
