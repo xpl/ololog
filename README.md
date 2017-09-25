@@ -86,8 +86,6 @@ array.map (x => { console.log (x); return x + 1 })
 
 # ANSI styling
 
-![pic](https://cdn.jpg.wtf/futurico/e1/3e/1497133274-e13e9cb97baa90cebbbad55534926fc5.png)
-
 Backed by the [ansicolor](https://github.com/xpl/ansicolor) library, colored output is supported for the terminal environment and for the Chrome DevTools console. On other platforms, ANSI codes are safely stripped from the output, so they don't mess up anything.
 
 Apply styling by calling the [`ansicolor`](https://github.com/xpl/ansicolor) methods on arbitrary strings:
