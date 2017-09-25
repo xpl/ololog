@@ -350,9 +350,12 @@ Replacing the default printer with [q-i](https://github.com/sapegin/q-i) (as an 
 ```javascript
 const log = require ('ololog').configure ({ stringify: { print: require ('q-i').stringify } })
 ```
-```
+```javascript
 log ({ foo: true, bar: 42 })
 ```
+
+![pic](https://user-images.githubusercontent.com/1707/30799941-222a66a8-a1e7-11e7-89b5-4bed706c7840.png)
+
 
 # Custom methods / aspect-oriented code injection
 
