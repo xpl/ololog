@@ -343,6 +343,17 @@ The following will execute all stages before the 'render' (screen output) stage,
 log.before ('render') ({ foo: 42 }) // '{ foo: 42 }'
 ```
 
+# Using with custom stringifier / object printer
+
+Replacing the default printer with [q-i](https://github.com/sapegin/q-i) (as an example):
+
+```javascript
+const log = require ('ololog').configure ({ stringify: { print: require ('q-i').stringify } })
+```
+```
+log ({ foo: true, bar: 42 })
+```
+
 # Custom methods / aspect-oriented code injection
 
 You can add your own shorthand methods, and you can also bind new code to the existing methods, executing it _before_, _after_ or _instead_. See the [pipez](https://github.com/xpl/pipez) library, which provides all the fun.
