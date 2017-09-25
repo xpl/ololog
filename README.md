@@ -117,16 +117,6 @@ log.bright.magenta ('this is something:'.yellow, [ "595da547d9b22f23d8228643", "
 
 ![pic](https://cdn.jpg.wtf/futurico/b1/34/1499313467-b1342c4330146675e9353eddd281006c.png)
 
-Can it handle more arguments?
-
-```javascript
-log.bright (
-    'this is something:'.yellow, '[ "595da547d9b22f23d8228643",\n  "595da547d9b22f23d822863f",\n  "595da547d9b22f23d8228641"  ]'.cyan,
-                                 '[ "595da547d9b22f23d8228643",\n  "595da547d9b22f23d822863f",\n  "595da547d9b22f23d8228641"  ]'.green)
-```
-
-![pic](https://cdn.jpg.wtf/futurico/b1/dc/1499313094-b1dc706d06a584059e54106b8376d672.png)
-
 # Smart object printing
 
 All magic is provided by the external [String.ify](https://github.com/xpl/string.ify) library. Read the docs to see all the available configuration options. There are plenty of them! Contributions are welcome.
