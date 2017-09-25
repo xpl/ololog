@@ -43,7 +43,7 @@ module.exports = function (runner) {
         }
     })
 
-    runner.on ('test end', ({ state = undefined, title, logBuffer, __removeLogHook, verbose = false, parent }) => {
+    runner.on ('test end', ({ state = undefined, title, logBuffer, only, verbose = false, parent, ...other }) => {
 
         ololog.impl.render = logImplRender
 
@@ -55,13 +55,15 @@ module.exports = function (runner) {
             }
             
             log.darkGray (labels[state] + ' ',  title)
+            
+            const onlyEnabled = parent._onlyTests.length
 
             while (!verbose && parent) {
                 verbose = parent.verbose
                 parent = parent.parent
             }
 
-            let show = (verbose || (state === 'failed')) && logBuffer
+            let show = (onlyEnabled || verbose || (state === 'failed')) && logBuffer
             if (show) {
                 log ('  ', ('\n' + logBuffer.trim () + '\n').replace (/\n\n\n/g, '\n\n'))
             }
