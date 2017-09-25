@@ -24,7 +24,7 @@ npm install ololog
 const log = require ('ololog')
 ```
 
-# Using With Mocha
+# Using With [Mocha](https://mochajs.org/)
 
 <img src="https://user-images.githubusercontent.com/1707/30816536-e504a9d6-a21e-11e7-976c-778a95d32219.png">
 
