@@ -10,11 +10,16 @@ process.on ('unhandledRejection', e => { log.bright.red.error (e) })
 
 /*  ------------------------------------------------------------------------ */
 
+const sleep = ms => new Promise (resolve => setTimeout (resolve, ms))
+
+/*  ------------------------------------------------------------------------ */
+
 module.exports = function (runner) {
 
     mocha.reporters.Base.call (this, runner)
 
     const logImplRender = ololog.impl.render
+    const cursorUp      = '\u001b[1A'
     
     runner.on ('suite', ({ title }) => {
 
@@ -31,7 +36,7 @@ module.exports = function (runner) {
     })
 
     runner.on ('test', test => {
-        
+            
         test.logBuffer = ''
 
         ololog.impl.render = text => {
@@ -41,6 +46,20 @@ module.exports = function (runner) {
             
             test.logBuffer += (multiline ? `\n${text}\n` : text) + '\n'
         }
+
+        ;(async () => {
+            
+            const clock = ['◐', '◓', '◑', '◒']
+            
+            console.log ('')
+            
+            for (let i = 0, n = clock.length; !test.state; i++) {
+
+                console.log (ansi.darkGray (cursorUp + clock[i % n] + ' ' + test.title + ' ' + '.'.repeat (i/2 % 5).padEnd (5)))
+                await sleep (100)
+            }
+
+        }) ()
     })
 
     runner.on ('test end', ({ state = undefined, title, logBuffer, only, verbose = false, parent, ...other }) => {
@@ -48,13 +67,8 @@ module.exports = function (runner) {
         ololog.impl.render = logImplRender
 
         if (state) {
-
-            const labels = {
-                'passed': '😎',
-                'failed': '👹'
-            }
             
-            log.darkGray (labels[state] + ' ',  title)
+            log.darkGray (cursorUp + { 'passed': '😎', 'failed': '🐞' }[state] + ' ',  title, '    ')
             
             const onlyEnabled = parent._onlyTests.length
 

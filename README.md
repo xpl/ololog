@@ -38,6 +38,7 @@ mocha --reporter ololog/reporter
 - [x] Supresses log output for nonfailed tests (disable with `.only` or `this.verbose=true` for a suite/test)
 - [x] Automatically manages empty lines / whitespace for better legibility
 - [x] Prints unhandled exceptions and promise rejections as nice stacktraces
+- [x] Animated tests progress
 
 # Browser bundle
 
