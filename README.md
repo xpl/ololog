@@ -28,8 +28,6 @@ const log = require ('ololog')
 
 <img src="https://user-images.githubusercontent.com/1707/30816536-e504a9d6-a21e-11e7-976c-778a95d32219.png">
 
-![ezgif-4-2965bd7c9d-1](https://user-images.githubusercontent.com/1707/30836580-c80ab106-a267-11e7-87d1-04513d36995b.gif)
-
 ```bash
 mocha --reporter ololog/reporter
 ```
@@ -38,7 +36,7 @@ mocha --reporter ololog/reporter
 - [x] Supresses log output for nonfailed tests (disable with `.only` or `this.verbose=true` for a suite/test)
 - [x] Automatically manages empty lines / whitespace for better legibility
 - [x] Prints unhandled exceptions and promise rejections as nice stacktraces
-- [x] Animated tests progress
+- [x] [Animated execution progress](https://user-images.githubusercontent.com/1707/30836580-c80ab106-a267-11e7-87d1-04513d36995b.gif)
 
 
 # Browser bundle
