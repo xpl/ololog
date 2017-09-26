@@ -68,7 +68,7 @@ module.exports = function (runner) {
 
         if (state) {
             
-            log.darkGray (cursorUp + { 'passed': '😎', 'failed': '🐞' }[state] + ' ',  title, '    ')
+            log.darkGray (cursorUp + { 'passed': '😎', 'failed': '👹' }[state] + ' ',  title, '    ')
             
             const onlyEnabled = parent._onlyTests.length
 
