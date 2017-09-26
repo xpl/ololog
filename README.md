@@ -40,6 +40,8 @@ mocha --reporter ololog/reporter
 - [x] Prints unhandled exceptions and promise rejections as nice stacktraces
 - [x] Animated tests progress
 
+![ezgif-4-2965bd7c9d-1](https://user-images.githubusercontent.com/1707/30836580-c80ab106-a267-11e7-87d1-04513d36995b.gif)
+
 # Browser bundle
 
 ...for those who still uses `<script>` tag for module importing ;) Exposes global `ololog` and [`ansicolor`](https://github.com/xpl/ansicolor) objects. Installs [String extensions for ANSI styles](https://github.com/xpl/ansicolor#nice-mode-by-request). Not compressed.
