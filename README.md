@@ -231,8 +231,10 @@ log.bright.red.error.configure ({ locate: false }) (e)
 # Using As The Default Exception Printer In Node
 
 ```javascript
-process.on ('uncaughtException',  e => { log.bright.red.error (e) }) // .error sends output to stderr
-process.on ('unhandledRejection', e => { log.bright.red.error (e) })
+const printError = log.bright.red.error.configure ({ locate: false })
+
+process.on ('uncaughtException',  e => { printError (e) })
+process.on ('unhandledRejection', e => { printError (e) })
 ```
 
 # Displaying Call Location
