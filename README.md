@@ -152,7 +152,7 @@ log (obj)
 Longer strings:
 
 ```javascript
-log.maxLength (70)
+log.maxLength (70) (obj)
 ```
 ```
 { asks: [{ price: "1000", amount: 10 }, { price: "2000", amount: 10 }],
@@ -162,7 +162,7 @@ log.maxLength (70)
 Shorter strings:
 
 ```javascript
-log.maxLength (20)
+log.maxLength (20) (obj)
 ```
 ```
 { asks: [ {  price: "1000",
