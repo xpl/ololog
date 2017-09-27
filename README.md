@@ -41,7 +41,7 @@ mocha --reporter ololog/reporter
 
 # Browser bundle
 
-...for those who still uses `<script>` tag for module importing ;) Exposes global `ololog` and [`ansicolor`](https://github.com/xpl/ansicolor) objects. Installs [String extensions for ANSI styles](https://github.com/xpl/ansicolor#nice-mode-by-request). Not compressed.
+...for those who still uses `<script>` tag for module importing ;) Exposes the global `ololog` and [`ansicolor`](https://github.com/xpl/ansicolor) objects. Installs [String extensions for ANSI styles](https://github.com/xpl/ansicolor#nice-mode-by-request). Not compressed.
 
 ```html
 <script src="https://unpkg.com/ololog"></script> <!-- from unpkg.com CDN -->
