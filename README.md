@@ -11,7 +11,7 @@
 - [x] Formats `Error` instances as [pretty stacktraces with source lines](https://github.com/xpl/ololog#pretty-printing-error-instances)
 - [x] Full sourcemap support (via [`get-source`](https://github.com/xpl/get-source))
 - [x] [Pluggable pipeline architecture](https://github.com/xpl/pipez#pipezbeta)
-- [x] [Can replace the unhandled error printer in Node](https://github.com/xpl/ololog#using-as-the-default-exception-printer-in-node)
+- [x] [Can replace the default unhandled error printer in Node](https://github.com/xpl/ololog#using-as-the-default-exception-printer-in-node)
 - [x] [Integrates with Mocha](https://github.com/xpl/ololog#using-with-mocha) (experimental)
 
 # Importing
