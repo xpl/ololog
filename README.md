@@ -216,7 +216,7 @@ log ({ foo: true, bar: 42 })
 
 This feature is implemented in the [StackTracey](https://github.com/xpl/stacktracey#pretty-printing) library. See it's docs for more (you can configure the path shortening / library calls skipping).
 
-```
+```javascript
 log.bright.red (e) // where `e` is an instance of Error
 ```
 
