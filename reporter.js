@@ -18,99 +18,102 @@ const sleep = ms => new Promise (resolve => setTimeout (resolve, ms))
 
 module.exports = function (runner) {
 
-mocha.reporters.Base.call (this, runner)
+    mocha.reporters.Base.call (this, runner)
 
-const originalImpl = Object.assign ({}, ololog.impl)
-const cursorUp     = '\u001b[1A'
+    const originalImpl = Object.assign ({}, ololog.impl)
+    const cursorUp     = '\u001b[1A'
 
-StackTracey.resetCache () // when running mocha under --watch, this is needed to re-load the changed sources
+    StackTracey.resetCache () // when running mocha under --watch, this is needed to re-load the changed sources
 
-runner.on ('suite', ({ title }) => {
+    runner.on ('suite', ({ title }) => {
 
-    if (title) {
-        log.bright (title + ':', '\n')
-    }
-})
+        if (title) {
+            log.bright (title + ':', '\n')
+        }
+    })
 
-runner.on ('suite end', ({ title, tests }) => {
+    runner.on ('suite end', ({ title, tests }) => {
 
-    if (tests.length) {
-        console.log ('')
-    }
-})
+        if (tests.length) {
+            console.log ('')
+        }
+    })
 
-runner.on ('test', test => {
-        
-    test.logBuffer = ''
+    runner.on ('test', test => {
+            
+        test.logBuffer = ''
 
-    let prevLocation
+        let prevLocation
 
-    ololog.impl.render = text => {
+        ololog.impl.render = text => {
 
-        const lines = text.split ('\n')
-        const multiline = lines.length > 1
+            const lines = text.split ('\n')
+            const multiline = lines.length > 1
 
-        const location = new StackTracey ().clean.at (2)
-        const locationChanged = prevLocation && !StackTracey.locationsEqual (location, prevLocation)
-        prevLocation = location
+            const location = new StackTracey ().clean.at (2)
+            const locationChanged = prevLocation && !StackTracey.locationsEqual (location, prevLocation)
+            prevLocation = location
 
-        test.logBuffer += ((locationChanged || multiline) ? '\n' : '') + text + '\n'
-    }
-
-    ;(async () => {
-        
-        const clock = ['◐', '◓', '◑', '◒']
-        
-        console.log ('')
-        
-        for (let i = 0, n = clock.length; !test.state; i++) {
-
-            console.log (ansi.darkGray (cursorUp + clock[i % n] + ' ' + test.title + ' ' + '.'.repeat (i/2 % 5).padEnd (5)))
-            await sleep (100)
+            test.logBuffer += ((locationChanged || multiline) ? '\n' : '') + text + '\n'
         }
 
-    }) ()
-})
+        ;(async () => {
+            
+            const clock = ['◐', '◓', '◑', '◒']
+            
+            console.log ('')
+            
+            for (let i = 0, n = clock.length; !test.state; i++) {
 
-runner.on ('test end', ({ state = undefined, title, logBuffer, only, verbose = false, parent, ...other }) => {
+                console.log (ansi.darkGray (cursorUp + clock[i % n] + ' ' + test.title + ' ' + '.'.repeat (i/2 % 5).padEnd (5)))
+                await sleep (100)
+            }
 
-    ololog.impl.render = originalImpl.render
+        }) ()
+    })
 
-    if (state) {
-        
-        log.darkGray (cursorUp + { 'passed': '😎', 'failed': '👹' }[state] + ' ',  title, '    ')
-        
-        const onlyEnabled = parent._onlyTests.length
+    runner.on ('test end', ({ state = undefined, title, logBuffer, only, verbose = false, parent, ...other }) => {
 
-        while (!verbose && parent) {
-            verbose = parent.verbose
-            parent = parent.parent
+        ololog.impl.render = originalImpl.render
+
+        if (state) {
+            
+            log.darkGray (cursorUp + { 'passed': '😎', 'failed': '👹' }[state] + ' ',  title, '    ')
+            
+            const onlyEnabled = parent._onlyTests.length
+
+            while (!verbose && parent) {
+                verbose = parent.verbose
+                parent = parent.parent
+            }
+
+            let show = (onlyEnabled || verbose || (state === 'failed')) && logBuffer
+            if (show) {
+
+                const sanitized = logBuffer
+                                    .split ('\n')
+                                    .map (line => isBlank (line) ? '' : line)
+                                    .join ('\n')
+
+                log ('  ', '\n' + sanitized.replace (/\n\n\n+/g, '\n\n').trim () + '\n')
+            }
         }
+    })
 
-        let show = (onlyEnabled || verbose || (state === 'failed')) && logBuffer
-        if (show) {
+    runner.on ('fail', (test, err) => {
 
-            const sanitized = logBuffer
-                                .split ('\n')
-                                .map (line => isBlank (line) ? '' : line)
-                                .join ('\n')
+        if (('actual' in err) && ('expected' in err)) {
+            
+            log.bright.red.error ('[AssertionError] ' + err.message)
+            log.newline ()
+            log.red.error.indent (1) ('actual:  ', err.actual)
+            log.green.error.indent (1) ('expected:', err.expected)
 
-            log ('  ', '\n' + sanitized.replace (/\n\n\n+/g, '\n\n').trim () + '\n')
+            log.newline ()
+            log.bright.red.error.indent (1) (new StackTracey (err).pretty)
+
+        } else {
+            log.bright.red.error ('\n', err)            
         }
-    }
-})
-
-runner.on ('fail', (test, err) => {
-
-    if (('actual' in err) && ('expected' in err)) {
-        
-        log.bright.red.error ('[AssertionError] ' + err.message)
-        log.newline ()
-        log.red.error ('\tactual:  ', err.actual)
-        log.green.error ('\texpected:', err.expected)
-
-    } else {
-        log.bright.red.error ('\n', err)            
-    }
-})
+    })
 }
