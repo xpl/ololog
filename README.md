@@ -11,6 +11,7 @@
 - [x] Formats `Error` instances as [pretty stacktraces with source lines](https://github.com/xpl/ololog#pretty-printing-error-instances)
 - [x] Full sourcemap support (via [`get-source`](https://github.com/xpl/get-source))
 - [x] [Pluggable pipeline architecture](https://github.com/xpl/pipez#pipezbeta)
+- [x] [Can replace the default unhandled error printer in Node](https://github.com/xpl/ololog#using-as-the-default-exception-printer-in-node)
 - [x] [Integrates with Mocha](https://github.com/xpl/ololog#using-with-mocha) (experimental)
 
 # Importing
@@ -38,8 +39,7 @@ mocha --reporter ololog/reporter
 - [x] Prints unhandled exceptions and promise rejections as nice stacktraces
 - [x] [Animated execution progress](https://user-images.githubusercontent.com/1707/30836580-c80ab106-a267-11e7-87d1-04513d36995b.gif)
 
-
-# Browser bundle
+# Browser Bundle
 
 ...for those who still uses `<script>` tag for module importing ;) Exposes the global `ololog` and [`ansicolor`](https://github.com/xpl/ansicolor) objects. Installs [String extensions for ANSI styles](https://github.com/xpl/ansicolor#nice-mode-by-request). Not compressed.
 
@@ -51,7 +51,7 @@ mocha --reporter ololog/reporter
 </script>
 ```
 
-# Basic usage
+# Basic Usage
 
 At first, it's similar to `console.log`:
 
@@ -78,7 +78,7 @@ log.configure ({ concat: { separator: '' }}) ('foo', 'bar', 'baz') // foobarbaz
 
 You can [read more about `configure` here](https://github.com/xpl/pipez#pipezbeta). Configuration engine is implemented as a separate external library, for everyone's use. Contributions are welcome.
 
-# Debugging of functional expressions
+# Debugging Of Functional Expressions
 
 Ololog returns its first argument (a feature that `console.log` doesn't have), and it greatly simplifies debugging of functional expressions, as you can simply wrap part of an expression to `log`:
 
@@ -92,7 +92,7 @@ It is far less ugly than with `console.log`:
 array.map (x => { console.log (x); return x + 1 })
 ```
 
-# ANSI styling
+# ANSI Styling
 
 Backed by the [ansicolor](https://github.com/xpl/ansicolor) library, colored output is supported for the terminal environment and for the Chrome DevTools console. On other platforms, ANSI codes are safely stripped from the output, so they don't mess up anything.
 
@@ -113,7 +113,7 @@ log.bright.red.underline ('multiple styles combined')
 
 [See all the supported styling options here](https://github.com/xpl/ansicolor#supported-styles).
 
-# Smart indentation/newline handling
+# Smart Indentation/Newline Handling
 
 ```javascript
 log.bright.magenta ('this is something:'.yellow, [ "595da547d9b22f23d8228643", "595da547d9b22f23d822863f", "595da547d9b22f23d8228641" ])
@@ -125,7 +125,7 @@ log.bright.magenta ('this is something:'.yellow, [ "595da547d9b22f23d8228643", "
 
 ![pic](https://cdn.jpg.wtf/futurico/b1/34/1499313467-b1342c4330146675e9353eddd281006c.png)
 
-# Smart object printing
+# Smart Object Printing
 
 All magic is provided by the external [String.ify](https://github.com/xpl/string.ify) library. Read the docs to see all the available configuration options. There are plenty of them! Contributions are welcome.
 
@@ -152,7 +152,7 @@ log (obj)
 Longer strings:
 
 ```javascript
-log.maxLength (70)
+log.maxLength (70) (obj)
 ```
 ```
 { asks: [{ price: "1000", amount: 10 }, { price: "2000", amount: 10 }],
@@ -162,7 +162,7 @@ log.maxLength (70)
 Shorter strings:
 
 ```javascript
-log.maxLength (20)
+log.maxLength (20) (obj)
 ```
 ```
 { asks: [ {  price: "1000",
@@ -199,7 +199,7 @@ Passing other configuration options to [`string.ify`](https://github.com/xpl/str
 log.configure ({ stringify: { precision: 2 } }) (obj) // Read the string.ify docs to see all the available configuration options. There are plenty of them!
 ```
 
-# Using with custom stringifier / object printer
+# Using With Custom Stringifier
 
 Replacing the default printer with [q-i](https://github.com/sapegin/q-i) (as an example):
 
@@ -212,36 +212,32 @@ log ({ foo: true, bar: 42 })
 
 ![pic](https://user-images.githubusercontent.com/1707/30799941-222a66a8-a1e7-11e7-89b5-4bed706c7840.png)
 
-# Pretty printing `Error` instances
+# Pretty Printing `Error` Instances
 
 This feature is implemented in the [StackTracey](https://github.com/xpl/stacktracey#pretty-printing) library. See it's docs for more (you can configure the path shortening / library calls skipping).
 
 ```javascript
-const e = new Error ('dummy error') // issued somewhere in a Mocha test callback...
-
-...
-
-log.bright.red (e)
+log.bright.red (e) // where `e` is an instance of Error
 ```
-```
-[EXCEPTION] dummy error
-    
-        at it                              test.js:104                             const e = new Error ('dummy error')
-        at it                              test.js:109                             log.bright.red (e)
-        at callFn                          node_modules/mocha/lib/runnable.js:326  var result = fn.call(ctx);                
-        at run                             node_modules/mocha/lib/runnable.js:319  callFn(this.fn);                          
-        at runTest                         node_modules/mocha/lib/runner.js:422    test.run(fn);                             
-        at                                 node_modules/mocha/lib/runner.js:528    self.runTest(function(err) {              
-        at next                            node_modules/mocha/lib/runner.js:342    return fn();                              
-        at                                 node_modules/mocha/lib/runner.js:352    next(suites.pop());                       
-        at next                            node_modules/mocha/lib/runner.js:284    return fn();                              
-        at <anonymous>                     node_modules/mocha/lib/runner.js:320    next(0);                                  
-        at runCallback                     timers.js:651                                                                     
-        at tryOnImmediate                  timers.js:624                                                                     
-        at processImmediate [as _immediat  timers.js:596   
-```       
 
-# Displaying call location
+or (if you want the output go to _stderr_ and supress the grey location badge):
+
+```javascript
+log.bright.red.error.configure ({ locate: false }) (e)
+```
+
+<img width="936" alt="screen shot 2017-09-27 at 13 57 24" src="https://user-images.githubusercontent.com/1707/30910025-dd160de6-a38b-11e7-9297-70f139cd63b8.png">
+
+# Using As The Default Exception Printer In Node
+
+```javascript
+const printError = log.bright.red.error.configure ({ locate: false })
+
+process.on ('uncaughtException',  e => { printError (e) })
+process.on ('unhandledRejection', e => { printError (e) })
+```
+
+# Displaying Call Location
 
 Have you ever encountered a situation where you need to quickly find in the code the place where the logging is called, but it's not so easy to do? With call location tags it's really easy. And it's enabled by default.
 
@@ -312,21 +308,15 @@ Backdating:
 log.configure ({ time: { when: new Date ('2017-02-27T12:45:19.951Z') }}) (...)
 ```
 
-# Specifying additional semantics (errors, warnings, info messages)
+# Specifying Additional Semantics (errors / warnings / info messages)
 
-You can add `.error` call modifier, which tells Ololog to render with `console.error` instead of `console.log`: 
+You can add the `.error` call modifier, which tells Ololog to render with the `console.error` instead of the `console.log`: 
 
 ```javascript
 log.error ('this goes to stderr')
 ```
 ```javascript
 log.bright.red.error ('bright red error!')
-```
-
-Under the hood it does the following:
-
-```javascript
-log.configure ({ render: { consoleMethod: 'error' } }) ('this goes to stderr')
 ```
 
 Other `console` methods are supported as well:
@@ -338,13 +328,13 @@ log.info ('calls console.info')
 log.warn ('calls console.warn')
 ```
 
-# Limiting max argument length
+# Limiting Max Argument Length
 
 ```javascript
 log.configure ({ trim: { max: 5 } }) ('1234567890', 'abcdefgh') // 1234… abcd…
 ```
 
-# Getting rendered text
+# Getting Rendered Text
 
 The following will execute all stages before the 'render' (screen output) stage, returning its argument:
 
@@ -352,7 +342,7 @@ The following will execute all stages before the 'render' (screen output) stage,
 log.before ('render') ({ foo: 42 }) // '{ foo: 42 }'
 ```
 
-# Custom methods / aspect-oriented code injection
+# Custom Methods / Aspect-Oriented Code Injection
 
 You can add your own shorthand methods, and you can also bind new code to the existing methods, executing it _before_, _after_ or _instead_. See the [pipez](https://github.com/xpl/pipez) library, which provides all the fun.
 
@@ -370,7 +360,7 @@ log.methods ({
 log.indent (2).configure ({ time: true }).red.bright ('this is bold red message, indented by 2 and supplied with timestamp')
 ```
 
-# Null device
+# Null Device
 
 Use `.null` to obtain a reduced instance that does nothing apart from returning its first argument:
 
@@ -381,7 +371,7 @@ const devNull = log.null
 devNull.bright.red ('this never shows') // simply returns 'this never shows'
 ```
 
-# Powered by
+# Powered By
 
 - [String.ify](https://github.com/xpl/string.ify)
 - [StackTracey](https://github.com/xpl/stacktracey)
@@ -389,6 +379,6 @@ devNull.bright.red ('this never shows') // simply returns 'this never shows'
 - [ansicolor](https://github.com/xpl/ansicolor)
 - [printable-characters](https://github.com/xpl/printable-characters)
 
-# See also
+# See Also
 
 - [CCXT](https://github.com/ccxt-dev/ccxt) – a cryptocurrency trading library with 85+ exchanges. It uses Ololog in the tests and in the examples.
