@@ -3,7 +3,6 @@ node_js:
 - "6"
 script:
 - set -e
-- npm run build
 - npm run test
 - npm run coveralls
 after_success:
