@@ -308,19 +308,13 @@ log.configure ({ time: { when: new Date ('2017-02-27T12:45:19.951Z') }}) (...)
 
 # Specifying Additional Semantics (errors / warnings / info messages)
 
-You can add `.error` call modifier, which tells Ololog to render with `console.error` instead of `console.log`: 
+You can add the `.error` call modifier, which tells Ololog to render with the `console.error` instead of the `console.log`: 
 
 ```javascript
 log.error ('this goes to stderr')
 ```
 ```javascript
 log.bright.red.error ('bright red error!')
-```
-
-Under the hood it does the following:
-
-```javascript
-log.configure ({ render: { consoleMethod: 'error' } }) ('this goes to stderr')
 ```
 
 Other `console` methods are supported as well:
