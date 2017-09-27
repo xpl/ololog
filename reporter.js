@@ -107,6 +107,7 @@ module.exports = function (runner) {
             log.bright.red.error ('[AssertionError] ' + err.message)
             log.newline ()
             log.red.error.indent (1) ('actual:  ', err.actual)
+            log.newline ()
             log.green.error.indent (1) ('expected:', err.expected)
 
             log.newline ()
