@@ -16,8 +16,7 @@
 
 # TODO
 
-- [ ] Improve tests coverage
-- [ ] Fix custom Mocha reporter when running in browser
+- [ ] Improve [tests](https://github.com/xpl/ololog/blob/master/test.js) coverage
 
 # Importing
 
