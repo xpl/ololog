@@ -16,6 +16,7 @@
 
 # TODO
 
+- [ ] HTML/DOM rendering
 - [ ] Improve [tests](https://github.com/xpl/ololog/blob/master/test.js) coverage
 
 # Importing
