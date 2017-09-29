@@ -14,6 +14,11 @@
 - [x] [Can replace the default unhandled error printer in Node](https://github.com/xpl/ololog#using-as-the-default-exception-printer-in-node)
 - [x] [Integrates with Mocha](https://github.com/xpl/ololog#using-with-mocha) (experimental)
 
+# TODO
+
+- [ ] Improve tests coverage
+- [ ] Fix custom Mocha reporter when running in browser
+
 # Importing
 
 For use with Node or with module bundlers (Browserify / WebPack / Rollup):
