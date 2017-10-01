@@ -258,6 +258,12 @@ Disabling:
 log.configure ({ locate: false }) (...)
 ```
 
+...or:
+
+```javascript
+log.noLocate (...)
+````
+
 Custom printer:
 
 ```javascript
