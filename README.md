@@ -371,7 +371,7 @@ log.methods ({
 
 You can also bind new code to the existing methods in an _aspect-oriented programming_ style, executing it _before_, _after_ or _instead_ – and thus overriding the default behavior. See the [pipez](https://github.com/xpl/pipez#pipez) library, which provides all the fun. For example, if you want to write `.error` calls not just on screen, but to a separate file, you can do following (by injecting a custom hook after the `render` call):
 
-````javascript
+```javascript
 const ololog = require ('ololog')
     , ansi   = require ('ansicolor')
     , fs     = require ('fs')
