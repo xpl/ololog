@@ -355,22 +355,36 @@ The following will execute all stages before the 'render' (screen output) stage,
 log.before ('render') ({ foo: 42 }) // '{ foo: 42 }'
 ```
 
-# Custom Methods / Aspect-Oriented Code Injection
+# Custom Methods
 
-You can add your own shorthand methods, and you can also bind new code to the existing methods, executing it _before_, _after_ or _instead_. See the [pipez](https://github.com/xpl/pipez) library, which provides all the fun.
+You can add your own shorthand methods/properties (will add new properties globally for any instance of the `ololog`, but this may change in future). An example, demonstrating how the actual `indent` and `red` chain-style helpers were implemented:
 
 ```javascript
 log.methods ({
 
     indent (level) { return this.configure ({ indent: { level: level }}) }
-
-    get red ()    { return this.configure ({ 'concat+': lines => lines.map (ansicolor.red) }) } // executes it after the 'concat'
-    get bright () { return this.configure ({ 'concat+': lines => lines.map (ansicolor.bright) }) }  
+    get red ()     { return this.configure ({ 'concat+': lines => lines.map (ansicolor.red) }) } // executes it after the 'concat'
 })
 ```
 
-```javascript
-log.indent (2).configure ({ time: true }).red.bright ('this is bold red message, indented by 2 and supplied with timestamp')
+# Overriding The Default Behaivor
+
+You can also bind new code to the existing methods in an _aspect-oriented programming_ style, executing it _before_, _after_ or _instead_ – and thus overriding the default behavior. See the [pipez](https://github.com/xpl/pipez#pipez) library, which provides all the fun. For example, if you want to write `.error` calls not just on screen, but to a separate file, you can do following (by injecting a custom hook after the `render` call):
+
+````javascript
+const ololog = require ('ololog')
+    , ansi   = require ('ansicolor')
+    , fs     = require ('fs')
+    
+const log = require ('ololog').configure ({
+
+    'render+' (text, { consoleMethod = '' }) { // adds this method after `render`
+        if (consoleMethod === 'error') {
+            fs.appendToFile ('error.log', '\n' + ansi.strip (text)) // strip ANSI styling codes from output
+        }
+        return text
+    }
+})
 ```
 
 # Null Device
