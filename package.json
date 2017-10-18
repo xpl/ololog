@@ -1,6 +1,6 @@
 {
   "name": "ololog",
-  "version": "1.0.63",
+  "version": "1.1.63",
   "description": "Platform-agnostic logging / colors / terminals & browsers / shows call locations / pretty prints objects and Errors / smart whitespace handling",
   "main": "build/ololog.js",
   "unpkg": "build/ololog.browser.js",
@@ -131,7 +131,7 @@
     "ansicolor": "^1.1.71",
     "pipez": "^1.1.7",
     "printable-characters": "^1.0.38",
-    "stacktracey": "^1.2.74",
+    "stacktracey": "^1.2.75",
     "string.bullet": "^1.0.11",
     "string.ify": "^1.0.43"
   }
