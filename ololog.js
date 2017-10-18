@@ -10,17 +10,34 @@ const O                 = Object
 
 /*  ------------------------------------------------------------------------ */
 
+
 const stringify = require ('string.ify').configure ({
 
-    formatter (x) {
+    formatter (x, stringify) {
 
         if ((x instanceof Error) && !(typeof Symbol !== 'undefined' && x[Symbol.for ('String.ify')])) {
 
-            const why           = stringify.limit ((x.message || '').replace (/\r|\n/g, '').trim (), 120),
-                  stack         = new StackTracey (x).pretty,
-                  stackIndented = stack.split ('\n').map (x => '    ' + x).join ('\n')
+            if (stringify.state.depth > 0) return `<Error: ${x.message}>` // prevents unwanted pretty printing for Errors that are properties of complex objects
 
-            return `[EXCEPTION] ${why}\n\n${stackIndented}\n`
+            const indent        = '    '
+                , why           = stringify.limit ((x.message || '').replace (/\r|\n/g, '').trim (), 120)
+                , stack         = new StackTracey (x).pretty
+                , stackIndented = stack.split ('\n').map (x => indent + x).join ('\n')
+                , isAssertion = ('actual' in x) && ('expected' in x)
+            
+            if (isAssertion) {
+
+                let actual   = bullet (indent + '  actual: ', stringify (x.actual))
+                  , expected = bullet (indent + 'expected: ', stringify (x.expected))
+
+                if ((actual.split ('\n').length > 1) || (expected.split ('\n').length > 1)) // if multiline actual/expected, need extra whitespace inbetween
+                    actual += '\n'
+
+                return `[ASSERTION] ${why}\n\n${ansi.red (actual)}\n${ansi.green (expected)}\n\n${stackIndented}\n`
+                
+            } else {
+                return `[ERROR] ${why}\n\n${stackIndented}\n`
+            }
         }
     }
 })

@@ -118,20 +118,20 @@
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-plugin-transform-es2017-object-entries": "0.0.4",
-    "babel-preset-env": "^1.6.0",
+    "babel-preset-env": "^1.6.1",
     "browserify": "^14.4.0",
     "chai": "^3.5.0",
-    "coveralls": "^2.13.1",
-    "eslint": "^4.7.2",
+    "coveralls": "^2.13.3",
+    "eslint": "^4.9.0",
     "istanbul": "^0.4.5",
     "mocha": "^3.5.3",
     "nyc": "^11.2.1"
   },
   "dependencies": {
-    "ansicolor": "^1.1.70",
+    "ansicolor": "^1.1.71",
     "pipez": "^1.1.7",
-    "printable-characters": "^1.0.33",
-    "stacktracey": "^1.0.60",
+    "printable-characters": "^1.0.38",
+    "stacktracey": "^1.2.73",
     "string.bullet": "^1.0.11",
     "string.ify": "^1.0.43"
   }

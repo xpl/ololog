@@ -7,32 +7,8 @@ const mocha       = require ('mocha')
 
 /*  ------------------------------------------------------------------------ */
 
-const printError = e => {
-
-    log.newline ()
-
-    if (e instanceof SyntaxError) {
-
-        console.log (e) // revert to default console.log because it shows source line where a SyntaxError was occured (something we can't do with Ololog now...)
-
-    } else if (('actual' in e) && ('expected' in e)) { // Assertion
-        
-        log.bright.red.error ('[AssertionError] ' + e.message)
-        log.newline ()
-        log.red.error.indent (1) ('actual:  ', e.actual)
-        log.newline ()
-        log.green.error.indent (1) ('expected:', e.expected)
-
-        log.newline ()
-        log.bright.red.error.indent (1) (new StackTracey (e).pretty)
-
-    } else {
-        log.bright.red.error (e)
-    }    
-}
-
-process.on ('uncaughtException',  printError)
-process.on ('unhandledRejection', printError)
+process.on ('uncaughtException',  log.red.error)
+process.on ('unhandledRejection', log.red.error)
 
 /*  ------------------------------------------------------------------------ */
 
