@@ -24,7 +24,8 @@ const stringify = require ('string.ify').configure ({
                 , stack         = new StackTracey (x).pretty
                 , stackIndented = stack.split ('\n').map (x => indent + x).join ('\n')
                 , isAssertion = ('actual' in x) && ('expected' in x)
-            
+                , type        = x.constructor.name || 'Error'
+
             if (isAssertion) {
 
                 let actual   = bullet (indent + 'actual:   ', stringify (x.actual))
@@ -33,10 +34,10 @@ const stringify = require ('string.ify').configure ({
                 if ((actual.split ('\n').length > 1) || (expected.split ('\n').length > 1)) // if multiline actual/expected, need extra whitespace inbetween
                     actual += '\n'
 
-                return `[ASSERTION] ${why}\n\n${ansi.red (actual)}\n${ansi.green (expected)}\n\n${stackIndented}\n`
+                return `[${type}] ${why}\n\n${ansi.red (actual)}\n${ansi.green (expected)}\n\n${stackIndented}\n`
                 
             } else {
-                return `[ERROR] ${why}\n\n${stackIndented}\n`
+                return `[${type}] ${why}\n\n${stackIndented}\n`
             }
         }
     }

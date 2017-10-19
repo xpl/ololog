@@ -123,7 +123,7 @@ describe ('Ololog', () => {
 
         log.configure ({ '+render': text => {
 
-            text.indexOf ('[ERROR] dummy error\n').should.equal (0)
+            text.indexOf ('[Error] dummy error\n').should.equal (0)
             text.indexOf ('const e = new Error (\'dummy error\')').should.be.gt (0)
 
         }}) (e)
@@ -146,7 +146,7 @@ describe ('Ololog', () => {
 
         log.configure ({ '+render': text => {
 
-            text.startsWith ("[ASSERTION] expected 'foo' to equal 'bar'\n\n").should.equal (true)
+            text.startsWith ("[AssertionError] expected 'foo' to equal 'bar'\n\n").should.equal (true)
             text.includes ('actual:   "foo"').should.equal (true)
             text.includes ('expected: "bar"').should.equal (true)
             
