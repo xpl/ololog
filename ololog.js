@@ -27,7 +27,7 @@ const stringify = require ('string.ify').configure ({
             
             if (isAssertion) {
 
-                let actual   = bullet (indent + '  actual: ', stringify (x.actual))
+                let actual   = bullet (indent + 'actual:   ', stringify (x.actual))
                   , expected = bullet (indent + 'expected: ', stringify (x.expected))
 
                 if ((actual.split ('\n').length > 1) || (expected.split ('\n').length > 1)) // if multiline actual/expected, need extra whitespace inbetween

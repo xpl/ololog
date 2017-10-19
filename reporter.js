@@ -100,5 +100,5 @@ module.exports = function (runner) {
         }
     })
 
-    runner.on ('fail', (test, err) => { printError (err) })
+    runner.on ('fail', (test, err) => { log.red.error (err) })
 }
