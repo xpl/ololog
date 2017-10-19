@@ -65,7 +65,7 @@ module.exports = function (runner) {
             
             for (let i = 0, n = clock.length; !test.state; i++) {
 
-                console.log (ansi.darkGray (cursorUp + clock[i % n] + ' ' + test.title + ' ' + '.'.repeat (i/2 % 5).padEnd (5)))
+                console.log (ansi.darkGray (cursorUp + clock[i % n] + '  ' + test.title + ' ' + '.'.repeat (i/2 % 5).padEnd (5)))
                 await sleep (100)
             }
 
