@@ -7,8 +7,8 @@ const mocha       = require ('mocha')
 
 /*  ------------------------------------------------------------------------ */
 
-process.on ('uncaughtException',  log.red.error)
-process.on ('unhandledRejection', log.red.error)
+process.on ('uncaughtException',  e => log.red.error (e))
+process.on ('unhandledRejection', e => log.red.error (e))
 
 /*  ------------------------------------------------------------------------ */
 
