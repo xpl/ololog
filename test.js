@@ -150,7 +150,7 @@ describe ('Ololog', () => {
             text.includes ('actual:   "foo"').should.equal (true)
             text.includes ('expected: "bar"').should.equal (true)
             
-            text.includes ("const err = (() => { try { 'foo'.should.equal ('bar') } catch (e) { return e } }").should.equal (true)
+            text.includes ("const err = (() => { try { 'foo'.should.equal ('bar') } catch (e) { return e }").should.equal (true)
 
         }}) (err)
     })
