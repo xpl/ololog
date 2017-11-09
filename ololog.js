@@ -28,8 +28,10 @@ const stringify = require ('string.ify').configure ({
 
             if (isAssertion) {
 
-                let actual   = bullet (indent + 'actual:   ', stringify (x.actual))
-                  , expected = bullet (indent + 'expected: ', stringify (x.expected))
+                const str = stringify.configure ({ maxStringLength: Number.MAX_VALUE, maxDepth: 8 })
+                
+                let actual   = bullet (indent + 'actual:   ', str (x.actual))
+                  , expected = bullet (indent + 'expected: ', str (x.expected))
 
                 if ((actual.split ('\n').length > 1) || (expected.split ('\n').length > 1)) // if multiline actual/expected, need extra whitespace inbetween
                     actual += '\n'
