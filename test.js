@@ -185,6 +185,14 @@ describe ('Ololog', () => {
         assert (() => nullLog.bright.red ('foo', 'bar').should.equal ('foo'), undefined)
     })
 
+    it.only ('location work on different platforms (debug)', () => {
+
+        const pipez       = require ('pipez')
+        const StackTracey = require ('stacktracey')
+        const getStack = pipez ({ locate: () => (new StackTracey ().clean) })
+        const stack = getStack ()
+        console.log (stack.pretty)
+    })
 })
 
 
