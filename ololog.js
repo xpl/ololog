@@ -102,7 +102,7 @@ const log = pipez ({
     locate: (lines, {
 
                     shift = 0,
-                    where = (new StackTracey ().clean.at (2 + shift)),
+                    where = (new StackTracey ().clean.at (1 + shift)),
                     join  = ((a, sep, b) => (a && b) ? (a + sep + b) : (a || b)),
                     print = ({ calleeShort, fileName = [], line = [] }) => ansi.darkGray ('(' + join (calleeShort, ' @ ', join (fileName, ':', line)) + ')')
 
