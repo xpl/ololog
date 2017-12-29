@@ -122,16 +122,16 @@
     "browserify": "^14.5.0",
     "chai": "^3.5.0",
     "coveralls": "^2.13.3",
-    "eslint": "^4.10.0",
+    "eslint": "^4.14.0",
     "istanbul": "^0.4.5",
     "mocha": "^3.5.3",
-    "nyc": "^11.3.0"
+    "nyc": "^11.4.1"
   },
   "dependencies": {
     "ansicolor": "^1.1.71",
-    "pipez": "^1.1.7",
+    "pipez": "^1.1.8",
     "printable-characters": "^1.0.38",
-    "stacktracey": "^1.2.86",
+    "stacktracey": "^1.2.87",
     "string.bullet": "^1.0.11",
     "string.ify": "^1.0.43"
   }
