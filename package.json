@@ -131,7 +131,7 @@
     "ansicolor": "^1.1.71",
     "pipez": "^1.1.8",
     "printable-characters": "^1.0.38",
-    "stacktracey": "^1.2.87",
+    "stacktracey": "^1.2.89",
     "string.bullet": "^1.0.11",
     "string.ify": "^1.0.43"
   }
