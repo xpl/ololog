@@ -311,7 +311,7 @@ log.indent (2) ('Lorem ipsum dolor sit amet\nconsectetur adipiscing elit..\n')
 With custom printer:
 
 ```javascript
-log.configure ({ time: { print: x => (String (x) + ' | ').bright.cyan }}) ('Lorem ipsum dolor sit amet\nconsectetur adipiscing elit..')
+log.configure ({ time: { yes: true, print: x => (String (x) + ' | ').bright.cyan }}) ('Lorem ipsum dolor sit amet\nconsectetur adipiscing elit..')
 ```
 
 ![pic](https://cdn.jpg.wtf/futurico/93/45/1493357501-9345b20f7edd289e0336bc322f1e68c3.png)
@@ -319,7 +319,7 @@ log.configure ({ time: { print: x => (String (x) + ' | ').bright.cyan }}) ('Lore
 Backdating:
 
 ```javascript
-log.configure ({ time: { when: new Date ('2017-02-27T12:45:19.951Z') }}) (...)
+log.configure ({ time: { yes: true, when: new Date ('2017-02-27T12:45:19.951Z') }}) (...)
 ```
 
 # Specifying Additional Semantics (errors / warnings / info messages)
