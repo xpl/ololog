@@ -166,7 +166,7 @@ const log = pipez ({
     get serialize () { return this.before ('render') },
     get deserialize () { return this.from ('render') },
 
-    newline () { return this.from ('join')(['']) }
+    newline () { return this.from ('join')(['']) },
 
     handleNodeErrors () {
         process.on ('uncaughtException',  e => { this.bright.red.error.noLocate (e); process.exit (1) })
