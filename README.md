@@ -239,10 +239,14 @@ log.bright.red.error.configure ({ locate: false }) (e)
 # Using As The Default Exception Printer In Node
 
 ```javascript
-const printError = log.bright.red.error.configure ({ locate: false })
+process.on ('uncaughtException',  e => { log.bright.red.error.noLocate (e); process.exit (1) })
+process.on ('unhandledRejection', e => { log.bright.red.error.noLocate (e); process.exit (1) })
+```
 
-process.on ('uncaughtException',  e => { printError (e) })
-process.on ('unhandledRejection', e => { printError (e) })
+Or you can simply call the `handleNodeErrors` helper when importing Ololog:
+
+```
+const log = require ('ololog').handleNodeErrors ()
 ```
 
 # Displaying Call Location
