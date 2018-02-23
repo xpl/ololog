@@ -167,6 +167,12 @@ const log = pipez ({
     get deserialize () { return this.from ('render') },
 
     newline () { return this.from ('join')(['']) }
+
+    handleNodeErrors () {
+        process.on ('uncaughtException',  e => { this.bright.red.error.noLocate (e); process.exit (1) })
+        process.on ('unhandledRejection', e => { this.bright.red.error.noLocate (e); process.exit (1) })
+        return this
+    }
 })
 
 /*  ------------------------------------------------------------------------ */
