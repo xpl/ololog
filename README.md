@@ -245,7 +245,7 @@ process.on ('unhandledRejection', e => { log.bright.red.error.noLocate (e); proc
 
 Or you can simply call the `handleNodeErrors` helper when importing Ololog:
 
-```
+```javascript
 const log = require ('ololog').handleNodeErrors ()
 ```
 
