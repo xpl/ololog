@@ -18,6 +18,15 @@ const sleep = ms => new Promise (resolve => setTimeout (resolve, ms))
 
 module.exports = function (runner) {
 
+    // NB: Do this before calling the Base constructor, because in the recent Mocha version, the `err` object
+    //     comes with the `actual` and `expected` fields already stringified, and we cannot access the original
+    //     objects no more, to perform a custom formatting.
+    // 
+    //     But if we add this event listener before the default ones, we intercept the `err` object before it
+    //     gets irreversibly "corrupted" by the Mocha's internals.
+    //
+    runner.on ('fail', (test, err) => { log.red.error (err) })
+
     mocha.reporters.Base.call (this, runner)
 
     const originalImpl = Object.assign ({}, ololog.impl)
@@ -99,6 +108,4 @@ module.exports = function (runner) {
             }
         }
     })
-
-    runner.on ('fail', (test, err) => { log.red.error (err) })
 }
