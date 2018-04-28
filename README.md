@@ -297,22 +297,28 @@ log.indent (2) ('foo\n', 'bar\n', 'baz')
 
 # Timestamping
 
-Disabled by default. To enable:
+Disabled by default. To enable (with default options):
 
 ```javascript
 log = log.configure ({ time: true })
 ```
 
-With indentation:
+Configure formatting:
 
 ```javascript
-log            ('Lorem ipsum dolor sit amet\nconsectetur adipiscing elit..\n')
-log.indent (2) ('Lorem ipsum dolor sit amet\nconsectetur adipiscing elit..\n')
+log = log.configure ({ time: { yes: true, format: 'iso' } })
 ```
 
-![pic](https://cdn.jpg.wtf/futurico/b2/31/1493357342-b2313dd7e25f8606ad7637997ca05fb3.png)
+Here is the correspondence between the `format` option value and the related `Date` method used for rendering:
 
-With custom printer:
+| `format` value | `Date` method
+| -------------- | --------------------- |
+| `"locale"`     | `.toLocaleString ()`  |
+| `"iso"`        | `.toISOString ()`     |
+| `"utc"`        | `.toUTCString ()`     |
+| `null`         | `.toString ()`        |
+
+Providing a custom printer:
 
 ```javascript
 log.configure ({ time: { yes: true, print: x => (String (x) + ' | ').bright.cyan }}) ('Lorem ipsum dolor sit amet\nconsectetur adipiscing elit..')
