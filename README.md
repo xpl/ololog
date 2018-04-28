@@ -303,6 +303,8 @@ Disabled by default. To enable (with default options):
 log = log.configure ({ time: true })
 ```
 
+<img width="965" src="https://user-images.githubusercontent.com/1707/39397314-f5df5ffe-4b05-11e8-8b7c-fda493d40749.png">
+
 Configure formatting:
 
 ```javascript

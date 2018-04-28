@@ -65,6 +65,7 @@ describe ('Ololog', () => {
         assert (() => log.configure ({ time: { format: 'locale' }}) ('foobar'), ["\u001b[90m2017-2-27 15:45:19\u001b[39m\tfoobar"])
         assert (() => log.configure ({ time: { format: 'iso' }}) ('foobar'),    ["\u001b[90m2017-02-27T12:45:19.951Z\u001b[39m\tfoobar"])
         assert (() => log.configure ({ time: { format: 'utc' }}) ('foobar'),    ["\u001b[90mMon, 27 Feb 2017 12:45:19 GMT\u001b[39m\tfoobar"])
+
     })
 
     it ('timestamps are good with indent', () => {
