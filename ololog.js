@@ -96,8 +96,13 @@ const log = pipez ({
 
     indent: (lines, { level = 0, pattern = '\t' }) => lines.map (line => pattern.repeat (level) + line),
     
-    time: (lines, { when  = new Date (),
-                    print = when => ansi.darkGray (when.toISOString ()) + '\t' }) => bullet (print (when), lines),
+    time: (lines, { when   = new Date (),
+                    format = 'locale',
+                    print  = when => ansi.darkGray (
+                                        ((format === 'iso')    ? when.toISOString () :
+                                        ((format === 'locale') ? when.toLocaleString () :
+                                        ((format === 'utc')    ? when.toUTCString () :
+                                                                 when.toString ())))) + '\t' }) => bullet (print (when), lines),
 
     locate: (lines, {
 
