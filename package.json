@@ -124,11 +124,11 @@
     "coveralls": "^2.13.3",
     "eslint": "^4.14.0",
     "istanbul": "^0.4.5",
+    "mocha": "^5.1.1",
     "nyc": "^11.4.1"
   },
   "dependencies": {
     "ansicolor": "^1.1.71",
-    "mocha": "^5.1.1",
     "pipez": "^1.1.8",
     "printable-characters": "^1.0.38",
     "stacktracey": "^1.2.96",
