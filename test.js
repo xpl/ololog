@@ -58,14 +58,16 @@ describe ('Ololog', () => {
 
     it ('timestamps work', () => {
 
-        const log = ololog.configure ({ locate: false, time: { yes: true, when: new Date ('2017-02-27T12:45:19.951Z') } })
+        const date = new Date ('2017-02-27T12:45:19.951Z')
+        const log = ololog.configure ({ locate: false, time: { yes: true, when: date } })
 
-        assert (() => log ('foobar'), ["\u001b[90m2017-2-27 15:45:19\u001b[39m\tfoobar"])
+        assert (() => log ('foobar'), [`\u001b[90m${date.toLocaleString ()}\u001b[39m\tfoobar`])
 
-        assert (() => log.configure ({ time: { format: 'locale' }}) ('foobar'), ["\u001b[90m2017-2-27 15:45:19\u001b[39m\tfoobar"])
+        assert (() => log.configure ({ time: { format: 'locale' }}) ('foobar'), [`\u001b[90m${date.toLocaleString ()}\u001b[39m\tfoobar`])
         assert (() => log.configure ({ time: { format: 'iso' }}) ('foobar'),    ["\u001b[90m2017-02-27T12:45:19.951Z\u001b[39m\tfoobar"])
         assert (() => log.configure ({ time: { format: 'utc' }}) ('foobar'),    ["\u001b[90mMon, 27 Feb 2017 12:45:19 GMT\u001b[39m\tfoobar"])
 
+        assert (() => log.configure ({ time: { format: null }}) ('foobar'),    [`\u001b[90m${date.toString ()}\u001b[39m\tfoobar`])
     })
 
     it ('timestamps are good with indent', () => {
