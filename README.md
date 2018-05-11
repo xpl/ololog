@@ -145,7 +145,7 @@ log.bright.magenta ('this is something:'.yellow, [ "595da547d9b22f23d8228643", "
 
 All magic is provided by the external [String.ify](https://github.com/xpl/string.ify) library. Read the docs to see all the available configuration options. There are plenty of them! Contributions are welcome.
 
-![GIF animation](http://cdn.jpg.wtf/futurico/13/34/1470446586-13341a275886bd6be2af39e3c24f2f31.gif)
+![GIF Animation](https://user-images.githubusercontent.com/1707/39936518-6163e2dc-5555-11e8-9c40-3abe57371ab4.gif)
 
 Example object:
 
