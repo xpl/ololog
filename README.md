@@ -239,7 +239,7 @@ log.bright.red (e) // where `e` is an instance of Error
 or (if you want the output go to _stderr_ and supress the grey location badge):
 
 ```javascript
-log.bright.red.error.configure ({ locate: false }) (e)
+log.bright.red.error.noLocate (e)
 ```
 
 <img width="936" alt="screen shot 2017-09-27 at 13 57 24" src="https://user-images.githubusercontent.com/1707/30910025-dd160de6-a38b-11e7-9297-70f139cd63b8.png">
