@@ -405,7 +405,9 @@ const log = require ('ololog').configure ({
 })
 ```
 
-Here's a complete example on how to set up a file logging that supports different log levels: [`examples/logging-to-file.js`](https://github.com/xpl/ololog/blob/master/examples/logging-to-file.js)
+Here's a complete example on how to set up a file logging that supports different log levels:
+
+- [`examples/logging-to-file.js`](https://github.com/xpl/ololog/blob/master/examples/logging-to-file.js)
 
 # Null Device
 
