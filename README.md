@@ -20,6 +20,8 @@
 
 - [Logging to a file and on screen at the same time](https://github.com/xpl/ololog/blob/master/examples/logging-to-file.js)
 
+- [Collapsing repeated messages (with an incrementing counter)](https://github.com/xpl/ololog/blob/master/examples/collapsing-repeated-messages.js)
+
 # TODO
 
 - [ ] HTML/DOM rendering
@@ -424,6 +426,6 @@ devNull.bright.red ('this never shows') // simply returns 'this never shows'
 - [ansicolor](https://github.com/xpl/ansicolor)
 - [printable-characters](https://github.com/xpl/printable-characters)
 
-# See Also
+# Projects That Use Ololog
 
-- [CCXT](https://github.com/ccxt-dev/ccxt) – a cryptocurrency trading library with 100+ exchanges. It uses Ololog in the tests and in the examples.
+- [CCXT](https://github.com/ccxt-dev/ccxt) – a cryptocurrency trading library with 100+ exchanges.
