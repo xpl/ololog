@@ -15,6 +15,11 @@
 - [x] [Can replace the default unhandled error printer in Node](https://github.com/xpl/ololog#using-as-the-default-exception-printer-in-node)
 - [x] [Integrates with Mocha](https://github.com/xpl/ololog#using-with-mocha) (experimental)
 
+
+# Examples _(NEW!)_
+
+- [Logging to a file and on screen at the same time](https://github.com/xpl/ololog/blob/master/examples/logging-to-file.js)
+
 # TODO
 
 - [ ] HTML/DOM rendering
