@@ -7,7 +7,7 @@ const ansi = require ('ansicolor') // that comes with ololog
 
 const log = require ('ololog').configure ({
 
-/*  Injects a function after a "render" step            */
+/*  Injects a function after the "render" step            */
 
     'render+' (text, { consoleMethod = '' }) {
 
