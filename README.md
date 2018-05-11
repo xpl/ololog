@@ -19,10 +19,8 @@
 # Examples _(NEW!)_
 
 - [Logging to a file and on screen at the same time](https://github.com/xpl/ololog/blob/master/examples/logging-to-file.js)
-
 - [Collapsing repeated messages (with an incrementing counter)](https://github.com/xpl/ololog/blob/master/examples/collapsing-repeated-messages.js)
-
-<img width="422" alt="screen shot 2018-05-11 at 19 32 48" src="https://user-images.githubusercontent.com/1707/39935701-8cc52cfe-5552-11e8-934b-43f1f8da0518.png">
+     <img width="422" alt="screen shot 2018-05-11 at 19 32 48" src="https://user-images.githubusercontent.com/1707/39935701-8cc52cfe-5552-11e8-934b-43f1f8da0518.png">
 
 # TODO
 
