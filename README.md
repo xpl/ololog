@@ -18,6 +18,8 @@
 
 # Examples _(NEW!)_
 
+These examples demonstrate some non-trivial complex behaviors that could be achieved with Ololog by [plugging into it's rendering pipeline](https://github.com/xpl/ololog#overriding-the-default-behaivor). For simpler examples read further docs!
+
 - [Logging to a file and on screen at the same time (with different log levels)](https://github.com/xpl/ololog/blob/master/examples/logging-to-file.js)
 - [Collapsing repeated messages (with an incrementing counter)](https://github.com/xpl/ololog/blob/master/examples/collapsing-repeated-messages.js)
 
