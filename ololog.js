@@ -159,9 +159,10 @@ const log = pipez ({
     get warn ()  { return this.configure ({ render: { consoleMethod: 'warn' } }) },
     get info ()  { return this.configure ({ render: { consoleMethod: 'info' } }) },
 
-    maxArrayLength (n) { return this.configure ({ stringify: { maxArrayLength: n } }) },
-    maxDepth (n)       { return this.configure ({ stringify: { maxDepth: n } }) },
-    maxLength (n)      { return this.configure ({ stringify: { maxLength: n } }) },
+    maxArrayLength (n)  { return this.configure ({ stringify: { maxArrayLength: n } }) },
+    maxObjectLength (n) { return this.configure ({ stringify: { maxObjectLength: n } }) },
+    maxDepth (n)        { return this.configure ({ stringify: { maxDepth: n } }) },
+    maxLength (n)       { return this.configure ({ stringify: { maxLength: n } }) },
     
     get unlimited () { return this.configure ({ stringify: { maxStringLength: Number.MAX_VALUE, maxArrayLength: Number.MAX_VALUE, maxDepth: Number.MAX_VALUE } }) },
     get noPretty () { return this.configure ({ stringify: { pretty: false } }) },
