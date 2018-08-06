@@ -285,6 +285,12 @@ Custom printer:
 log.configure ({ locate: { print: ({ calleeShort, fileName, line }) => ... } }) (...)
 ```
 
+Displaying outer call location (upwards the stack), can be useful when implementing library code / wrappers:
+
+```javascript
+log.configure ({ locate: { shift: 1 }}) (...)
+```
+
 Manually setting call location (see the [StackTracey](https://github.com/xpl/stacktracey) library, which serves the purpose):
 
 ```javascript
