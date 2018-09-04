@@ -211,6 +211,15 @@ log.maxDepth (1).maxArrayLength (100) (obj) // or log.configure ({ stringify: { 
 log.unlimited (obj) // disables limiting
 ```
 
+Setting floating-point output precision:
+
+```javascript
+log.precision (2) ({ foo: 123.456789 })
+```
+```javascript
+{ foo: 123.45 }
+```
+
 Passing other configuration options to [`string.ify`](https://github.com/xpl/string.ify): 
 
 ```javascript
