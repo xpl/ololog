@@ -128,7 +128,7 @@
     "nyc": "^11.4.1"
   },
   "dependencies": {
-    "ansicolor": "^1.1.71",
+    "ansicolor": "^1.1.78",
     "pipez": "^1.1.8",
     "printable-characters": "^1.0.38",
     "stacktracey": "^1.2.96",
