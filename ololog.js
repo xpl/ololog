@@ -20,7 +20,7 @@ const stringify = require ('string.ify').configure ({
             if (stringify.state.depth > 0) return `<Error: ${x.message}>` // prevents unwanted pretty printing for Errors that are properties of complex objects
 
             const indent        = '    '
-                , why           = stringify.limit ((x.message || '').replace (/\r|\n/g, '').trim (), 120)
+                , why           = stringify.limit ((x.message || '').replace (/\r|\n/g, '').trim (), stringify.state.maxErrorMessageLength || 120)
                 , stack         = new StackTracey (x).pretty
                 , stackIndented = stack.split ('\n').map (x => indent + x).join ('\n')
                 , isAssertion = ('actual' in x) && ('expected' in x)
@@ -164,7 +164,12 @@ const log = pipez ({
     maxDepth (n)        { return this.configure ({ stringify: { maxDepth: n } }) },
     maxLength (n)       { return this.configure ({ stringify: { maxLength: n } }) },
     
-    get unlimited () { return this.configure ({ stringify: { maxStringLength: Number.MAX_VALUE, maxObjectLength: Number.MAX_VALUE,  maxArrayLength: Number.MAX_VALUE, maxDepth: Number.MAX_VALUE } }) },
+    get unlimited () { return this.configure ({ stringify: { maxStringLength: Number.MAX_VALUE,
+                                                             maxObjectLength: Number.MAX_VALUE,
+                                                             maxArrayLength: Number.MAX_VALUE,
+                                                             maxDepth: Number.MAX_VALUE,
+                                                             maxErrorMessageLength: Number.MAX_VALUE } }) },
+
     get noPretty () { return this.configure ({ stringify: { pretty: false } }) },
     get noLocate () { return this.configure ({ locate: false }) },
     precision (n) { return this.configure ({ stringify: { precision: n } }) },
