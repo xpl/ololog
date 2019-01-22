@@ -379,7 +379,7 @@ log.info ('calls console.info')
 log.warn ('calls console.warn')
 ```
 
-# Displaying The `INFO` / `WARN` / `ERROR` Tags Along With The Messages
+# Displaying The `INFO` / `WARN` / `ERROR` Tags
 
 There is a `tag` stage (disabled by default) that displays the log level:
 
