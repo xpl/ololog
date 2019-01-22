@@ -379,6 +379,58 @@ log.info ('calls console.info')
 log.warn ('calls console.warn')
 ```
 
+# Displaying The `INFO` / `WARN` / `ERROR` Tags Along With The Messages
+
+There is a `tag` stage (disabled by default) that displays the log level:
+
+```javascript
+const log = require ('ololog').configure ({ tag: true })
+
+log       ('a regular message')
+log.info  ('an info message')
+log.warn  ('a warning')
+log.error ('an error')
+```
+
+<img width="203" alt="screen shot 2019-01-22 at 22 22 44" src="https://user-images.githubusercontent.com/1707/51559915-426ddc80-1e94-11e9-967e-4780437d6818.png">
+
+# Customized Tag Printer
+
+You can completely override the `tag` stage, introducing new parameters and behavior (a `clusterId` in this example):
+
+```javascript
+const bullet = require ('string.bullet') // NB: these packages are part of Ololog, no need to install them separately
+const { cyan, yellow, red, dim } = require ('ansicolor')
+
+const log = require ('ololog').configure ({
+
+    locate: false,
+    time: true,
+    tag: (lines, {
+            level = '',
+            levelColor = { 'info': cyan, 'warn': yellow, 'error': red.bright.inverse },
+            clusterId
+          }) => {
+        
+        const clusterStr = clusterId ? ('CLUSTER[' + (clusterId + '').padStart (2, '0') + ']') : ''
+        const levelStr = level && (levelColor[level] || (s => s)) (level.toUpperCase ())
+
+        return bullet (dim (clusterStr.padStart (10)) + '\t' + levelStr.padStart (6) + '\t', lines)
+    }
+})
+```
+
+```javascript
+log.configure ({ tag: { clusterId: 1  } })       ('foo')
+log.configure ({ tag: { clusterId: 3  } }).info  ('bar')
+log.configure ({ tag: { clusterId: 27 } }).error ('a multiline\nerror\nmessage')
+```
+
+The output:
+
+<img width="458" alt="screen shot 2019-01-22 at 22 46 59" src="https://user-images.githubusercontent.com/1707/51561304-ec029d00-1e97-11e9-9fcc-6d6edd0401fb.png">
+
+
 # Limiting Max Argument Length
 
 ```javascript

@@ -96,6 +96,12 @@ const log = pipez ({
 
     indent: (lines, { level = 0, pattern = '\t' }) => lines.map (line => pattern.repeat (level) + line),
     
+    tag: (lines, { level = '',
+                   levelColor = {
+                       'info': ansi.cyan,
+                       'warn': ansi.yellow,
+                       'error': ansi.bright.red } }) => bullet ((levelColor[level] || (s => s)) (level.toUpperCase ().padStart (6) + '\t'), lines),
+
     time: (lines, { when   = new Date (),
                     format = 'locale',
                     print  = when => ansi.darkGray (
@@ -145,7 +151,8 @@ const log = pipez ({
 
 }).configure ({
 
-    time: false // disables 'time' step (until enabled back explicitly)
+    time: false, // disables some steps (until enabled back explicitly)
+    tag:  false
 
 /*  ------------------------------------------------------------------------ */
 
@@ -155,9 +162,9 @@ const log = pipez ({
 
     indent (level) { return this.configure ({ indent: { level: level }}) },
 
-    get error () { return this.configure ({ render: { consoleMethod: 'error' } }) },
-    get warn ()  { return this.configure ({ render: { consoleMethod: 'warn' } }) },
-    get info ()  { return this.configure ({ render: { consoleMethod: 'info' } }) },
+    get error () { return this.configure ({ tag: { level: 'error' }, render: { consoleMethod: 'error' } }) },
+    get warn ()  { return this.configure ({ tag: { level: 'warn' },  render: { consoleMethod: 'warn' } }) },
+    get info ()  { return this.configure ({ tag: { level: 'info' },  render: { consoleMethod: 'info' } }) },
 
     maxArrayLength (n)  { return this.configure ({ stringify: { maxArrayLength: n } }) },
     maxObjectLength (n) { return this.configure ({ stringify: { maxObjectLength: n } }) },
