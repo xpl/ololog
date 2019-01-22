@@ -203,15 +203,18 @@ describe ('Ololog', () => {
         console.log (stack.pretty)
     })
 
-    it ('tag works', () => {
+    if (String.prototype.padStart) { // no .padStart on Node 8 :(
 
-        const log = ololog.configure ({ locate: false, tag: true })
-        
-        assert (() => log ('a regular message'), ['      \ta regular message'])
-        assert (() => log.info ('an info message'), ['\u001b[36m  INFO\t\u001b[39man info message'], 'info')
-        assert (() => log.warn ('a warning'), ['\u001b[33m  WARN\t\u001b[39ma warning'], 'warn')
-        assert (() => log.error ('an error'), ['\u001b[22m\u001b[1m\u001b[31m ERROR\t\u001b[39m\u001b[22man error'], 'error')
-    })
+        it ('tag works', () => {
+
+            const log = ololog.configure ({ locate: false, tag: true })
+            
+            assert (() => log ('a regular message'), ['      \ta regular message'])
+            assert (() => log.info ('an info message'), ['\u001b[36m  INFO\t\u001b[39man info message'], 'info')
+            assert (() => log.warn ('a warning'), ['\u001b[33m  WARN\t\u001b[39ma warning'], 'warn')
+            assert (() => log.error ('an error'), ['\u001b[22m\u001b[1m\u001b[31m ERROR\t\u001b[39m\u001b[22man error'], 'error')
+        })
+    }
 })
 
 
