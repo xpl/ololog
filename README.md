@@ -25,6 +25,11 @@ These examples demonstrate some non-trivial complex behaviors that could be achi
 
      <img width="422" alt="screen shot 2018-05-11 at 19 32 48" src="https://user-images.githubusercontent.com/1707/39935701-8cc52cfe-5552-11e8-934b-43f1f8da0518.png">
 
+3. [Displaying log levels and custom tags](https://github.com/xpl/ololog/blob/master/examples/custom-tags.js)
+
+     <img width="458" alt="screen shot 2019-01-22 at 22 46 59" src="https://user-images.githubusercontent.com/1707/51561304-ec029d00-1e97-11e9-9fcc-6d6edd0401fb.png">
+
+
 # TODO
 
 - [ ] HTML/DOM rendering
