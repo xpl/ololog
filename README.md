@@ -273,6 +273,12 @@ Or you can simply call the `handleNodeErrors` helper when importing Ololog:
 const log = require ('ololog').handleNodeErrors ()
 ```
 
+### See Also: [`panic-overlay`](https://github.com/xpl/panic-overlay/#panic-overlay-)
+
+You can improve the error reporting not only in Node projects, but also in browsers. See the [`panic-overlay`](https://github.com/xpl/panic-overlay/#panic-overlay-) library which shares the same codebase with Ololog:
+
+<img width="400" src="https://user-images.githubusercontent.com/1707/54091547-44332700-4392-11e9-81a8-8593c48980b1.png">
+
 # Displaying Call Location
 
 Have you ever encountered a situation where you need to quickly find in the code the place where the logging is called, but it's not so easy to do? With call location tags it's really easy. And it's enabled by default.
