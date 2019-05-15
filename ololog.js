@@ -178,6 +178,8 @@ const log = pipez ({
                                                              maxErrorMessageLength: Number.MAX_VALUE } }) },
 
     get noPretty () { return this.configure ({ stringify: { pretty: false } }) },
+    get noFancy () { return this.configure ({ stringify: { fancy: false } }) },
+    get noRightAlignKeys () { return this.configure ({ stringify: { rightAlignKeys: false } }) },
     get noLocate () { return this.configure ({ locate: false }) },
     precision (n) { return this.configure ({ stringify: { precision: n } }) },
 

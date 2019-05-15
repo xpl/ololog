@@ -155,22 +155,16 @@ All magic is provided by the external [String.ify](https://github.com/xpl/string
 
 ![GIF Animation](https://user-images.githubusercontent.com/1707/39936518-6163e2dc-5555-11e8-9c40-3abe57371ab4.gif)
 
-Example object:
-
-```javascript
-const obj = { asks: [{ price: "1000", amount: 10 }, { price: "2000", amount: 10 }], bids: [{ price: "500", amount: 10 }, { price: "100", amount: 10 }] }
-```
-
 Default output:
 
 ```javascript
-log (obj)
+log (obj) // prints example object
 ```
 ```
-{ asks: [ { price: "1000", amount: 10 },
-          { price: "2000", amount: 10 }  ],
-  bids: [ { price: "500", amount: 10 },
-          { price: "100", amount: 10 }  ]   }
+{ asks: [ { price: "1000", amt: 10 },
+          { price: "2000", amt: 10 }  ],
+  bids: [ { price: "500", amt: 10 },
+          { price: "100", amt: 10 }  ]   }
 ```
 
 Longer strings:
@@ -179,8 +173,8 @@ Longer strings:
 log.maxLength (70) (obj)
 ```
 ```
-{ asks: [{ price: "1000", amount: 10 }, { price: "2000", amount: 10 }],
-  bids: [{ price: "500", amount: 10 }, { price: "100", amount: 10 }]    }
+{ asks: [{ price: "1000", amt: 10 }, { price: "2000", amt: 10 }],
+  bids: [{ price: "500", amt: 10 }, { price: "100", amt: 10 }]    }
 ```
 
 Shorter strings:
@@ -190,16 +184,72 @@ log.maxLength (20) (obj)
 ```
 ```
 { asks: [ {  price: "1000",
-            amount:  10     },
+               amt:  10     },
           {  price: "2000",
-            amount:  10     }  ],
+               amt:  10     }  ],
   bids: [ {  price: "500",
-            amount:  10    },
+               amt:  10    },
           {  price: "100",
-            amount:  10    }  ]   }
+               amt:  10    }  ]   }
 ```
 
-Disabling fancy formatting / single line mode:
+Disabling right keys alignment:
+
+```javascript
+log.noRightAlignKeys (anotherObj)
+```
+```
+{ obj: [ { someLongPropertyName: 1,
+           propertyName: 2,
+           anotherProp: 4,
+           moreProps: 5             },
+         { propertyName: { someVeryLongPropertyName: true,
+                           qux: 6,
+                           zap: "lol"                      } } ] }
+```
+
+Disabling fancy nesting:
+
+```javascript
+log.noFancy (anotherObj)
+```
+```
+{
+    obj: [
+        {
+            someLongPropertyName: 1,
+            propertyName: 2,
+            anotherProp: 4,
+            moreProps: 5
+        },
+        {
+            propertyName: {
+                someVeryLongPropertyName: true,
+                qux: 6,
+                zap: "lol"
+            }
+        }
+    ]
+}
+```
+
+No fancy nesting + setting indentation width to 2 spaces:
+
+```javascript
+log.configure ({ stringify: { fancy: false, indentation: '  ' } }) (yetAnotherObj)
+```
+```
+{
+  obj: [
+    {
+      propertyName: 2,
+      moreProps: 5
+    }
+  ]
+}
+```
+
+Single line mode:
 
 ```javascript
 log.noPretty (obj)
@@ -231,6 +281,20 @@ Passing other configuration options to [`string.ify`](https://github.com/xpl/str
 ```javascript
 log.configure ({ stringify: { precision: 2 } }) (obj) // Read the string.ify docs to see all the available configuration options. There are plenty of them!
 ```
+
+**Please not that in case of multiple configuration options it is preferable to do that**:
+
+```javascript
+log.configure ({ stringify: { precision: 2, maxLength: 20, noFancy: true, maxDepth: 8 }})
+```
+
+**Instead of**:
+
+```javascript
+log.precision (2).maxLength (20).noFancy.maxDepth (8)
+```
+
+...because the latter generates too deep callstack which could disrupt the displaying of the [call location tag](https://github.com/xpl/ololog#displaying-call-location) along with the message.
 
 # Using With Custom Stringifier
 
