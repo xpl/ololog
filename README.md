@@ -314,7 +314,7 @@ log.configure ({ stringify: { precision: 2, maxLength: 20, noFancy: true, maxDep
 log.precision (2).maxLength (20).noFancy.maxDepth (8)
 ```
 
-...because the latter generates too deep callstack which could disrupt the displaying of the [call location tag](https://github.com/xpl/ololog#displaying-call-location) along with the message!
+...because the latter generates too deep callstack which could disrupt the displaying of the [call location tag](https://github.com/xpl/ololog#displaying-call-location) along with the message! The problem is yet to be solved in future [`pipez`](https://github.com/xpl/pipez) versions.
 
 # Using With Custom Stringifier
 
