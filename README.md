@@ -280,6 +280,7 @@ Passing other configuration options to [`string.ify`](https://github.com/xpl/str
 
 ```javascript
 log.configure ({
+
     stringify: {
         pure:            false,
         json:            false,
@@ -295,7 +296,8 @@ log.configure ({
         fancy:           true,
         indentation:    '    '
     }
-})
+    
+}) (obj)
 ```
 
 ### Avoid Too Long Call Chains
