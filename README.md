@@ -276,25 +276,45 @@ log.precision (2) ({ foo: 123.456789 })
 { foo: 123.45 }
 ```
 
-Passing other configuration options to [`string.ify`](https://github.com/xpl/string.ify): 
+Passing other configuration options to [`string.ify`](https://github.com/xpl/string.ify) (read the its docs for more info):
 
 ```javascript
-log.configure ({ stringify: { precision: 2 } }) (obj) // Read the string.ify docs to see all the available configuration options. There are plenty of them!
+log.configure ({
+
+    stringify: {
+        pure:            false,
+        json:            false,
+        maxDepth:        5,
+        maxLength:       50,
+        maxArrayLength:  60,
+        maxObjectLength: 200,
+        maxStringLength: 60,
+        precision:       undefined,
+        formatter:       undefined,
+        pretty:         'auto',
+        rightAlignKeys:  true,
+        fancy:           true,
+        indentation:    '    '
+    }
+    
+}) (obj)
 ```
 
-**Please not that in case of multiple configuration options it is preferable to do that**:
+### Avoid Too Long Call Chains
+
+Please not that in case of multiple configuration options it is preferable to do that:
 
 ```javascript
 log.configure ({ stringify: { precision: 2, maxLength: 20, noFancy: true, maxDepth: 8 }})
 ```
 
-**Instead of**:
+...instead of:
 
 ```javascript
 log.precision (2).maxLength (20).noFancy.maxDepth (8)
 ```
 
-...because the latter generates too deep callstack which could disrupt the displaying of the [call location tag](https://github.com/xpl/ololog#displaying-call-location) along with the message.
+...because the latter generates too deep callstack which could disrupt the displaying of the [call location tag](https://github.com/xpl/ololog#displaying-call-location) along with the message! The problem is yet to be solved in future [`pipez`](https://github.com/xpl/pipez) versions.
 
 # Using With Custom Stringifier
 
