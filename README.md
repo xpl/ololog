@@ -474,8 +474,12 @@ log.info ('calls console.info')
 ```javascript
 log.warn ('calls console.warn')
 ```
+```javascript
+log.debug ('calls console.debug')
+```
 
-# Displaying The `INFO` / `WARN` / `ERROR` Tags
+
+# Displaying The `INFO` / `WARN` / `ERROR` / `DEBUG` Tags
 
 There is a `tag` stage (disabled by default) that displays the log level:
 
@@ -486,6 +490,7 @@ log       ('a regular message')
 log.info  ('an info message')
 log.warn  ('a warning')
 log.error ('an error')
+log.debug ('a debug message')
 ```
 
 <img width="203" alt="screen shot 2019-01-22 at 22 22 44" src="https://user-images.githubusercontent.com/1707/51559915-426ddc80-1e94-11e9-967e-4780437d6818.png">
@@ -504,7 +509,7 @@ const log = require ('ololog').configure ({
     time: true,
     tag: (lines, {
             level = '',
-            levelColor = { 'info': cyan, 'warn': yellow, 'error': red.bright.inverse },
+            levelColor = { 'info': cyan, 'warn': yellow, 'error': red.bright.inverse, 'debug': blue},
             clusterId
           }) => {
         
