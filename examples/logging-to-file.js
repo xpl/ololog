@@ -41,6 +41,7 @@ log ("this isn't going to a file!")
 log.info ("goes to info.log")
 log.warn ("goes to info.log and error.log (a warning)")
 log.error ("goes to info.log and error.log (an error)")
+log.debug ("goes to info.log")
 
 log.red.info ("ANSI codes are stripped when writing to a file")
 

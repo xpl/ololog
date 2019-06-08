@@ -474,6 +474,10 @@ log.info ('calls console.info')
 ```javascript
 log.warn ('calls console.warn')
 ```
+```javascript
+log.debug ('calls console.debug')
+```
+
 
 # Displaying The `INFO` / `WARN` / `ERROR` Tags
 
