@@ -13,7 +13,7 @@ const log = require ('ololog').configure ({
     time: true,
     tag: (lines, {
             level = '',
-            levelColor = { 'info': cyan, 'warn': yellow, 'error': red.bright.inverse, 'debug':orange },
+            levelColor = { 'info': cyan, 'warn': yellow, 'error': red.bright.inverse, 'debug':blue },
             clusterId
           }) => {
         
