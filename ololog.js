@@ -166,6 +166,7 @@ const log = pipez ({
     get error () { return this.configure ({ tag: { level: 'error' }, render: { consoleMethod: 'error' } }) },
     get warn ()  { return this.configure ({ tag: { level: 'warn' },  render: { consoleMethod: 'warn' } }) },
     get info ()  { return this.configure ({ tag: { level: 'info' },  render: { consoleMethod: 'info' } }) },
+    get debug ()  { return this.configure ({ tag: { level: 'debug' },  render: { consoleMethod: 'debug' } }) },
 
     maxArrayLength (n)  { return this.configure ({ stringify: { maxArrayLength: n } }) },
     maxObjectLength (n) { return this.configure ({ stringify: { maxObjectLength: n } }) },
