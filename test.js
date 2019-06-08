@@ -114,7 +114,7 @@ describe ('Ololog', () => {
         assert (() => log.configure ({ trim: { max: 5 } }) ('1234567890', 'abcdefgh'), ["1234… abcd…"])
     })
 
-    it ('.error / .warn / .info works', () => {
+    it ('.error / .warn / .info / .debug works', () => {
 
         assert (() => log.error.red ('this goes to stderr'),
                      ['\u001b[31m' + 'this goes to stderr' + '\u001b[39m'], 'error')
@@ -124,6 +124,9 @@ describe ('Ololog', () => {
 
         assert (() => log.info.red ('this goes to console.info'),
                      ['\u001b[31m' + 'this goes to console.info' + '\u001b[39m'], 'info')
+
+        assert (() => log.debug.red ('this goes to console.debug'),
+        ['\u001b[31m' + 'this goes to console.debug' + '\u001b[39m'], 'debug')
     })
 
     it ('formatting Error works', () => {
