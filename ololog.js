@@ -100,7 +100,7 @@ const log = pipez ({
                    levelColor = {
                        'info': ansi.cyan,
                        'warn': ansi.yellow,
-                       'debug': ansi.bgYellow,
+                       'debug': ansi.blue,
                        'error': ansi.bright.red } }) => bullet ((levelColor[level] || (s => s)) (level.toUpperCase ().padStart (6) + '\t'), lines),
 
     time: (lines, { when   = new Date (),
