@@ -587,7 +587,7 @@ You can look up all the default steps you could replace here:
 
 https://github.com/xpl/ololog/blob/master/ololog.js#L67
 
-#Injecting Code Before/After Steps
+# Injecting Custom Code Before/After Steps
 
 You can also bind new code to the existing methods in an _aspect-oriented programming_ style, executing it _before_, _after_ or _instead_ – and thus overriding the default behavior. See the [pipez](https://github.com/xpl/pipez#pipez) library, which provides all the fun — with its help you could build incredibly configurable things similar to Ololog easily.
 
