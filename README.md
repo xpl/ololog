@@ -587,9 +587,11 @@ You can look up all the default steps you could replace here:
 
 https://github.com/xpl/ololog/blob/master/ololog.js#L67
 
-# Overriding The Default Behavior: Injecting Code Before/After Steps
+#Injecting Code Before/After Steps
 
-You can also bind new code to the existing methods in an _aspect-oriented programming_ style, executing it _before_, _after_ or _instead_ – and thus overriding the default behavior. See the [pipez](https://github.com/xpl/pipez#pipez) library, which provides all the fun. For example, if you want to write `.error` calls not just on screen, but to a separate file, you can do following (by injecting a custom hook after the `render` call):
+You can also bind new code to the existing methods in an _aspect-oriented programming_ style, executing it _before_, _after_ or _instead_ – and thus overriding the default behavior. See the [pipez](https://github.com/xpl/pipez#pipez) library, which provides all the fun — with its help you could build incredibly configurable things similar to Ololog easily.
+
+For example, if you want to write `.error` calls not just on screen, but to a separate file, you can do following (by injecting a custom hook after the `render` call):
 
 ```javascript
 const ololog = require ('ololog')
