@@ -120,7 +120,8 @@ Also, if you don't like that behavior, you can override it. For example, returni
 
 ```javascript
 log = log.configure ({
-    returnValue: (renderedText, { initialArguments }) => initialArguments[initialArguments.length - 1]
+
+    returnValue: (text, { initialArguments }) => initialArguments[initialArguments.length - 1]
 })
 ```
 
