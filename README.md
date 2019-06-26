@@ -116,6 +116,14 @@ It is far less ugly than with `console.log`:
 array.map (x => { console.log (x); return x + 1 })
 ```
 
+Also, if you don't like that behavior, you can override it. For example, returning the _last argument_ instead of first:
+
+```javascript
+log = log.configure ({
+    returnValue: (renderedText, { initialArguments }) => initialArguments[initialArguments.length - 1]
+})
+```
+
 # ANSI Styling
 
 Backed by the [ansicolor](https://github.com/xpl/ansicolor) library, colored output is supported for the terminal environment and for the Chrome DevTools console. On other platforms, ANSI codes are safely stripped from the output, so they don't mess up anything.
@@ -558,7 +566,27 @@ log.methods ({
 })
 ```
 
-# Overriding The Default Behaivor
+# Overriding The Default Behavior
+
+You can provide a custom implementation for certain steps in the Ololog's pipeline. For example, you can replace the `render` step to output the rendered text to somewhere else other than `console.log`:
+
+```javascript
+log = log.configure ({
+
+    render (text) {
+
+        box.pushLine (text)
+        box.scroll (1)
+        screen.render ()
+    }
+})
+```
+
+You can look up all the default steps you could replace here:
+
+https://github.com/xpl/ololog/blob/master/ololog.js#L67
+
+# Overriding The Default Behavior: Injecting Code Before/After Steps
 
 You can also bind new code to the existing methods in an _aspect-oriented programming_ style, executing it _before_, _after_ or _instead_ – and thus overriding the default behavior. See the [pipez](https://github.com/xpl/pipez#pipez) library, which provides all the fun. For example, if you want to write `.error` calls not just on screen, but to a separate file, you can do following (by injecting a custom hook after the `render` call):
 
@@ -582,12 +610,12 @@ Here's a complete example on how to set up a file logging that supports differen
 
 - [`examples/logging-to-file.js`](https://github.com/xpl/ololog/blob/master/examples/logging-to-file.js)
 
-Here's another trick that you could do by injecting a handler _before_ the `render` step:
+Here's another trick that you could do by injecting a handler _before_ the `render` step (that would be `+render` instead of `render+`):
 
 - [Collapsing repeated messages (with an incrementing counter)](https://github.com/xpl/ololog/blob/master/examples/collapsing-repeated-messages.js)
 
      <img width="422" alt="screen shot 2018-05-11 at 19 32 48" src="https://user-images.githubusercontent.com/1707/39935701-8cc52cfe-5552-11e8-934b-43f1f8da0518.png">
-
+     
 # Null Device
 
 Use `.null` to obtain a reduced instance that does nothing apart from returning its first argument:
