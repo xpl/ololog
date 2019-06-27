@@ -200,7 +200,7 @@ log.magenta (bright.green ('This is my object:'), { foo: 10, bar: 20, qux: 30 })
 
 <img width="261" alt="Screen Shot 2019-06-27 at 13 39 08" src="https://user-images.githubusercontent.com/1707/60259909-fe6a8200-98e0-11e9-8aff-7563afd77230.png">
 
-## Using `indent` option
+## Using The `indent` Option
 
 The other way is to use the `indent` config option:
 
