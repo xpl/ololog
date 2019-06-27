@@ -557,7 +557,7 @@ The output:
 log.configure ({ trim: { max: 5 } }) ('1234567890', 'abcdefgh') // 1234… abcd…
 ```
 
-# Getting Rendered Text
+# Getting The Rendered Text
 
 The following will execute all stages before the 'render' (screen output) stage, returning its argument:
 
@@ -565,17 +565,7 @@ The following will execute all stages before the 'render' (screen output) stage,
 log.before ('render') ({ foo: 42 }) // '{ foo: 42 }'
 ```
 
-# Custom Methods
-
-You can add your own shorthand methods/properties (will add new properties globally for any instance of the `ololog`, but this may change in future). An example, demonstrating how the actual `indent` and `red` chain-style helpers were implemented:
-
-```javascript
-log.methods ({
-
-    indent (level) { return this.configure ({ indent: { level: level }}) }
-    get red ()     { return this.configure ({ 'concat+': lines => lines.map (ansicolor.red) }) } // executes it after the 'concat'
-})
-```
+The other way of getting the text (for example, if you want to intercept it and output to your custom renderer, like Blessed) is to override the default `render` step, see below...
 
 # Overriding The Default Behavior
 
@@ -628,7 +618,19 @@ Here's another trick that you could do by injecting a handler _before_ the `rend
 - [Collapsing repeated messages (with an incrementing counter)](https://github.com/xpl/ololog/blob/master/examples/collapsing-repeated-messages.js)
 
      <img width="422" alt="screen shot 2018-05-11 at 19 32 48" src="https://user-images.githubusercontent.com/1707/39935701-8cc52cfe-5552-11e8-934b-43f1f8da0518.png">
-     
+
+# Adding Custom Helper Methods
+
+You can add your own shorthand methods/properties (will add new properties globally for any instance of the `ololog`, but this may change in future). An example, demonstrating how the actual `indent` and `red` chain-style helpers were implemented:
+
+```javascript
+log.methods ({
+
+    indent (level) { return this.configure ({ indent: { level: level }}) }
+    get red ()     { return this.configure ({ 'concat+': lines => lines.map (ansicolor.red) }) } // executes it after the 'concat'
+})
+```
+
 # Null Device
 
 Use `.null` to obtain a reduced instance that does nothing apart from returning its first argument:
