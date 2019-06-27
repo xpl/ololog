@@ -158,17 +158,67 @@ log.bright.red.underline ('multiple styles combined')
 
 [See all the supported styling options here](https://github.com/xpl/ansicolor#supported-styles).
 
-# Smart Indentation/Newline Handling
+# Smart Indentation / Newline Handling
+
+To add indentation to a multiline text or complex objects, you can simply provide the indentation symbols as a first argument:
 
 ```javascript
-log.bright.magenta ('this is something:'.yellow, [ "595da547d9b22f23d8228643", "595da547d9b22f23d822863f", "595da547d9b22f23d8228641" ])
+log ('    ', 'foo\nbar\nbar')
+```
+````
+    foo
+    bar
+    bar
 ```
 
-![pic](https://cdn.jpg.wtf/futurico/a3/cf/1499313101-a3cf62db303adad169816ce670f43a3b.png)
+The remarkable thing is that you can provide *any text* that would be used to offset what's coming after it. This is especially useful with printing long objects that span across many lines:
 
-...and this is how it would look without special caring:
+```javascript
+log ('This is my object:', { foo: 10, bar: 20, qux: 30 })
+```
+```
+This is my object: { foo: 10,
+                     bar: 20,
+                     qux: 30  }
+```
 
-![pic](https://cdn.jpg.wtf/futurico/b1/34/1499313467-b1342c4330146675e9353eddd281006c.png)
+Compare it to the crappy `console.log` output, which doesn't care about readability:
+
+```
+This is my object: { foo: 10,
+ bar: 20,
+ qux: 30  }
+```
+
+Ololog also handles the ANSI escape codes correctly to compute the indentation width:
+
+```javascript
+const { bright } = require ('ansicolor')
+
+log.magenta (bright.green ('This is my object:'), { foo: 10, bar: 20, qux: 30 })
+```
+
+<img width="261" alt="Screen Shot 2019-06-27 at 13 39 08" src="https://user-images.githubusercontent.com/1707/60259909-fe6a8200-98e0-11e9-8aff-7563afd77230.png">
+
+## Using `indent` option
+
+The other way is to use the `indent` config option:
+
+```javascript
+log.configure ({ indent: { level: 3 } }) ('foo\nbar\nbaz\n')
+```
+
+Shorthand method:
+
+```javascript
+log.indent (2) ('foo\n', 'bar\n', 'baz')
+```
+
+You can also set the indentation pattern should be used:
+
+```javascript
+log = log.configure ({ indent: { pattern: '\t' } })
+```
 
 # Smart Object Printing
 
@@ -421,20 +471,6 @@ Manually setting call location (see the [StackTracey](https://github.com/xpl/sta
 
 ```javascript
 log.configure ({ locate: { where: new StackTracey ().at (2) } }) (...)
-```
-
-# Indentation
-
-```javascript
-log.configure ({ indent: { level: 3 } }) ('foo\n', 'bar\n', 'baz')  //          foo
-                                                                    //          bar
-                                                                    //          baz
-```
-
-Shorthand method:
-
-```javascript
-log.indent (2) ('foo\n', 'bar\n', 'baz')
 ```
 
 # Timestamping
