@@ -100,7 +100,7 @@ log ('foo', 'bar', 'baz') // foobarbaz
 log.configure ({ concat: { separator: '' }}) ('foo', 'bar', 'baz') // foobarbaz
 ```
 
-..you can chain the configuration calls:
+And you can chain the configuration calls, applying them subsequently:
 
 ```javascript
 log1 = log.configure ({ locate: false }) // removes the code location tag
