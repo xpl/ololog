@@ -574,7 +574,7 @@ You can provide a custom implementation for certain steps in the Ololog's pipeli
 ```javascript
 log = log.configure ({
 
-    render (text, { consoleMethod = 'log' /* can be debug/info/error/warn */ }) {
+    render (text, { consoleMethod = '' /* can be also debug/info/error/warn */ }) {
 
         // receives '{ foo: 42 }' and outputs it to the Blessed library
         box.pushLine (text)
