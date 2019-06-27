@@ -110,7 +110,9 @@ log2 = log1.configure ({ time: true }) // preserves previous settings + enables 
 log2 ('bar')
 ```
 
-You can [read more about `configure` here](https://github.com/xpl/pipez#pipez). Configuration engine is implemented as a separate external library, for everyone's use. Contributions are welcome.
+The variety of possible options will be covered just below — there is a plenty of them!
+
+Configuration engine is implemented as a separate external library, for everyone's use — you can [read more about it here](https://github.com/xpl/pipez#pipez). Contributions are welcome.
 
 # Debugging Of Functional Expressions
 
