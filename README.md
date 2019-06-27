@@ -190,7 +190,7 @@ This is my object: { foo: 10,
  qux: 30  }
 ```
 
-Ololog also handles the ANSI escape codes correctly to compute the indentation width:
+Ololog also handles the ANSI escape codes correctly while computing the proper the indentation width:
 
 ```javascript
 const { bright } = require ('ansicolor')
