@@ -100,6 +100,16 @@ log ('foo', 'bar', 'baz') // foobarbaz
 log.configure ({ concat: { separator: '' }}) ('foo', 'bar', 'baz') // foobarbaz
 ```
 
+..you can chain the configuration calls:
+
+```javascript
+log1 = log.configure ({ locate: false }) // removes the code location tag
+log1 ('foo')
+
+log2 = log1.configure ({ time: true }) // preserves previous settings (locate: false) + enables timestamps
+log2 ('bar')
+```
+
 You can [read more about `configure` here](https://github.com/xpl/pipez#pipezbeta). Configuration engine is implemented as a separate external library, for everyone's use. Contributions are welcome.
 
 # Debugging Of Functional Expressions
