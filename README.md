@@ -574,13 +574,15 @@ You can provide a custom implementation for certain steps in the Ololog's pipeli
 ```javascript
 log = log.configure ({
 
-    render (text) {
+    render (text) { // receives '{ foo: 42 }' and outputs it to the Blessed library
 
         box.pushLine (text)
         box.scroll (1)
         screen.render ()
     }
 })
+
+log ({ foo: 42 })
 ```
 
 You can look up all the default steps you could replace here:
