@@ -1,6 +1,6 @@
 {
   "name": "ololog",
-  "version": "1.1.137",
+  "version": "1.1.138",
   "description": "Logging. Colors. Terminals & browsers. Show call locations. Pretty prints objects, Errors, anything!",
   "main": "build/ololog.js",
   "unpkg": "build/ololog.browser.js",
