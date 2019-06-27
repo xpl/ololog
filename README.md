@@ -7,7 +7,7 @@
 - [x] [Colors / styles](https://github.com/xpl/ololog#ansi-styling) for terminals and Chrome DevTools (try [online demo](https://xpl.github.io/ololog/))
 - [x] [Displays call locations](https://github.com/xpl/ololog#displaying-call-location)
 - [x] [Returns its argument](https://github.com/xpl/ololog#debugging-of-functional-expressions) (for easy debugging of functional expressions)
-- [x] [Smart newline / indentation handling](https://github.com/xpl/ololog#smart-indentationnewline-handling)
+- [x] [Smart indentation / newline handling](https://github.com/xpl/ololog/#smart-indentation--newline-handling)
 - [x] [Powerful object printer](https://github.com/xpl/ololog#smart-object-printing)
 - [x] Formats `Error` instances as [pretty stacktraces with source lines](https://github.com/xpl/ololog#pretty-printing-error-instances)
 - [x] Full sourcemap support (via [`get-source`](https://github.com/xpl/get-source))
@@ -165,7 +165,7 @@ To add indentation to a multiline text or complex objects, you can simply provid
 ```javascript
 log ('    ', 'foo\nbar\nbar')
 ```
-````
+```
     foo
     bar
     bar
