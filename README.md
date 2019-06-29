@@ -584,6 +584,18 @@ log.configure ({ tag: { clusterId: 3  } }).info  ('bar')
 log.configure ({ tag: { clusterId: 27 } }).error ('a multiline\nerror\nmessage')
 ```
 
+You can also use [Custom Methods](https://github.com/xpl/ololog#adding-custom-helper-methods) feature to make it even more concise:
+
+```javascript
+log = log.methods ({
+   clusterId (n) { return this.configure ({ tag: { clusterId: n } }) }
+})
+
+log.clusterId (1)       ('foo')
+log.clusterId (1).info  ('bar')
+log.clusterId (1).error ('a multiline\nerror\nmessage')
+```
+
 The output:
 
 <img width="458" alt="screen shot 2019-01-22 at 22 46 59" src="https://user-images.githubusercontent.com/1707/51561304-ec029d00-1e97-11e9-9fcc-6d6edd0401fb.png">
