@@ -588,7 +588,9 @@ You can also use [Custom Methods](https://github.com/xpl/ololog#adding-custom-he
 
 ```javascript
 log = log.methods ({
-   clusterId (n) { return this.configure ({ tag: { clusterId: n } }) }
+
+    // adds `clusterId` helper
+    clusterId (n) { return this.configure ({ tag: { clusterId: n } }) }
 })
 
 log.clusterId (1)       ('foo')
