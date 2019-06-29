@@ -593,9 +593,9 @@ log = log.methods ({
     clusterId (n) { return this.configure ({ tag: { clusterId: n } }) }
 })
 
-log.clusterId (1)       ('foo')
-log.clusterId (1).info  ('bar')
-log.clusterId (1).error ('a multiline\nerror\nmessage')
+log.clusterId (1)        ('foo')
+log.clusterId (3) .info  ('bar')
+log.clusterId (27).error ('a multiline\nerror\nmessage')
 ```
 
 The output:
