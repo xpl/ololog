@@ -414,7 +414,7 @@ or (if you want the output go to _stderr_ and supress the grey location badge):
 log.bright.red.error.noLocate (e)
 ```
 
-<img width="936" alt="screen shot 2017-09-27 at 13 57 24" src="https://user-images.githubusercontent.com/1707/30910025-dd160de6-a38b-11e7-9297-70f139cd63b8.png">
+<img width="1091" alt="Screen Shot 2019-04-06 at 00 56 17" src="https://user-images.githubusercontent.com/1707/55658599-d8b06e00-5806-11e9-935c-32a11d689c92.png">
 
 # Using As The Default Exception Printer In Node
 
