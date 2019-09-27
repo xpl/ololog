@@ -14,6 +14,6 @@ shallow_clone: true
 test_script:
   - node --version
   - npm --version
-  - npm test
+  - npm run test-no-coverage
 cache:
 - '%APPDATA%\npm-cache'
