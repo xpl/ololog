@@ -8,7 +8,7 @@
     "lint": "eslint ololog.js",
     "lint-test": "eslint test.js",
     "build": "npm run lint && npm run lint-test && npm run babel && npm run browserify",
-    "test": "npm run build && env OLOLOG_TEST_FILE='./build/ololog' nyc --reporter=html --reporter=text mocha --reporter spec"
+    "test": "npm run build && env OLOLOG_TEST_FILE='./build/ololog' nyc --reporter=html --reporter=text mocha --reporter spec",
     "test-no-coverage": "npm run build && env OLOLOG_TEST_FILE='./build/ololog' mocha --reporter spec",
     "autotest": "env OLOLOG_TEST_FILE='./ololog' mocha --reporter spec --watch",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
