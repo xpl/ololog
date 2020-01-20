@@ -4,6 +4,7 @@
   "description": "Logging. Colors. Terminals & browsers. Show call locations. Pretty prints objects, Errors, anything!",
   "main": "build/ololog.js",
   "unpkg": "build/ololog.browser.js",
+  "types": "./ololog.d.ts",
   "scripts": {
     "lint": "eslint ololog.js",
     "lint-test": "eslint test.js",
