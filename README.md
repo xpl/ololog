@@ -32,7 +32,6 @@ These examples demonstrate some non-trivial complex behaviors that could be achi
 
 # TODO
 
-- [ ] TypeScript typings (see [#7](https://github.com/xpl/ololog/issues/8))
 - [ ] HTML/DOM rendering
 - [ ] Improve [tests](https://github.com/xpl/ololog/blob/master/test.js) coverage
 
