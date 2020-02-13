@@ -15,6 +15,7 @@ after_success:
 - git remote add origin https://${GITHUB_TOKEN}@github.com/xpl/ololog.git
 - git push origin HEAD:master
 deploy:
+  edge: true
   provider: npm
   email: rocket.mind@gmail.com
   api_key:
