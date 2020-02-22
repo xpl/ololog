@@ -399,6 +399,15 @@ log ({ foo: true, bar: 42 })
 
 ![pic](https://user-images.githubusercontent.com/1707/30799941-222a66a8-a1e7-11e7-89b5-4bed706c7840.png)
 
+You can also override the arguments stringification stage completely (see more on [overriding default behavior](https://github.com/xpl/ololog#overriding-the-default-behavior)):
+
+```javascript
+log = require ('ololog').configure ({ stringify (args, cfg) { return args.map (x => myCustomStringifier (x, cfg)) } })
+
+// ...providing additional configuration somewhere later...
+log = log.configure ({ stringify: { /* this object will be passed down as `cfg` to myCustomStringifier */ }})
+```
+
 # Pretty Printing `Error` Instances
 
 This feature is implemented in the [StackTracey](https://github.com/xpl/stacktracey#pretty-printing) library. See it's docs for more (you can configure the path shortening / library calls skipping).

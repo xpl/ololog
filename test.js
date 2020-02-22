@@ -218,6 +218,17 @@ describe ('Ololog', () => {
             assert (() => log.error ('an error'), ['\u001b[22m\u001b[1m\u001b[31m ERROR\t\u001b[39m\u001b[22man error'], 'error')
         })
     }
+
+    it ('custom stringifier works', () => {
+
+        // specifying custom printer
+        let log = ololog.configure ({ locate: false, stringify: { print (x) { return 'foo!' } } })
+        assert (() => log (42), ['foo!'])
+
+        // overriding stringify stage completely
+        log = ololog.configure ({ locate: false, stringify (args, cfg) { return args.map (x => 'foo!') } })
+        assert (() => log (42, 24), ['foo! foo!'])
+    })
 })
 
 

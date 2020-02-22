@@ -68,7 +68,7 @@ const log = pipez ({
 
 /*  ------------------------------------------------------------------------ */
 
-    stringify: (args, cfg, print = stringify.configure (cfg)) => args.map (arg => (typeof arg === 'string') ? arg : print (arg)),
+    stringify: (args, cfg, print = cfg.print || stringify.configure (cfg)) => args.map (arg => (typeof arg === 'string') ? arg : print (arg)),
     
     trim: (tokens, { max = undefined }) => !max ? tokens : tokens.map (t => stringify.limit (t, max)),
 
