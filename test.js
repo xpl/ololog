@@ -219,15 +219,15 @@ describe ('Ololog', () => {
         })
     }
 
-    it ('custom stringifier works', () => {
+    it.only ('custom stringifier works', () => {
 
         // specifying custom printer
         let log = ololog.configure ({ locate: false, stringify: { print (x) { return 'foo!' } } })
         assert (() => log (42), ['foo!'])
 
-        // overriding stringify stage completely
-        log = ololog.configure ({ locate: false, stringify (args, cfg) { return args.map (x => 'foo!') } })
-        assert (() => log (42, 24), ['foo! foo!'])
+        // overriding the stringify stage completely
+        log = ololog.configure ({ locate: false, stringify (args, cfg) { return args.map (x => cfg.foo) } })
+        assert (() => log.configure ({ stringify: { foo: 'foo!' }}) (42, 24), ['foo! foo!'])
     })
 })
 
