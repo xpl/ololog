@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/xpl/ololog.svg?branch=master)](https://travis-ci.org/xpl/ololog) [![Windows Build Status](https://ci.appveyor.com/api/projects/status/toprqa1obtcawp1m?svg=true)](https://ci.appveyor.com/project/xpl/ololog)
  [![NPM](https://img.shields.io/npm/v/ololog.svg)](http://npmjs.com/package/ololog)
 
-- [x] Platform-agnostic logging
+- [x] A better `console.log` for the log-driven debugging junkies
 - [x] [Colors / styles](https://github.com/xpl/ololog#ansi-styling) for terminals and Chrome DevTools (try [online demo](https://xpl.github.io/ololog/))
 - [x] [Displays call locations](https://github.com/xpl/ololog#displaying-call-location)
 - [x] [Returns its argument](https://github.com/xpl/ololog#debugging-of-functional-expressions) (for easy debugging of functional expressions)
