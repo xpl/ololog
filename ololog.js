@@ -160,6 +160,7 @@ const log = pipez ({
 }).methods ({
 
     get noop () { return pipez ({ returnValue: args => args[0] }).methods (this.methods_) },
+    get null () { return this.noop }, // LEGACY, DEPRECATED (left here for backward compatibility)
 
     indent (level) { return this.configure ({ indent: { level: level }}) },
 
