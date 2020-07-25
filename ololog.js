@@ -159,7 +159,7 @@ const log = pipez ({
 
 }).methods ({
 
-    get null () { return pipez ({ returnValue: args => args[0] }).methods (this.methods_) },
+    get noop () { return pipez ({ returnValue: args => args[0] }).methods (this.methods_) },
 
     indent (level) { return this.configure ({ indent: { level: level }}) },
 

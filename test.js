@@ -190,11 +190,11 @@ describe ('Ololog', () => {
                                              '[ "595da547d9b22f23d8228643",\n  "595da547d9b22f23d822863f",\n  "595da547d9b22f23d8228641"  ]'.green), ['\u001b[22m\u001b[1m\u001b[33mthis is something:\u001b[39m \u001b[36m[ \"595da547d9b22f23d8228643\",\u001b[39m\u001b[22m\n\u001b[22m\u001b[1m                   \u001b[36m  \"595da547d9b22f23d822863f\",\u001b[39m\u001b[22m\n\u001b[22m\u001b[1m                   \u001b[36m  \"595da547d9b22f23d8228641\"  ]\u001b[39m \u001b[32m[ \"595da547d9b22f23d8228643\",\u001b[39m\u001b[22m\n\u001b[22m\u001b[1m                                                   \u001b[32m  \"595da547d9b22f23d822863f\",\u001b[39m\u001b[22m\n\u001b[22m\u001b[1m                                                   \u001b[32m  \"595da547d9b22f23d8228641\"  ]\u001b[39m\u001b[22m'])
     })
 
-    it ('null', () => {
+    it ('noop', () => {
 
-        const nullLog = log.null
+        const noopLog = log.noop
 
-        assert (() => nullLog.bright.red ('foo', 'bar').should.equal ('foo'), undefined)
+        assert (() => noopLog.bright.red ('foo', 'bar').should.equal ('foo'), undefined)
     })
 
     it ('location work on different platforms (debug)', () => {
