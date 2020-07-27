@@ -45,9 +45,13 @@ describe ('Ololog', () => {
 
     it ('location work', () => {
         
-        assert (() => ololog.configure ({ locate: true }).bgBrightCyan ('with location\n\n'), ['\u001b[106mwith location\u001b[49m \u001b[90m(assert @ test.js:48)\u001b[39m\n\u001b[106m\u001b[49m\n\u001b[106m\u001b[49m'])
+        assert (function hello() {
+            ololog.configure ({ locate: true }).bgBrightCyan ('with location\n\n')
+        }, ['\u001b[106mwith location\u001b[49m \u001b[90m(hello @ test.js:49)\u001b[39m\n\u001b[106m\u001b[49m\n\u001b[106m\u001b[49m'])
 
-        assert (() => require ('./ololog') ('with location'), ['with location \u001b[90m(assert @ test.js:50)\u001b[39m'])
+        assert (function hello() {
+            require ('./ololog') ('with location')
+        }, ['with location \u001b[90m(hello @ test.js:53)\u001b[39m'])
     })
 
     it ('indent work', () => {
@@ -68,6 +72,14 @@ describe ('Ololog', () => {
         assert (() => log.configure ({ time: { format: 'utc' }}) ('foobar'),    ["\u001b[90mMon, 27 Feb 2017 12:45:19 GMT\u001b[39m\tfoobar"])
 
         assert (() => log.configure ({ time: { format: null }}) ('foobar'),    [`\u001b[90m${date.toString ()}\u001b[39m\tfoobar`])
+
+        assert (() => log.configure ({
+            time: {
+                format: 'locale',
+                locale: 'en-US',
+                options: { timeZone: 'America/Denver' }
+            }
+        }) ('foobar'), [`\u001b[90m${date.toLocaleString ('en-US', { timeZone: 'America/Denver' })}\u001b[39m\tfoobar`])
     })
 
     it ('timestamps are good with indent', () => {
@@ -219,7 +231,7 @@ describe ('Ololog', () => {
         })
     }
 
-    it.only ('custom stringifier works', () => {
+    it ('custom stringifier works', () => {
 
         // specifying custom printer
         let log = ololog.configure ({ locate: false, stringify: { print (x) { return 'foo!' } } })

@@ -499,12 +499,25 @@ log = log.configure ({ time: { yes: true, format: 'iso' } })
 
 Here is the correspondence between the `format` option value and the related `Date` method used for rendering:
 
-| `format` value | `Date` method
-| -------------- | --------------------- |
-| `"locale"`     | `.toLocaleString ()`  |
-| `"iso"`        | `.toISOString ()`     |
-| `"utc"`        | `.toUTCString ()`     |
-| `null`         | `.toString ()`        |
+| `format` value       | `Date` method
+| -------------------- | --------------------- |
+| `"locale"` (default) | `.toLocaleString ()`  |
+| `"iso"`              | `.toISOString ()`     |
+| `"utc"`              | `.toUTCString ()`     |
+| `null`               | `.toString ()`        |
+
+Providing [locale and timezone options](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleString) (available when `format` is set to `locale`):
+
+```javascript
+log.configure ({
+    time: {
+        yes: true,
+        format: 'locale',
+        locale: 'en-US',
+        options: { timeZone: 'America/Denver' }
+    }
+})
+```
 
 Providing a custom printer:
 

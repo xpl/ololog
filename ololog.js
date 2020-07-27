@@ -105,9 +105,11 @@ const log = pipez ({
 
     time: (lines, { when   = new Date (),
                     format = 'locale',
+                    locale = [],
+                    options = {},
                     print  = when => ansi.darkGray (
                                         ((format === 'iso')    ? when.toISOString () :
-                                        ((format === 'locale') ? when.toLocaleString () :
+                                        ((format === 'locale') ? when.toLocaleString (locale, options) :
                                         ((format === 'utc')    ? when.toUTCString () :
                                                                  when.toString ())))) + '\t' }) => bullet (print (when), lines),
 
