@@ -1,4 +1,4 @@
-type StageCallback = (input: any, config?: object) => any;
+type StageCallback = (input: any, config?: any) => any;
 
 declare interface Config {
 
@@ -76,7 +76,7 @@ declare interface Config {
 
     locate?: {
         shift?: number;
-        where?: object; // TODO: add StackTracey callstack item type
+        where?: any; // TODO: add StackTracey callstack item type
         join?: (a: string, sep: string, b: string) => string;
         print?: (args: { calleeShort: string, fileName: string, line: string }) => string;
     } | boolean | StageCallback;
@@ -93,7 +93,7 @@ declare interface Config {
 
     render?: {
         engine?:       'chrome' | 'ansi' | 'generic' | string;
-        engines?:       object;
+        engines?:       any;
         consoleMethod?: 'log' | 'error' | 'warn' | 'info' | 'debug';
     } | StageCallback;
 
@@ -120,7 +120,7 @@ declare interface ololog {
     before: (stage: string) => ololog;
     after:  (stage: string) => ololog;
 
-    methods: (newMethods: object) => ololog;
+    methods: (newMethods: any) => ololog;
 
     error: ololog;
     warn: ololog;
