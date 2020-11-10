@@ -21,7 +21,7 @@ const stringify = require ('string.ify').configure ({
 
             const indent        = '    '
                 , why           = stringify.limit ((x.message || '').replace (/\r|\n/g, '').trim (), stringify.state.maxErrorMessageLength || 120)
-                , stack         = new StackTracey (x).pretty
+                , stack         = new StackTracey (x).withSources ().asTable ()
                 , stackIndented = stack.split ('\n').map (x => indent + x).join ('\n')
                 , isAssertion = ('actual' in x) && ('expected' in x)
                 , type        = x.constructor.name || 'Error'
@@ -116,7 +116,7 @@ const log = pipez ({
     locate: (lines, {
 
                     shift = 0,
-                    where = (new StackTracey ().clean.at (1 + shift)),
+                    where = (new StackTracey ().clean ().at (1 + shift)),
                     join  = ((a, sep, b) => (a && b) ? (a + sep + b) : (a || b)),
                     print = ({ calleeShort, fileName = [], line = [] }) => ansi.darkGray ('(' + join (calleeShort, ' @ ', join (fileName, ':', line)) + ')')
 
