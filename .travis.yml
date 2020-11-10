@@ -4,8 +4,8 @@ node_js:
 script:
 - set -e
 - npm run test
-- npm run coveralls
 after_success:
+- npm run coveralls
 - git config --global user.email "travis@travis-ci.org"
 - git config --global user.name "Travis CI"
 - npm config set git-tag-version=false
