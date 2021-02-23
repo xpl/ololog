@@ -24,8 +24,9 @@ declare interface Config {
     'stringify+'?: StageCallback;
 
     trim?: {
+        yes?: boolean;
         max?: number;
-    } | StageCallback;
+    } | boolean | StageCallback;
 
     '+trim'?: StageCallback;
     'trim+'?: StageCallback;
@@ -45,14 +46,16 @@ declare interface Config {
     'concat+'?: StageCallback;
 
     indent?: {
-        level?: number;
+        yes?:     boolean;
+        level?:   number;
         pattern?: string;
-    } | StageCallback | boolean;
+    } | boolean | StageCallback;
 
     '+indent'?: StageCallback;
     'indent+'?: StageCallback;
 
     tag?: {
+        yes?:   boolean;
         level?: string;
         levelColor?: {
             info:  (s: string) => string;
@@ -66,15 +69,19 @@ declare interface Config {
     'tag+'?: StageCallback;
 
     time?: {
-        when?:   Date;
-        format?: 'locale' | 'iso' | 'utc';
-        print?:  (when: Date) => string;
+        yes?:     boolean;
+        when?:    Date;
+        format?:  'locale' | 'iso' | 'utc' | null;
+        locale?:  string;
+        options?: Intl.DateTimeFormatOptions;
+        print?:   (when: Date) => string;
     } | boolean | StageCallback;
 
     '+time'?: StageCallback;
     'time+'?: StageCallback;
 
     locate?: {
+        yes?:   boolean;
         shift?: number;
         where?: any; // TODO: add StackTracey callstack item type
         join?: (a: string, sep: string, b: string) => string;
