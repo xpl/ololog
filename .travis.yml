@@ -6,20 +6,20 @@ script:
 - npm run test
 after_success:
 - npm run coveralls
-- git config --global user.email "travis@travis-ci.org"
-- git config --global user.name "Travis CI"
-- npm config set git-tag-version=false
-- NPM_VERSION=$(npm version patch)
-- git commit -a -m "${NPM_VERSION:1}" -m "[ci skip]"
-- git remote remove origin
-- git remote add origin https://${GITHUB_TOKEN}@github.com/xpl/ololog.git
-- git push origin HEAD:master
-deploy:
-  edge: true
-  provider: npm
-  email: rocket.mind@gmail.com
-  api_key:
-    secure: a7frCQHalyfViYHNEio2t2fWSxyG2IPubloe+/uHxpBEnfMsC9T5wbHynNkh4ONPBMc73QYBo7e6U7CrLodYWjYPaGfOrf03Qe4qwFybCV1udmkjFxYFhMtgr7hsIOG/ee6QmOKVtzIfgS6KyDhoux062qQXrE6FB82U+iGFqg8GFoRjFjdu2m8wwNX1nST0vDR8IGpEAuhJ8uRIv+sLKlHhEg3ANx7llnT2MPzhC945ZU4JKQlM0pz73Rx1TBJC0pUfcpHRntyiKOJ2lB/Wi4chN2jpPIsTwqngmZJQnxptiH4CyBTJAZWRVmy6R/yO4dlGX5Xkji2liDywkX3eQHS3dU+hdHiCagT0Q56UmiPOZvrvpKLLb7LOu1NKahxFbcYZUwtgC9eo9M2xWh/5DsRvX9QQWRT6D7/wmmk7lp28u262pE72zBZj+lQfVc9a9vxsC8frNORlSOxlzF2kPpNhLGIAWjNL640AfiZOe9mRlJbWUKOhkGn917AFdY0XQcOIVDuvooempyuqKsa4FpTZmhkmR29SC0MFQkjhGonZiP+4eOmgl7hxbUvDuNrdoDvGHY8lRLZ8+GA6BrbDizZt5IJ4oZgxghDWqfVIXwfHss77aSFtnEc5JbFbTxPPfCLvtW3D6gDfJuoV9hXjl6wJ1Ss/t88wIgYoZls35XE=
+# - git config --global user.email "travis@travis-ci.org"
+# - git config --global user.name "Travis CI"
+# - npm config set git-tag-version=false
+# - NPM_VERSION=$(npm version patch)
+# - git commit -a -m "${NPM_VERSION:1}" -m "[ci skip]"
+# - git remote remove origin
+# - git remote add origin https://${GITHUB_TOKEN}@github.com/xpl/ololog.git
+# - git push origin HEAD:master
+# deploy:
+#   edge: true
+#   provider: npm
+#   email: rocket.mind@gmail.com
+#   api_key:
+#     secure: a7frCQHalyfViYHNEio2t2fWSxyG2IPubloe+/uHxpBEnfMsC9T5wbHynNkh4ONPBMc73QYBo7e6U7CrLodYWjYPaGfOrf03Qe4qwFybCV1udmkjFxYFhMtgr7hsIOG/ee6QmOKVtzIfgS6KyDhoux062qQXrE6FB82U+iGFqg8GFoRjFjdu2m8wwNX1nST0vDR8IGpEAuhJ8uRIv+sLKlHhEg3ANx7llnT2MPzhC945ZU4JKQlM0pz73Rx1TBJC0pUfcpHRntyiKOJ2lB/Wi4chN2jpPIsTwqngmZJQnxptiH4CyBTJAZWRVmy6R/yO4dlGX5Xkji2liDywkX3eQHS3dU+hdHiCagT0Q56UmiPOZvrvpKLLb7LOu1NKahxFbcYZUwtgC9eo9M2xWh/5DsRvX9QQWRT6D7/wmmk7lp28u262pE72zBZj+lQfVc9a9vxsC8frNORlSOxlzF2kPpNhLGIAWjNL640AfiZOe9mRlJbWUKOhkGn917AFdY0XQcOIVDuvooempyuqKsa4FpTZmhkmR29SC0MFQkjhGonZiP+4eOmgl7hxbUvDuNrdoDvGHY8lRLZ8+GA6BrbDizZt5IJ4oZgxghDWqfVIXwfHss77aSFtnEc5JbFbTxPPfCLvtW3D6gDfJuoV9hXjl6wJ1Ss/t88wIgYoZls35XE=
 env:
   global:
   - secure: hXbiRP7DdYziWZgDHR9hVipkpJutqW5Xem6wrVDCzo6HvYHTpGIMKlWdlIJhLaeROC06kWc4dg5kJRKputjH4N6RlCmt6836YMwL7e2RaLlTqu1BDYaJS+UV2u9wBC0XePv0NTagjPs2R91yQNNHG1sJGl1s7nnZDqCs4xkBYRItB/4pf0+H0OeuHEzjsl3KT7+sFjFyHsn8idNjDPnYUk9+zF159nj5Pbcd8o44USuJdAzu9XANe5XNxwIZlUpZBWDlvpCUxUoC0wKGwBSvZ5/bbPpI1M6SW+x0YzYhE6kSLiwscyhBPBMZuBUEbVtPuE7UGNkSUs9PXaSEpyBoBnX7tYWLiNoxscCptzyN92AQ57zC9nJtA5SuckiiXK8rxCqe7wOPBVZoD6mg3eU3/VZg2hvBKBgpaTYEFGqInwO7vmNko/mNeJVGq4pNCmpfjik5h7ArGYFHjt24/CsUuG58q4RKVXpe5bMjUk+KFSjhTopPNE8zlFexuYSaMgxpWxrNQLHCuSMiGIImOIhDusqBGKHiL7Wwq++dMTVtav1QekrPxA8UaVSlyoeKKTHHiMGAKnl6tqntoAtMb3EsCXAfNZRVh7HUcS/+3PYQZAG/5tLhkH/ST5n8nmnAZYG4TZ49uMFbXcVecNCfW7eorPrQfbDS13KMNl+YwXDT89c=
