@@ -119,81 +119,81 @@ declare interface ololog {
 
     (...args: any[]): any; // prints the passed arguments
 
-    configure (config: Config): ololog;
+    configure (config: Config): this;
 
     newline: () => void;
-    handleNodeErrors: () => ololog;
+    handleNodeErrors: () => this;
 
-    before: (stage: string) => ololog;
-    after:  (stage: string) => ololog;
+    before: (stage: string) => this;
+    after:  (stage: string) => this;
 
-    methods: (newMethods: any) => ololog;
+    methods: <T>(newMethods: T) => this & T;
 
-    error: ololog;
-    warn: ololog;
-    info: ololog;
-    debug: ololog;
+    error: this;
+    warn: this;
+    info: this;
+    debug: this;
 
-    noop: ololog,
+    noop: this,
 
-    indent:          (level: number) => ololog;
-    precision:       (n: number)     => ololog;
-    maxArrayLength:  (n: number)     => ololog;
-    maxObjectLength: (n: number)     => ololog;
-    maxDepth:        (n: number)     => ololog;
+    indent:          (level: number) => this;
+    precision:       (n: number)     => this;
+    maxArrayLength:  (n: number)     => this;
+    maxObjectLength: (n: number)     => this;
+    maxDepth:        (n: number)     => this;
     
-    unlimited:        ololog;
-    noPretty:         ololog;
-    noFancy:          ololog;
-    noRightAlignKeys: ololog;
-    noLocate:         ololog;
+    unlimited:        this;
+    noPretty:         this;
+    noFancy:          this;
+    noRightAlignKeys: this;
+    noLocate:         this;
 
-    serialize: ololog;
-    deserialize: ololog;
+    serialize: this;
+    deserialize: this;
 
-    default: ololog;
-    white: ololog;
-    black: ololog;
-    red: ololog;
-    green: ololog;
-    yellow: ololog;
-    blue: ololog;
-    magenta: ololog;
-    cyan: ololog;
+    default: this;
+    white: this;
+    black: this;
+    red: this;
+    green: this;
+    yellow: this;
+    blue: this;
+    magenta: this;
+    cyan: this;
 
-    darkGray: ololog;
-    lightGray: ololog;
-    lightRed: ololog;
-    lightGreen: ololog;
-    lightYellow: ololog;
-    lightBlue: ololog;
-    lightMagenta: ololog;
-    lightCyan: ololog;
+    darkGray: this;
+    lightGray: this;
+    lightRed: this;
+    lightGreen: this;
+    lightYellow: this;
+    lightBlue: this;
+    lightMagenta: this;
+    lightCyan: this;
 
-    bright: ololog;
-    dim: ololog;
-    italic: ololog;
-    underline: ololog;
-    inverse: ololog;
+    bright: this;
+    dim: this;
+    italic: this;
+    underline: this;
+    inverse: this;
 
-    bgDefault: ololog;
-    bgWhite: ololog;
-    bgBlack: ololog;
-    bgRed: ololog;
-    bgGreen: ololog;
-    bgYellow: ololog;
-    bgBlue: ololog;
-    bgMagenta: ololog;
-    bgCyan: ololog;
+    bgDefault: this;
+    bgWhite: this;
+    bgBlack: this;
+    bgRed: this;
+    bgGreen: this;
+    bgYellow: this;
+    bgBlue: this;
+    bgMagenta: this;
+    bgCyan: this;
 
-    bgDarkGray: ololog;
-    bgLightGray: ololog;
-    bgLightRed: ololog;
-    bgLightGreen: ololog;
-    bgLightYellow: ololog;
-    bgLightBlue: ololog;
-    bgLightMagenta: ololog;
-    bgLightCyan: ololog;
+    bgDarkGray: this;
+    bgLightGray: this;
+    bgLightRed: this;
+    bgLightGreen: this;
+    bgLightYellow: this;
+    bgLightBlue: this;
+    bgLightMagenta: this;
+    bgLightCyan: this;
 }
 
 declare const ololog: ololog
