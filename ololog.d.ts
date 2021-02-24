@@ -134,7 +134,7 @@ declare interface ololog {
     info: this;
     debug: this;
 
-    noop: this,
+    noop: this;
 
     indent:          (level: number) => this;
     precision:       (n: number)     => this;
