@@ -6,6 +6,7 @@
 		<title>Ololog Web Testpage</title>
 		<script>window.module = {}</script>
 		<script src="https://rawgit.com/xpl/ololog/master/build/ololog.browser.js"></script>
+		<script src="index.js" defer></script>
 		<script>
 			log = ololog
 			ansicolor = ansicolor.nice
@@ -29,29 +30,6 @@
 
 		<input id="foo" style="width: 600px;" value="log.red.italic ('foo')" />;
 
-		<script>
-			input = document.getElementById ('foo')
-
-			input.onkeydown = function (e) {
-				if (e.keyCode === 13) {
-					foo ()
-				}
-			}
-			input.oninput = foo
-
-			function foo () {
-				try {
-					eval (input.value)
-					input.className = ''
-				} catch (e) {
-					console.log (e)
-					input.className = 'err'
-				}
-			}
-
-			foo ()
-		</script>
-		
 		<br><br>
 		
 		<a href="https://github.com/xpl/ololog">github.com/xpl/ololog</a>
