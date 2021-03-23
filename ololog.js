@@ -116,7 +116,6 @@ const log = pipez ({
     locate: (lines, {
 
                     shift = 0,
-                    zhoo = console.log(new StackTracey ().clean ()),
                     where = (new StackTracey ().clean ().at (1 + shift)),
                     join  = ((a, sep, b) => (a && b) ? (a + sep + b) : (a || b)),
                     print = ({ calleeShort, fileName = [], line = [] }) => ansi.darkGray ('(' + join (calleeShort, ' @ ', join (fileName, ':', line)) + ')')
